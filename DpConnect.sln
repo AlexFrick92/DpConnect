@@ -1,0 +1,57 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.9.34728.123
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DpConnect.Configuration", "DpConnect.Configuration\DpConnect.Configuration.csproj", "{1AFBC91A-389C-438C-AC3B-89AF22139D0D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DpConnect.Interface", "DpConnect.Interface\DpConnect.Interface.csproj", "{58470ADD-50FD-479D-862B-65BA360714EF}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Toolbox", "Toolbox", "{CCB8C253-C27E-41D0-BB3B-FAC7F7FAB7DF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Toolkit", "..\Toolkit\Toolkit.csproj", "{EAA5D1E1-AD76-4F44-BB42-6DAC7CC91207}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DpConnect.Provider", "DpConnect.Provider\DpConnect.Provider.csproj", "{FF25CA19-1544-4BD3-8CF0-806429CABD61}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Promatis.Opc.UA.Client", "..\..\Tools\Opc.UA\Source\Client\Promatis.Opc.UA.Client.csproj", "{D6B9F819-DDCA-4CBD-98CC-8D13A67A18F3}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tools", "Tools", "{C7B0B4F4-2AEB-4FCC-B17F-70F0213A0FDF}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{1AFBC91A-389C-438C-AC3B-89AF22139D0D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1AFBC91A-389C-438C-AC3B-89AF22139D0D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1AFBC91A-389C-438C-AC3B-89AF22139D0D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1AFBC91A-389C-438C-AC3B-89AF22139D0D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{58470ADD-50FD-479D-862B-65BA360714EF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{58470ADD-50FD-479D-862B-65BA360714EF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{58470ADD-50FD-479D-862B-65BA360714EF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{58470ADD-50FD-479D-862B-65BA360714EF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EAA5D1E1-AD76-4F44-BB42-6DAC7CC91207}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EAA5D1E1-AD76-4F44-BB42-6DAC7CC91207}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EAA5D1E1-AD76-4F44-BB42-6DAC7CC91207}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EAA5D1E1-AD76-4F44-BB42-6DAC7CC91207}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FF25CA19-1544-4BD3-8CF0-806429CABD61}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FF25CA19-1544-4BD3-8CF0-806429CABD61}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FF25CA19-1544-4BD3-8CF0-806429CABD61}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FF25CA19-1544-4BD3-8CF0-806429CABD61}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D6B9F819-DDCA-4CBD-98CC-8D13A67A18F3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D6B9F819-DDCA-4CBD-98CC-8D13A67A18F3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D6B9F819-DDCA-4CBD-98CC-8D13A67A18F3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D6B9F819-DDCA-4CBD-98CC-8D13A67A18F3}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{EAA5D1E1-AD76-4F44-BB42-6DAC7CC91207} = {CCB8C253-C27E-41D0-BB3B-FAC7F7FAB7DF}
+		{D6B9F819-DDCA-4CBD-98CC-8D13A67A18F3} = {C7B0B4F4-2AEB-4FCC-B17F-70F0213A0FDF}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {AF711CA4-3497-4382-A3F5-89FA9B8401DD}
+	EndGlobalSection
+EndGlobal
