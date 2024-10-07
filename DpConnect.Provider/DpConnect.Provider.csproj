@@ -89,7 +89,7 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\Tools\Opc.UA\Source\Client\Promatis.Opc.UA.Client.csproj">
+    <ProjectReference Include="..\..\Tools\Opc.UA\Source\Client\Promatis.Opc.UA.Client.csproj">
       <Project>{d6b9f819-ddca-4cbd-98cc-8d13a67a18f3}</Project>
       <Name>Promatis.Opc.UA.Client</Name>
     </ProjectReference>

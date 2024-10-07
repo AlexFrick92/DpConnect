@@ -9,11 +9,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DpConnect.Interface", "DpCo
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Toolbox", "Toolbox", "{CCB8C253-C27E-41D0-BB3B-FAC7F7FAB7DF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Toolkit", "..\Toolkit\Toolkit.csproj", "{EAA5D1E1-AD76-4F44-BB42-6DAC7CC91207}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Toolkit", "..\Toolbox\Toolkit\Toolkit.csproj", "{EAA5D1E1-AD76-4F44-BB42-6DAC7CC91207}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DpConnect.Provider", "DpConnect.Provider\DpConnect.Provider.csproj", "{FF25CA19-1544-4BD3-8CF0-806429CABD61}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Promatis.Opc.UA.Client", "..\..\Tools\Opc.UA\Source\Client\Promatis.Opc.UA.Client.csproj", "{D6B9F819-DDCA-4CBD-98CC-8D13A67A18F3}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Promatis.Opc.UA.Client", "..\Tools\Opc.UA\Source\Client\Promatis.Opc.UA.Client.csproj", "{D6B9F819-DDCA-4CBD-98CC-8D13A67A18F3}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tools", "Tools", "{C7B0B4F4-2AEB-4FCC-B17F-70F0213A0FDF}"
 EndProject
