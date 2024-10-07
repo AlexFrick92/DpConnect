@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<!--Пример конфигурации точек данных-->
+
+<DpConfiguration>
+
+	<ProviderDefinition>
+		<OpcUaProvider Name ="Stend AKF" Endpoint ="opc.tcp://10.10.10.96:4840"/>
+	</ProviderDefinition>
+
+	<ProcessorDefinition>
+		<ReadNodeProcessor Name ="RnProc1"/>
+	</ProcessorDefinition>
+
+	<DataPointDefinition>
+		<!--Heartbeat-->
+		<DpValue Name="BoolTypeVar">
+			<Provider Name ="Stend AKF">
+				<NodeId>ns=3;s="PrimitiveTypes"."BoolTypeVar"</NodeId>
+			</Provider>
+
+			<Processor Name ="RnProc1" TargetProperty="BoolNode"/>
+		</DpValue>
+
+	</DataPointDefinition>
+</DpConfiguration>

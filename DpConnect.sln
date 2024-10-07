@@ -17,6 +17,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Promatis.Opc.UA.Client", ".
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tools", "Tools", "{C7B0B4F4-2AEB-4FCC-B17F-70F0213A0FDF}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DpConnect.SimpleSample", "DpConnect.SimpleSample\DpConnect.SimpleSample.csproj", "{A9205473-8BF2-426E-A01F-6DEE397A8798}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -43,6 +45,10 @@ Global
 		{D6B9F819-DDCA-4CBD-98CC-8D13A67A18F3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D6B9F819-DDCA-4CBD-98CC-8D13A67A18F3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D6B9F819-DDCA-4CBD-98CC-8D13A67A18F3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A9205473-8BF2-426E-A01F-6DEE397A8798}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A9205473-8BF2-426E-A01F-6DEE397A8798}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A9205473-8BF2-426E-A01F-6DEE397A8798}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A9205473-8BF2-426E-A01F-6DEE397A8798}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
