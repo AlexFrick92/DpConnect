@@ -24,10 +24,10 @@ namespace DpConnect.SimpleSample
                 .SetLogger(logger)
                 .AddConfiguration($"{currentDirectory}/DpConfig.xml")                
                 .SetProviders(new Type[] { typeof(OpcUaProvider) })
-                .SetProcessors(new Type[] { typeof(ReadNodeProcessor)})                
+                .SetProcessors(new Type[] { typeof(ReadNodeProcessor), typeof(CallMethodProcessor), typeof(ReadComplexNode)})                
                 .Build();
 
-           // dataPointConfigurator.StartProviders();
+           dataPointConfigurator.StartProviders();
 
 
             while (true)

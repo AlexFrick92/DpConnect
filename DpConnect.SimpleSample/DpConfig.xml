@@ -10,16 +10,91 @@
 
 	<ProcessorDefinition>
 		<ReadNodeProcessor Name ="RnProc1"/>
+		<CallMethodProcessor Name ="CmProc1"/>
+		<ReadComplexNode Name ="RcProc1"/>
 	</ProcessorDefinition>
 
 	<DataPointDefinition>
-		<!--Heartbeat-->
 		<DpValue Name="BoolTypeVar">
 			<Provider Name ="Stend AKF">
 				<NodeId>ns=3;s="PrimitiveTypes"."BoolTypeVar"</NodeId>
 			</Provider>
 
 			<Processor Name ="RnProc1" TargetProperty="BoolNode"/>
+		</DpValue>
+
+
+		<DpMethod>
+			<InputArguments>
+				<Argument Name="Arg1"/>
+				<Argument Name="Arg2"/>
+			</InputArguments>
+			
+			<Provider Name ="Stend AKF">
+				<NodeId>ns=3;s="OPCUA_Mul_Real"</NodeId>
+			</Provider>
+
+			<Processor Name ="CmProc1" TargetProperty="NodeMethod"/>
+			
+		</DpMethod>
+
+		<DpMethod>
+			<InputArguments>
+				<Argument Name="Arg1"/>
+				<Argument Name="Arg2"/>
+			</InputArguments>
+
+			<OutputArguments>
+				<Argument Name="Result"/>
+			</OutputArguments>
+
+			<Provider Name ="Stend AKF">
+				<NodeId>ns=3;s="OPCUA_Sum_Int"</NodeId>
+			</Provider>
+
+			<Processor Name ="CmProc1" TargetProperty="NodeMethod2"/>
+
+		</DpMethod>
+
+
+		<DpValue>
+			<DpProperty Name="BoolTypeVar">
+				<Provider Name = "Stend AKF">
+					<NodeId>ns=3;s="PrimitiveTypes"."BoolTypeVar"</NodeId>
+				</Provider>
+			</DpProperty>
+
+			<DpProperty Name="IntTypeVar">
+				<Provider Name = "Stend AKF">
+					<NodeId>ns=3;s="PrimitiveTypes"."IntTypeVar"</NodeId>
+				</Provider>
+			</DpProperty>
+
+			<DpProperty Name="RealTypeVar">
+				<Provider Name = "Stend AKF">
+					<NodeId>ns=3;s="PrimitiveTypes"."RealTypeVar"</NodeId>
+				</Provider>
+			</DpProperty>
+
+			<DpProperty Name="StringTypeVar">
+				<Provider Name = "Stend AKF">
+					<NodeId>ns=3;s="PrimitiveTypes"."StringTypeVar"</NodeId>
+				</Provider>
+			</DpProperty>
+
+			<DpProperty Name="WStringTypeVar">
+				<Provider Name = "Stend AKF">
+					<NodeId>ns=3;s="PrimitiveTypes"."WStringTypeVar"</NodeId>
+				</Provider>
+			</DpProperty>
+
+			<DpProperty Name="DateTimeTypeVar">
+				<Provider Name = "Stend AKF">
+					<NodeId>ns=3;s="PrimitiveTypes"."DateTimeTypeVar"</NodeId>
+				</Provider>
+			</DpProperty>
+
+			<Processor Name ="RcProc1" TargetProperty="ComplexDp"/>			
 		</DpValue>
 
 	</DataPointDefinition>
