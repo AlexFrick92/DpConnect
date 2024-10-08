@@ -21,7 +21,7 @@ namespace DpConnect.SimpleSample
 
         private void ComplexDp_ValueUpdated(object sender, MyComplexNode e)
         {
-            Console.WriteLine(e.ToString());
+            Console.WriteLine(Name + " " + e.ToString());
         }
 
         public IDpValue<MyComplexNode> ComplexDp { get; set; }

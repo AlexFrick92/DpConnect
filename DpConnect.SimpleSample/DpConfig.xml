@@ -5,13 +5,14 @@
 <DpConfiguration>
 
 	<ProviderDefinition>
-		<OpcUaProvider Name ="Stend AKF" Endpoint ="opc.tcp://10.10.10.96:4840"/>
+		<OpcUaProvider Name ="Stend AKF" Endpoint ="opc.tcp://10.10.10.95:4840"/>
 	</ProviderDefinition>
 
 	<ProcessorDefinition>
 		<ReadNodeProcessor Name ="RnProc1"/>
 		<CallMethodProcessor Name ="CmProc1"/>
 		<ReadComplexNode Name ="RcProc1"/>
+		<ReadComplexNode Name ="RcProc2"/>
 	</ProcessorDefinition>
 
 	<DataPointDefinition>
@@ -94,7 +95,8 @@
 				</Provider>
 			</DpProperty>
 
-			<Processor Name ="RcProc1" TargetProperty="ComplexDp"/>			
+			<Processor Name ="RcProc1" TargetProperty="ComplexDp"/>
+			<Processor Name ="RcProc2" TargetProperty="ComplexDp"/>
 		</DpValue>
 
 	</DataPointDefinition>
