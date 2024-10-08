@@ -71,13 +71,13 @@ namespace DpConnect.Configuration
                 //Простой тип - любой значимый (включая DateTime) либо строка.
                 if (dpType.IsValueType || dpType == typeof(string))
                 {
-                   dpInstance = GetDpValue(dataPoint);
+                   dpInstance = GetDpValue(dataPoint, dpType);
                 }
                 //Если T - ссылочный тип, значит имеем дело со сложной точкой данных, в которой свойства будут как отдельный DpValue
                 else
                 {
 
-                    dpInstance = GetDpComplexValue(dataPoint);
+                    dpInstance = GetDpComplexValue(dataPoint, dpType);
                 }
 
             }
@@ -85,13 +85,15 @@ namespace DpConnect.Configuration
             //Если это DpMethod
             else if (dataPoint.Name == DpXmlConfiguration.Tag_DpMethod)
             {
-                dpInstance = GetDpMethod(dataPoint);
+                Type inputType = genericTypeArgument[0];
+                Type outputType = genericTypeArgument[1];
+                dpInstance = GetDpMethod(dataPoint, inputType, outputType);
             }
             return dpInstance as IDataPoint;
         }
 
 
-        dynamic GetDpValue(XElement dataPoint)
+        dynamic GetDpValue(XElement dataPoint, Type dpType)
         {
             dynamic dpInstance = null;
             //Создаём простую точку взяв тип от свойства процессора
@@ -116,7 +118,7 @@ namespace DpConnect.Configuration
             return dpInstance;
         }
 
-        dynamic GetDpComplexValue(XElement dataPoint)
+        dynamic GetDpComplexValue(XElement dataPoint, Type dpType)
         {
 
             dynamic dpInstance = null;
@@ -126,7 +128,7 @@ namespace DpConnect.Configuration
             Console.WriteLine($"DataPoint Configurator: Обнаружена сложная точка {dpName} : {dpType}");
 
             //DpComplexValue<T> класс для составной точки
-            Type genericType = typeof(DpComplexValue<>).MakeGenericType(genericTypeArgument[0]);
+            Type genericType = typeof(DpComplexValue<>).MakeGenericType(dpType);
 
             dpInstance = Activator.CreateInstance(genericType);
             (dpInstance as IDataPoint).Name = dpName;
@@ -139,7 +141,7 @@ namespace DpConnect.Configuration
             {
 
                 //propertyType - IDpValue<T> аргумент T, в нём мы и ищем свойство, имя которого совпадает с заданным в конфиге и берем его тип.
-                Type propertyType = genericTypeArgument[0].GetProperties().First(p => p.Name == dpProp.Attribute(DpXmlConfiguration.Tag_Description).Value).PropertyType;
+                Type propertyType = dpType.GetProperties().First(p => p.Name == dpProp.Attribute(DpXmlConfiguration.Tag_Description).Value).PropertyType;
 
                 //Теперь зарегестрируем его в объекте сложной точки. 
                 dynamic dpProperty = ((IDpComplexValueConfig)dpInstance).AddProperty(propertyType, dpProp.Attribute(DpXmlConfiguration.Tag_Description).Value);
@@ -152,7 +154,7 @@ namespace DpConnect.Configuration
             return dpInstance;
         }
 
-        dynamic GetDpMethod(XElement dataPoint)
+        dynamic GetDpMethod(XElement dataPoint, Type InputType, Type OutputType)
         {
             dynamic dpInstance = null;
             //DpMethod создается с двумя аргументами: класс входных параметров и класс выходных.
@@ -161,7 +163,7 @@ namespace DpConnect.Configuration
             //Этот механизм нужно сильно пересмотреть...
 
             //Создаём тип на основе аргументов
-            Type genericMethodType = typeof(DpMethod<,>).MakeGenericType(genericTypeArgument[0], genericTypeArgument[1]);
+            Type genericMethodType = typeof(DpMethod<,>).MakeGenericType(InputType, OutputType);
             dpInstance = Activator.CreateInstance(genericMethodType);
 
             //Если указан тег <InputArguments>, то внутри должен быть <InputArgument Name=""> в котором будет указано имя свойства. 
