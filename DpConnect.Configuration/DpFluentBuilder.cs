@@ -2,6 +2,7 @@
 using Promatis.Core;
 using Promatis.Core.Logging;
 using System;
+using System.Collections.Generic;
 using System.Data.SqlTypes;
 using System.Xml.Linq;
 
@@ -17,7 +18,7 @@ namespace DpConnect.Configuration
 
         DpXmlConfiguration _configuration;
         ILogger _logger;        
-        IDpProcessor[] _dpProcessors;
+        IEnumerable<IDpProcessor> _dpProcessors;
 
         public DpFluentBuilder(IIoCContainer container, 
             IDpProviderConfigurator dpProviderConfigurator, 
@@ -45,7 +46,7 @@ namespace DpConnect.Configuration
 
             return this;
         }
-        public IDpFluentBuilder SetProcessors(IDpProcessor[] processorInstances) 
+        public IDpFluentBuilder SetProcessors(IEnumerable<IDpProcessor> processorInstances) 
         { 
             _dpProcessors = processorInstances;
             return this;

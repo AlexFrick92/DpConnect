@@ -5,9 +5,9 @@ namespace DpConnect.Interface
 {
     public interface IDpProcessorConfigurator
     {
-        List<IDpProcessor> ConfiguredProcessors { get; set; }
+        IEnumerable<IDpProcessor> ConfiguredProcessors { get; set; }
 
-        IList<IDpProcessor> ConfigureProcessors(XDocument xmlProcessors);
+        IEnumerable<IDpProcessor> ConfigureProcessors(XDocument xmlProcessors);
 
         void RegisterProcessor(IDpProcessor processor);
 

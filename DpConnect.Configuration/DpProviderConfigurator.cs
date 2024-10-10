@@ -11,21 +11,21 @@ namespace DpConnect.Configuration
 {
     public class DpProviderConfigurator : IDpProviderConfigurator
     {
-        ILogger _logger;
-        List<Type> _registeredProviders;
-        public List<IDpProvider> ConfiguredProviders { get; set; }
+        ILogger _logger;        
+        public IEnumerable<IDpProvider> ConfiguredProviders { get; set; }
+        List<IDpProvider> _configuredProviders;
         IIoCContainer _container;
 
         public DpProviderConfigurator(ILogger logger, IIoCContainer container)
         {
-            _logger = logger;
-            _registeredProviders = new List<Type>();
-            ConfiguredProviders = new List<IDpProvider>();
+            _logger = logger;            
+            _configuredProviders = new List<IDpProvider>();
+            ConfiguredProviders = _configuredProviders;
             _container = container;
 
         }
 
-        public IList<IDpProvider> ConfigureProviders(XDocument xmlConfig)
+        public IEnumerable<IDpProvider> ConfigureProviders(XDocument xmlConfig)
         {
             foreach (XElement xmlProvider in xmlConfig.Element(DpXmlConfiguration.Tag_ProviderDefinition).Elements("Provider"))
             {
@@ -42,7 +42,7 @@ namespace DpConnect.Configuration
                                 
                 provider.Name = xmlProvider.Attribute("Name").Value;
                 provider.ConfigureHost(new XDocument(xmlProvider));
-                ConfiguredProviders.Add(provider);
+                _configuredProviders.Add(provider);
 
                 Console.WriteLine($"Законфигурирован провайдер: {provider.GetType()} : {provider.Name}");
             }
@@ -59,8 +59,6 @@ namespace DpConnect.Configuration
         }
         public IDpProvider GetProviderByName(string name)
         {
-
-
             return ConfiguredProviders.First(x => (x.Name == name));
         }
 

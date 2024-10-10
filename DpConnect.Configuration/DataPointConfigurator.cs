@@ -14,7 +14,7 @@ namespace DpConnect.Configuration
         readonly IEnumerable<IDpProvider> _providers;
         readonly IEnumerable<IDpProcessor> _processors;
 
-        public DataPointConfigurator(ILogger logger, List<IDpProvider> configuredProviders, List<IDpProcessor> configuredProcessors)
+        public DataPointConfigurator(ILogger logger, IEnumerable<IDpProvider> configuredProviders, IEnumerable<IDpProcessor> configuredProcessors)
         {
             _providers = configuredProviders;
             _processors = configuredProcessors;

@@ -1,4 +1,5 @@
 ﻿using DpConnect.Interface;
+using System.Collections.Generic;
 
 namespace DpConnect.Interface
 {
@@ -7,7 +8,7 @@ namespace DpConnect.Interface
         IDpFluentBuilder AddConfiguration(params string[] configPath);
 
         IDpFluentBuilder Build ();
-        IDpFluentBuilder SetProcessors(IDpProcessor[] processorInstances);        
+        IDpFluentBuilder SetProcessors(IEnumerable<IDpProcessor> processorInstances);        
         void StartProviders();
     }
 }

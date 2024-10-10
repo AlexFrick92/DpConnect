@@ -6,9 +6,9 @@ namespace DpConnect.Interface
 {
     public interface IDpProviderConfigurator
     {
-        IList<IDpProvider> ConfigureProviders(XDocument xmlConfig);
+        IEnumerable<IDpProvider> ConfigureProviders(XDocument xmlConfig);
 
-        List<IDpProvider> ConfiguredProviders { get; set; }
+        IEnumerable<IDpProvider> ConfiguredProviders { get; set; }
 
         void StartProviders();
         void StopProviders();
