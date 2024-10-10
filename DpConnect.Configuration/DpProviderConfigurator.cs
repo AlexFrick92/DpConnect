@@ -25,17 +25,6 @@ namespace DpConnect.Configuration
 
         }
 
-        public void RegisterProvider(Type type)
-        {
-            if (typeof(IDpProvider).IsAssignableFrom(type))
-            {
-                _registeredProviders.Add(type);
-                System.Console.WriteLine($"Зарегистрирован провайдер: {type.Name}");
-            }
-            else
-                throw new ArgumentException($"Тип {type.Name} не является наследником {typeof(IDpProvider)}");
-        }
-
         public IList<IDpProvider> ConfigureProviders(XDocument xmlConfig)
         {
             foreach (XElement xmlProvider in xmlConfig.Element(DpXmlConfiguration.Tag_ProviderDefinition).Elements("Provider"))
