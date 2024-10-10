@@ -13,18 +13,15 @@ namespace DpConnect.Configuration
 
         readonly IDpProviderConfigurator _providerConfigurator;
         readonly IDpProcessorConfigurator _processorConfigurator;
-        DataPointConfigurator _dpConfigurator;
-        IIoCContainer _container;
+        DataPointConfigurator _dpConfigurator;        
 
         DpXmlConfiguration _configuration;
         ILogger _logger;        
         IEnumerable<IDpProcessor> _dpProcessors;
 
-        public DpFluentBuilder(IIoCContainer container, 
-            IDpProviderConfigurator dpProviderConfigurator, 
+        public DpFluentBuilder(IDpProviderConfigurator dpProviderConfigurator, 
             IDpProcessorConfigurator dpProcessorConfigurator)
-        {
-            _container = container;
+        {            
             _providerConfigurator = dpProviderConfigurator;
             _processorConfigurator = dpProcessorConfigurator;
         }
@@ -52,12 +49,7 @@ namespace DpConnect.Configuration
             return this;
         }
         public IDpFluentBuilder Build()
-        {
-            if (_logger == null)
-                _logger = new ConsoleLogger();
-            if (_container == null)
-                throw new ArgumentNullException("Не задан IoC");                        
-
+        {                       
             if(_dpProcessors != null)
                 foreach (var processor in _dpProcessors)
                     _processorConfigurator.RegisterProcessor(processor);            
