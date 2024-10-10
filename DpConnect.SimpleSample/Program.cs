@@ -27,8 +27,7 @@ namespace DpConnect.SimpleSample
             
             DpFluentBuilder dataPointConfigurator = new DpFluentBuilder()                
                 .SetContainer(container)
-                .AddConfiguration($"{currentDirectory}/DpConfig.xml")                
-                //.SetProviders(new Type[] { typeof(OpcUaProvider) })
+                .AddConfiguration($"{currentDirectory}/DpConfig.xml")                                
                 .SetProcessors(new Type[] { typeof(ReadNodeProcessor), typeof(CallMethodProcessor), typeof(ReadComplexNode)})                
                 .Build();
 

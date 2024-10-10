@@ -9,8 +9,6 @@ namespace DpConnect.Interface
 
         IDpProvider Clone();
 
-        void SetLogger(ILogger logger);
-
         void ConfigureHost(XDocument xmlConfig);
 
         void RegisterDp<T>(IDpValueSource<T> dp, XDocument xmlConfig);         

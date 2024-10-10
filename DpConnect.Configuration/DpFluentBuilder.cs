@@ -16,8 +16,7 @@ namespace DpConnect.Configuration
         IIoCContainer _container;
 
         DpXmlConfiguration _configuration;
-        ILogger _logger;
-        Type[] _providerTypes;
+        ILogger _logger;        
         Type[] _processorTypes;
         IDpProcessor[] _dpProcessors;
 
@@ -44,11 +43,6 @@ namespace DpConnect.Configuration
 
             return this;
         }
-        public DpFluentBuilder SetProviders(Type[] providerTypes)
-        {
-            _providerTypes = providerTypes;
-            return this;
-        }
         public DpFluentBuilder SetProcessors(Type[] processorTypes)
         {
             _processorTypes = processorTypes;
@@ -68,10 +62,6 @@ namespace DpConnect.Configuration
 
             _providerConfigurator = new DpProviderConfigurator(_logger, _container);
             _processorConfigurator = new DpProcessorConfigurator();
-
-            if(_providerTypes != null)
-                foreach (var provider in _providerTypes)
-                    _providerConfigurator.RegisterProvider(provider);
 
             if(_dpProcessors != null)
                 foreach (var processor in _dpProcessors)

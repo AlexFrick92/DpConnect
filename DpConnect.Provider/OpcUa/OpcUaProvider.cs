@@ -6,8 +6,6 @@ using System.Collections.Generic;
 using System.Xml.Linq;
 using System.Reflection;
 
-
-
 //Адаптер для клиента опс уа
 
 namespace DpConnect.Provider.OpcUa
@@ -18,15 +16,18 @@ namespace DpConnect.Provider.OpcUa
         ILogger _logger;
         OpcUaHostConfiguration _hostConfiguration;
         IList<object> _dpNodes = new List<object>();
-        public OpcUaProvider()
+
+        public OpcUaProvider(ILogger logger)
         {
-            //_client = new Client("opc.tcp://10.10.10.92:4840", logger);
-        }        
+            Console.WriteLine("Создан из контейнера с логгером!");
+            _logger = logger;
+        }
+
         public string Name { get; set; }
 
         public IDpProvider Clone()
         {
-            return new OpcUaProvider();
+            return new OpcUaProvider(_logger);
         }
 
         public void ConfigureHost(XDocument xmlConfiguration)
@@ -110,11 +111,6 @@ namespace DpConnect.Provider.OpcUa
         private IList<object> CallMethod(string NodeId, params object[] args)
         {            
             return _client.CallMethod(NodeId, args);
-        }
-
-        public void SetLogger(ILogger logger)
-        {
-            _logger = logger;
         }
     }
 }

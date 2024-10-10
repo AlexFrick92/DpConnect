@@ -41,30 +41,16 @@ namespace DpConnect.Configuration
             foreach (XElement xmlProvider in xmlConfig.Element(DpXmlConfiguration.Tag_ProviderDefinition).Elements("Provider"))
             {
 
-                IDpProvider provider = null;
-
                 string typeName = xmlProvider.Attribute("TypeName").Value;                
-
-                Type providerType = _registeredProviders.FirstOrDefault(p => p.Name == typeName);                
-                if(providerType == null)
-                {
-                    _logger.Info($"Провайдер {typeName} не найден в списке. Поищем в контейнере...");
-
-                    providerType = Type.GetType(typeName);
-
-                    MethodInfo methodInfo = typeof(IIoCContainer).GetMethod(nameof(IIoCContainer.Resolve), new[] {typeof(Type)}  );
-                    MethodInfo genericMethod = methodInfo.MakeGenericMethod(providerType);
-
-                    provider =  (IDpProvider)genericMethod.Invoke(_container, new[] { providerType });
-
-                    _logger.Info($"Найден {providerType.FullName}");
-                }
-
-
-                //IDpProvider provider = (IDpProvider)Activator.CreateInstance(providerType);
                 
-                provider.SetLogger(_logger);
+                Type providerType = Type.GetType(typeName);
 
+                MethodInfo methodInfo = typeof(IIoCContainer).GetMethod(nameof(IIoCContainer.Resolve), new[] {typeof(Type)}  );
+                MethodInfo genericMethod = methodInfo.MakeGenericMethod(providerType);
+
+                IDpProvider provider =  (IDpProvider)genericMethod.Invoke(_container, new[] { providerType });                    
+                
+                                
                 provider.Name = xmlProvider.Attribute("Name").Value;
                 provider.ConfigureHost(new XDocument(xmlProvider));
                 ConfiguredProviders.Add(provider);
