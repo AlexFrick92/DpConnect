@@ -17,13 +17,11 @@ namespace DpConnect.Configuration
 
         DpXmlConfiguration _configuration;
         ILogger _logger;        
-        Type[] _processorTypes;
         IDpProcessor[] _dpProcessors;
 
-        public DpFluentBuilder SetContainer(IIoCContainer container)
+        public DpFluentBuilder(IIoCContainer container)
         {
             _container = container;
-            return this;
         }
         public DpFluentBuilder AddConfiguration(params string[] configPath)
         {
@@ -43,11 +41,6 @@ namespace DpConnect.Configuration
 
             return this;
         }
-        public DpFluentBuilder SetProcessors(Type[] processorTypes)
-        {
-            _processorTypes = processorTypes;
-            return this;    
-        }
         public DpFluentBuilder SetProcessors(IDpProcessor[] processorInstances) 
         { 
             _dpProcessors = processorInstances;
@@ -60,16 +53,12 @@ namespace DpConnect.Configuration
             if (_container == null)
                 throw new ArgumentNullException("Не задан IoC");
 
-            _providerConfigurator = new DpProviderConfigurator(_logger, _container);
-            _processorConfigurator = new DpProcessorConfigurator();
+            _providerConfigurator = new DpProviderConfigurator(_container);
+            _processorConfigurator = new DpProcessorConfigurator(_container);
 
             if(_dpProcessors != null)
                 foreach (var processor in _dpProcessors)
                     _processorConfigurator.RegisterProcessor(processor);            
-
-            if(_processorTypes != null)
-                foreach (var processor in _processorTypes)
-                    _processorConfigurator.RegisterProcessor(processor);
             
             _providerConfigurator.ConfigureProviders(_configuration.ProviderConfiguration);
             _processorConfigurator.ConfigureProcessors(_configuration.ProcessorConfiguration);

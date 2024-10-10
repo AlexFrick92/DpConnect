@@ -3,7 +3,7 @@ using DpConnect.Interface;
 
 namespace DpConnect.SimpleSample
 {
-    internal class ReadNodeProcessor : DpProcessor
+    internal class ReadNodeProcessor : DpProcessor, IReadNodeProcessor
     {        
         public ReadNodeProcessor()
         {            

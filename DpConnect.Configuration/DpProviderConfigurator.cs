@@ -16,9 +16,9 @@ namespace DpConnect.Configuration
         public List<IDpProvider> ConfiguredProviders;
         IIoCContainer _container;
 
-        public DpProviderConfigurator(ILogger logger, IIoCContainer container)
+        public DpProviderConfigurator(IIoCContainer container)
         {
-            _logger = logger;
+            _logger = container.Resolve<ILogger>();
             _registeredProviders = new List<Type>();
             ConfiguredProviders = new List<IDpProvider>();
             _container = container;

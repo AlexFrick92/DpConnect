@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace DpConnect.SimpleSample
 {
-    internal class ReadComplexNode : DpProcessor
+    internal class ReadComplexNode : DpProcessor, IReadComplexNode
     {
         public ReadComplexNode()
         {

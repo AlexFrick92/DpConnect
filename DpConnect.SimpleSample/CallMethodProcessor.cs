@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace DpConnect.SimpleSample
 {
-    internal class CallMethodProcessor : DpProcessor
+    internal class CallMethodProcessor : DpProcessor, ICallMethodProcessor
     {
         public CallMethodProcessor()
         {

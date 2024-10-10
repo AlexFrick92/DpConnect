@@ -18,8 +18,7 @@ namespace DpConnect.Provider.OpcUa
         IList<object> _dpNodes = new List<object>();
 
         public OpcUaProvider(ILogger logger)
-        {
-            Console.WriteLine("Создан из контейнера с логгером!");
+        {            
             _logger = logger;
         }
 
@@ -27,7 +26,7 @@ namespace DpConnect.Provider.OpcUa
 
         public IDpProvider Clone()
         {
-            return new OpcUaProvider(_logger);
+            return default; // new OpcUaProvider(_logger);
         }
 
         public void ConfigureHost(XDocument xmlConfiguration)

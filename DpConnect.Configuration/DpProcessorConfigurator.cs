@@ -3,6 +3,8 @@ using System.Linq;
 using DpConnect.Interface;
 using System.Collections.Generic;
 using System.Xml.Linq;
+using Promatis.Core;
+using System.Reflection;
 
 namespace DpConnect.Configuration
 {
@@ -10,25 +12,34 @@ namespace DpConnect.Configuration
     {
         List<Type> _registeredProcessors;
         public List<IDpProcessor> ConfiguredProcessors;
+        IIoCContainer _container;
 
-        public DpProcessorConfigurator()
+
+        public DpProcessorConfigurator(IIoCContainer container)
         {
+            _container = container;
             ConfiguredProcessors = new List<IDpProcessor>();
             _registeredProcessors = new List<Type>();
         }
         public IList<IDpProcessor> ConfigureProcessors(XDocument xmlProcessors)
         {
-            foreach (XElement xmlProc in xmlProcessors.Element(DpXmlConfiguration.Tag_ProcessorDefinition).Elements())
+            foreach (XElement xmlProc in xmlProcessors.Element(DpXmlConfiguration.Tag_ProcessorDefinition).Elements("Processor"))
             {
-                if (ConfiguredProcessors.FirstOrDefault(p => p.Name == xmlProc.Attribute("Name").Value) == null)
-                {
-                    IDpProcessor processor = (IDpProcessor)Activator.CreateInstance(_registeredProcessors.First(p => p.Name == xmlProc.Name));
-                    processor.Name = xmlProc.Attribute("Name").Value;
 
-                    ConfiguredProcessors.Add(processor);
+                string typeName = xmlProc.Attribute("TypeName").Value;
 
-                    Console.WriteLine($"Законфигурирован процессор: {processor.GetType()} : {processor.Name}");
-                }     
+                Type procType = Type.GetType(typeName);
+
+                MethodInfo methodInfo = typeof(IIoCContainer).GetMethod(nameof(IIoCContainer.Resolve), new[] { typeof(Type) });
+                MethodInfo genericMethod = methodInfo.MakeGenericMethod(procType);
+
+                IDpProcessor processor = (IDpProcessor)genericMethod.Invoke(_container, new[] { procType });
+
+                processor.Name = xmlProc.Attribute("Name").Value;
+
+                ConfiguredProcessors.Add(processor);
+
+                Console.WriteLine($"Законфигурирован процессор: {processor.GetType()} : {processor.Name}");    
                 
             }
             return ConfiguredProcessors;

@@ -9,10 +9,10 @@
 	</ProviderDefinition>
 
 	<ProcessorDefinition>
-		<ReadNodeProcessor Name ="RnProc1"/>
-		<CallMethodProcessor Name ="CmProc1"/>
-		<ReadComplexNode Name ="RcProc1"/>
-		<ReadComplexNode Name ="RcProc2"/>
+		<Processor TypeName="DpConnect.SimpleSample.IReadNodeProcessor, DpConnect.SimpleSample" Name ="RnProc1"/>
+		<Processor TypeName="DpConnect.SimpleSample.ICallMethodProcessor, DpConnect.SimpleSample" Name ="CmProc1"/>
+		<Processor TypeName="DpConnect.SimpleSample.IReadComplexNode, DpConnect.SimpleSample" Name ="RcProc1"/>
+		<Processor TypeName="DpConnect.SimpleSample.IReadComplexNode, DpConnect.SimpleSample" Name ="RcProc2"/>
 	</ProcessorDefinition>
 
 	<DataPointDefinition>
