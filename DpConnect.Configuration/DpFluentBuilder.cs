@@ -7,7 +7,7 @@ using System.Xml.Linq;
 
 namespace DpConnect.Configuration
 {
-    public class DpFluentBuilder
+    public class DpFluentBuilder : IDpFluentBuilder
     {
 
         DpProviderConfigurator _providerConfigurator;
@@ -23,7 +23,7 @@ namespace DpConnect.Configuration
         {
             _container = container;
         }
-        public DpFluentBuilder AddConfiguration(params string[] configPath)
+        public IDpFluentBuilder AddConfiguration(params string[] configPath)
         {
             if (_configuration == null)
                 _configuration = new DpXmlConfiguration(configPath);
@@ -46,7 +46,7 @@ namespace DpConnect.Configuration
             _dpProcessors = processorInstances;
             return this;
         }
-        public DpFluentBuilder Build()
+        public IDpFluentBuilder Build()
         {
             if (_logger == null)
                 _logger = new ConsoleLogger();

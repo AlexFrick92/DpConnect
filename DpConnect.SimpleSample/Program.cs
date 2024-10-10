@@ -20,21 +20,29 @@ namespace DpConnect.SimpleSample
 
             IIoCContainer container = new DryIocContainer();
 
+            container.RegisterInstance(container);
+
             container.Register<ILogger, ConsoleLogger>();
             
             container.Register<IOpcUaProvider, OpcUaProvider>();
 
             container.Register<IReadComplexNode, ReadComplexNode>();
             container.Register<IReadNodeProcessor, ReadNodeProcessor>();
-            container.Register<ICallMethodProcessor, CallMethodProcessor>();               
+            container.Register<ICallMethodProcessor, CallMethodProcessor>();
+
+
+            
+
+            container.Register<IDpFluentBuilder, DpFluentBuilder>();
 
             string currentDirectory = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
-            
-            DpFluentBuilder dataPointConfigurator = new DpFluentBuilder(container)                               
-                .AddConfiguration($"{currentDirectory}/DpConfig.xml")                                                
-                .Build();
 
-           dataPointConfigurator.StartProviders();
+            var dpBuilder = container.Resolve<IDpFluentBuilder>()
+                .AddConfiguration($"{currentDirectory}/DpConfig.xml")
+                .Build();
+                              
+                
+           dpBuilder.StartProviders();
 
 
             while (true)
