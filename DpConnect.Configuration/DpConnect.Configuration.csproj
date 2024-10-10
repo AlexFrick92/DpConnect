@@ -45,7 +45,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DataPointConfigurator.cs" />
-    <Compile Include="DpBuilder.cs" />
     <Compile Include="DpComplexValue.cs" />
     <Compile Include="DpFluentBuilder.cs" />
     <Compile Include="DpMethod.cs" />

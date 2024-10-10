@@ -4,6 +4,8 @@ using System.Linq;
 using System.Xml.Linq;
 using DpConnect.Interface;
 using Promatis.Core.Logging;
+using Promatis.Core;
+using System.Reflection;
 
 namespace DpConnect.Configuration
 {
@@ -12,15 +14,18 @@ namespace DpConnect.Configuration
         ILogger _logger;
         List<Type> _registeredProviders;
         public List<IDpProvider> ConfiguredProviders;
+        IIoCContainer _container;
 
-        public DpProviderConfigurator(ILogger logger)
+        public DpProviderConfigurator(ILogger logger, IIoCContainer container)
         {
             _logger = logger;
             _registeredProviders = new List<Type>();
             ConfiguredProviders = new List<IDpProvider>();
+            _container = container;
+
         }
 
-        public void RegisterProvider(Type type) 
+        public void RegisterProvider(Type type)
         {
             if (typeof(IDpProvider).IsAssignableFrom(type))
             {
@@ -33,9 +38,31 @@ namespace DpConnect.Configuration
 
         public IList<IDpProvider> ConfigureProviders(XDocument xmlConfig)
         {
-            foreach (XElement xmlProvider in xmlConfig.Element(DpXmlConfiguration.Tag_ProviderDefinition).Elements())
+            foreach (XElement xmlProvider in xmlConfig.Element(DpXmlConfiguration.Tag_ProviderDefinition).Elements("Provider"))
             {
-                IDpProvider provider = (IDpProvider)Activator.CreateInstance(_registeredProviders.First(p => p.Name == xmlProvider.Name));
+
+                IDpProvider provider = null;
+
+                string typeName = xmlProvider.Attribute("TypeName").Value;                
+
+                Type providerType = _registeredProviders.FirstOrDefault(p => p.Name == typeName);                
+                if(providerType == null)
+                {
+                    _logger.Info($"Провайдер {typeName} не найден в списке. Поищем в контейнере...");
+
+                    providerType = Type.GetType(typeName);
+
+                    MethodInfo methodInfo = typeof(IIoCContainer).GetMethod(nameof(IIoCContainer.Resolve), new[] {typeof(Type)}  );
+                    MethodInfo genericMethod = methodInfo.MakeGenericMethod(providerType);
+
+                    provider =  (IDpProvider)genericMethod.Invoke(_container, new[] { providerType });
+
+                    _logger.Info($"Найден {providerType.FullName}");
+                }
+
+
+                //IDpProvider provider = (IDpProvider)Activator.CreateInstance(providerType);
+                
                 provider.SetLogger(_logger);
 
                 provider.Name = xmlProvider.Attribute("Name").Value;
@@ -46,7 +73,7 @@ namespace DpConnect.Configuration
             }
             return ConfiguredProviders;
 
-        }           
+        }
         public void StartProviders()
         {
             Console.WriteLine("Запуск провайдеров...");
@@ -54,6 +81,12 @@ namespace DpConnect.Configuration
                 provider.Start();
 
             Console.WriteLine("Провайдеры запустились!");
+        }
+        public IDpProvider GetProviderByName(string name)
+        {
+
+
+            return ConfiguredProviders.First(x => (x.Name == name));
         }
 
         public void StopProviders()

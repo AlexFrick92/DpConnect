@@ -5,7 +5,7 @@
 <DpConfiguration>
 
 	<ProviderDefinition>
-		<OpcUaProvider Name ="Stend AKF" Endpoint ="opc.tcp://10.10.10.95:4840"/>
+		<Provider TypeName="DpConnect.Provider.OpcUa.IOpcUaProvider, DpConnect.Provider" Name ="Stend AKF" Endpoint ="opc.tcp://10.10.10.95:4840"/>
 	</ProviderDefinition>
 
 	<ProcessorDefinition>

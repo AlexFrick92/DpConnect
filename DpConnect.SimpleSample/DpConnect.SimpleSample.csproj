@@ -62,6 +62,10 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Tools\IoC\Source\DryIoC\Promatis.IoC.DryIoc.csproj">
+      <Project>{536c73c1-951c-4062-bcaa-01f1b86e483b}</Project>
+      <Name>Promatis.IoC.DryIoc</Name>
+    </ProjectReference>
     <ProjectReference Include="..\DpConnect.Configuration\DpConnect.Configuration.csproj">
       <Project>{1afbc91a-389c-438c-ac3b-89af22139d0d}</Project>
       <Name>DpConnect.Configuration</Name>

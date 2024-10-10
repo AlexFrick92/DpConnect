@@ -7,7 +7,7 @@ namespace DpConnect.Provider.OpcUa
         public string Endpoint;
         public OpcUaHostConfiguration(XDocument xmlConfig) 
         {
-            Endpoint = xmlConfig.Element(typeof(OpcUaProvider).Name).Attribute("Endpoint").Value;
+            Endpoint = xmlConfig.Element("Provider").Attribute("Endpoint").Value;
         }
     }
 }

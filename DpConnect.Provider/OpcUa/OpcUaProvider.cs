@@ -12,7 +12,7 @@ using System.Reflection;
 
 namespace DpConnect.Provider.OpcUa
 {
-    public class OpcUaProvider : IDpProvider
+    public class OpcUaProvider : IOpcUaProvider
     {
         Client _client;
         ILogger _logger;

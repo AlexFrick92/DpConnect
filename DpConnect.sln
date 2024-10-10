@@ -19,6 +19,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tools", "Tools", "{C7B0B4F4
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DpConnect.SimpleSample", "DpConnect.SimpleSample\DpConnect.SimpleSample.csproj", "{A9205473-8BF2-426E-A01F-6DEE397A8798}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Promatis.IoC.DryIoc", "..\Tools\IoC\Source\DryIoC\Promatis.IoC.DryIoc.csproj", "{536C73C1-951C-4062-BCAA-01F1B86E483B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -49,6 +51,10 @@ Global
 		{A9205473-8BF2-426E-A01F-6DEE397A8798}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A9205473-8BF2-426E-A01F-6DEE397A8798}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A9205473-8BF2-426E-A01F-6DEE397A8798}.Release|Any CPU.Build.0 = Release|Any CPU
+		{536C73C1-951C-4062-BCAA-01F1B86E483B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{536C73C1-951C-4062-BCAA-01F1B86E483B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{536C73C1-951C-4062-BCAA-01F1B86E483B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{536C73C1-951C-4062-BCAA-01F1B86E483B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -56,6 +62,7 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{EAA5D1E1-AD76-4F44-BB42-6DAC7CC91207} = {CCB8C253-C27E-41D0-BB3B-FAC7F7FAB7DF}
 		{D6B9F819-DDCA-4CBD-98CC-8D13A67A18F3} = {C7B0B4F4-2AEB-4FCC-B17F-70F0213A0FDF}
+		{536C73C1-951C-4062-BCAA-01F1B86E483B} = {C7B0B4F4-2AEB-4FCC-B17F-70F0213A0FDF}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {AF711CA4-3497-4382-A3F5-89FA9B8401DD}

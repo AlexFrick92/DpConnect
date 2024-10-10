@@ -79,6 +79,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="OpcUa\IOpcUaProvider.cs" />
     <Compile Include="OpcUa\OpcUaDpConfiguration.cs" />
     <Compile Include="OpcUa\OpcUaHostConfiguration.cs" />
     <Compile Include="OpcUa\OpcUaProvider.cs" />

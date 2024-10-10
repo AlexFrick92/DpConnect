@@ -2,11 +2,12 @@
 using System.IO;
 using System.Reflection;
 
+using Promatis.Core;
 using Promatis.Core.Logging;
+using Promatis.IoC.DryIoc;
 
 using DpConnect.Configuration;
 using DpConnect.Provider.OpcUa;
-
 
 
 namespace DpConnect.SimpleSample
@@ -16,14 +17,18 @@ namespace DpConnect.SimpleSample
         static void Main(string[] args)
         {
 
+
+            IIoCContainer container = new DryIocContainer();
+
+            container.Register<ILogger, ConsoleLogger>();
+            container.Register<IOpcUaProvider, OpcUaProvider>();
+
             string currentDirectory = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
-
-            ConsoleLogger logger = new ConsoleLogger();
-
-            DpFluentBuilder dataPointConfigurator = new DpFluentBuilder()
-                .SetLogger(logger)
+            
+            DpFluentBuilder dataPointConfigurator = new DpFluentBuilder()                
+                .SetContainer(container)
                 .AddConfiguration($"{currentDirectory}/DpConfig.xml")                
-                .SetProviders(new Type[] { typeof(OpcUaProvider) })
+                //.SetProviders(new Type[] { typeof(OpcUaProvider) })
                 .SetProcessors(new Type[] { typeof(ReadNodeProcessor), typeof(CallMethodProcessor), typeof(ReadComplexNode)})                
                 .Build();
 

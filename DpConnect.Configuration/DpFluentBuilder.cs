@@ -1,4 +1,5 @@
 ﻿using DpConnect.Interface;
+using Promatis.Core;
 using Promatis.Core.Logging;
 using System;
 using System.Data.SqlTypes;
@@ -12,6 +13,7 @@ namespace DpConnect.Configuration
         DpProviderConfigurator _providerConfigurator;
         DpProcessorConfigurator _processorConfigurator;
         DataPointConfigurator _dpConfigurator;
+        IIoCContainer _container;
 
         DpXmlConfiguration _configuration;
         ILogger _logger;
@@ -19,9 +21,9 @@ namespace DpConnect.Configuration
         Type[] _processorTypes;
         IDpProcessor[] _dpProcessors;
 
-        public DpFluentBuilder SetLogger(ILogger logger)
+        public DpFluentBuilder SetContainer(IIoCContainer container)
         {
-            _logger = logger;
+            _container = container;
             return this;
         }
         public DpFluentBuilder AddConfiguration(params string[] configPath)
@@ -61,12 +63,15 @@ namespace DpConnect.Configuration
         {
             if (_logger == null)
                 _logger = new ConsoleLogger();
+            if (_container == null)
+                throw new ArgumentNullException("Не задан IoC");
 
-            _providerConfigurator = new DpProviderConfigurator(_logger);
+            _providerConfigurator = new DpProviderConfigurator(_logger, _container);
             _processorConfigurator = new DpProcessorConfigurator();
 
-            foreach (var provider in _providerTypes)
-                _providerConfigurator.RegisterProvider(provider);
+            if(_providerTypes != null)
+                foreach (var provider in _providerTypes)
+                    _providerConfigurator.RegisterProvider(provider);
 
             if(_dpProcessors != null)
                 foreach (var processor in _dpProcessors)
