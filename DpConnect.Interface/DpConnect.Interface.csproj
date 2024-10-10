@@ -45,13 +45,16 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DpProcessor.cs" />
+    <Compile Include="IDpFluentBuilder.cs" />
     <Compile Include="IDpProcessor.cs" />
+    <Compile Include="IDpProcessorConfigurator.cs" />
     <Compile Include="IDpProvider.cs" />
     <Compile Include="IDataPoint.cs" />
     <Compile Include="IDpComplexValueConfig.cs" />
     <Compile Include="IDpMethod.cs" />
     <Compile Include="IDpMethodConfig.cs" />
     <Compile Include="IDpMethodSource.cs" />
+    <Compile Include="IDpProviderConfigurator.cs" />
     <Compile Include="IDpValue.cs" />
     <Compile Include="IDpValueSource.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

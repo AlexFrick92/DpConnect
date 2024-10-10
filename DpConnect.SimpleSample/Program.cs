@@ -35,6 +35,8 @@ namespace DpConnect.SimpleSample
             container.Register<IDpFluentBuilder, DpFluentBuilder>();
 
 
+
+
             string currentDirectory = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
 
             var dpBuilder = container.Resolve<IDpFluentBuilder>()

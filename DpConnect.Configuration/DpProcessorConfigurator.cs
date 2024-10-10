@@ -44,16 +44,6 @@ namespace DpConnect.Configuration
             }
             return ConfiguredProcessors;
         }
-        public void RegisterProcessor(Type type)
-        {
-            if (typeof(IDpProcessor).IsAssignableFrom(type))
-            {
-                _registeredProcessors.Add(type);
-                System.Console.WriteLine($"Зарегистрирован процессор: {type.Name}");
-            }
-            else
-                throw new ArgumentException($"Тип {type.Name} не является наследником {typeof(IDpProcessor)}");
-        }
         public void RegisterProcessor(IDpProcessor processor)
         {
             if (ConfiguredProcessors.FirstOrDefault(p => p.Name == processor.Name) != null)
