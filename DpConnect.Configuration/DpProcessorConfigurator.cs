@@ -11,7 +11,7 @@ namespace DpConnect.Configuration
     public class DpProcessorConfigurator : IDpProcessorConfigurator
     {
         List<Type> _registeredProcessors;
-        public List<IDpProcessor> ConfiguredProcessors;
+        public List<IDpProcessor> ConfiguredProcessors { get; set; }
         IIoCContainer _container;
 
 

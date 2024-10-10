@@ -29,11 +29,11 @@ namespace DpConnect.SimpleSample
             container.Register<IReadComplexNode, ReadComplexNode>();
             container.Register<IReadNodeProcessor, ReadNodeProcessor>();
             container.Register<ICallMethodProcessor, CallMethodProcessor>();
-
-
             
             container.Register<IDpProviderConfigurator, DpProviderConfigurator>();
+            container.Register<IDpProcessorConfigurator, DpProcessorConfigurator>();
             container.Register<IDpFluentBuilder, DpFluentBuilder>();
+
 
             string currentDirectory = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
 
