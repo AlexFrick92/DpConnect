@@ -8,7 +8,7 @@ using System.Reflection;
 
 namespace DpConnect.Configuration
 {
-    public class DpProcessorConfigurator
+    public class DpProcessorConfigurator : IDpProcessorConfigurator
     {
         List<Type> _registeredProcessors;
         public List<IDpProcessor> ConfiguredProcessors;

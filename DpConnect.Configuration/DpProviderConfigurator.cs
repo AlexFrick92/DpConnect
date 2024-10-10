@@ -9,16 +9,16 @@ using System.Reflection;
 
 namespace DpConnect.Configuration
 {
-    public class DpProviderConfigurator
+    public class DpProviderConfigurator : IDpProviderConfigurator
     {
         ILogger _logger;
         List<Type> _registeredProviders;
-        public List<IDpProvider> ConfiguredProviders;
+        public List<IDpProvider> ConfiguredProviders { get; set; }
         IIoCContainer _container;
 
-        public DpProviderConfigurator(IIoCContainer container)
+        public DpProviderConfigurator(ILogger logger, IIoCContainer container)
         {
-            _logger = container.Resolve<ILogger>();
+            _logger = logger;
             _registeredProviders = new List<Type>();
             ConfiguredProviders = new List<IDpProvider>();
             _container = container;

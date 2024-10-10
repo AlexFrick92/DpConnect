@@ -53,6 +53,8 @@
     <Compile Include="DpValue.cs" />
     <Compile Include="DpXmlConfiguration.cs" />
     <Compile Include="IDpFluentBuilder.cs" />
+    <Compile Include="IDpProcessorConfigurator.cs" />
+    <Compile Include="IDpProviderConfigurator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

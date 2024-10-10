@@ -32,7 +32,7 @@ namespace DpConnect.SimpleSample
 
 
             
-
+            container.Register<IDpProviderConfigurator, DpProviderConfigurator>();
             container.Register<IDpFluentBuilder, DpFluentBuilder>();
 
             string currentDirectory = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);

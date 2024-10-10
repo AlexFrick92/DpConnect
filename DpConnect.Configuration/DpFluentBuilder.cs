@@ -10,7 +10,7 @@ namespace DpConnect.Configuration
     public class DpFluentBuilder : IDpFluentBuilder
     {
 
-        DpProviderConfigurator _providerConfigurator;
+        IDpProviderConfigurator _providerConfigurator;
         DpProcessorConfigurator _processorConfigurator;
         DataPointConfigurator _dpConfigurator;
         IIoCContainer _container;
@@ -19,9 +19,10 @@ namespace DpConnect.Configuration
         ILogger _logger;        
         IDpProcessor[] _dpProcessors;
 
-        public DpFluentBuilder(IIoCContainer container)
+        public DpFluentBuilder(IIoCContainer container, IDpProviderConfigurator dpProviderConfigurator)
         {
             _container = container;
+            _providerConfigurator = dpProviderConfigurator;
         }
         public IDpFluentBuilder AddConfiguration(params string[] configPath)
         {
@@ -52,8 +53,7 @@ namespace DpConnect.Configuration
                 _logger = new ConsoleLogger();
             if (_container == null)
                 throw new ArgumentNullException("Не задан IoC");
-
-            _providerConfigurator = new DpProviderConfigurator(_container);
+            
             _processorConfigurator = new DpProcessorConfigurator(_container);
 
             if(_dpProcessors != null)
