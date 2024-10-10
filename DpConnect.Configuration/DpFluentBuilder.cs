@@ -45,7 +45,7 @@ namespace DpConnect.Configuration
 
             return this;
         }
-        public DpFluentBuilder SetProcessors(IDpProcessor[] processorInstances) 
+        public IDpFluentBuilder SetProcessors(IDpProcessor[] processorInstances) 
         { 
             _dpProcessors = processorInstances;
             return this;

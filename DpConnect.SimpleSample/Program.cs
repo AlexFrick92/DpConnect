@@ -34,13 +34,11 @@ namespace DpConnect.SimpleSample
             container.Register<IDpProcessorConfigurator, DpProcessorConfigurator>();
             container.Register<IDpFluentBuilder, DpFluentBuilder>();
 
-
-
-
             string currentDirectory = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
 
             var dpBuilder = container.Resolve<IDpFluentBuilder>()
                 .AddConfiguration($"{currentDirectory}/DpConfig.xml")
+                .SetProcessors(new IDpProcessor[] { new ReadComplexNode() {Name = "RcNode3Pro" } })
                 .Build();
                               
                 

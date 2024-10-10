@@ -1,8 +1,7 @@
-﻿using DpConnect.Interface;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Xml.Linq;
 
-namespace DpConnect.Configuration
+namespace DpConnect.Interface
 {
     public interface IDpProcessorConfigurator
     {

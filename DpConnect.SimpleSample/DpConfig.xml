@@ -97,6 +97,7 @@
 
 			<Processor Name ="RcProc1" TargetProperty="ComplexDp"/>
 			<Processor Name ="RcProc2" TargetProperty="ComplexDp"/>
+			<Processor Name ="RcNode3Pro" TargetProperty="ComplexDp"/>
 		</DpValue>
 
 	</DataPointDefinition>
