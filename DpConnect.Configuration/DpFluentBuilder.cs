@@ -19,9 +19,11 @@ namespace DpConnect.Configuration
         ILogger _logger;        
         IEnumerable<IDpProcessor> _dpProcessors;
 
-        public DpFluentBuilder(IDpProviderConfigurator dpProviderConfigurator, 
+        public DpFluentBuilder(ILogger logger,
+            IDpProviderConfigurator dpProviderConfigurator, 
             IDpProcessorConfigurator dpProcessorConfigurator)
-        {            
+        {
+            _logger = logger;
             _providerConfigurator = dpProviderConfigurator;
             _processorConfigurator = dpProcessorConfigurator;
         }

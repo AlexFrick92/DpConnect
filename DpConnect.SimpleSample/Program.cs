@@ -22,7 +22,7 @@ namespace DpConnect.SimpleSample
 
             container.RegisterInstance(container);
 
-            container.Register<ILogger, ConsoleLogger>();
+            container.RegisterInstance<ILogger>(new ConsoleLogger());
             
             container.Register<IOpcUaProvider, OpcUaProvider>();
 
