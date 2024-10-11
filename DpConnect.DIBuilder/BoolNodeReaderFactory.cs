@@ -9,12 +9,10 @@ namespace DpConnect.DIBuilder
 {
     internal class BoolNodeReaderFactory : IDpProcessorFactory<BoolNodeReader>
     {
-        private readonly ILogger _logger;
-        private readonly IDpBuilder _binder;
-        public BoolNodeReaderFactory(ILogger logger, IDpBuilder dpBinder)
+        private readonly ILogger _logger;        
+        public BoolNodeReaderFactory(ILogger logger)
         {
-            _logger = logger;
-            _binder = dpBinder;
+            _logger = logger;            
 
         }
         public BoolNodeReader Create(string name)

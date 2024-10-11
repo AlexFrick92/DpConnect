@@ -44,8 +44,14 @@ namespace DpConnect.DIBuilder
 
             DpValue<bool> dpValue = new DpValue<bool>();
 
-            prov.RegisterDp<bool>(dpValue, new System.Xml.Linq.XDocument());
-            
+
+            // Хочется так же убрать xml конфиг отсюда, то есть создавать (регать) точку в провайдере нужно уже с заданной конфигурацией в классе.
+            // с другой стороны, если мы подразумеваем конфигурацию через файлы, то каждый IDpProvider должен уметь работать с Xml.
+
+
+            prov.RegisterDp<bool>(dpValue, new System.Xml.Linq.XDocument());                        
+
+
             prop.SetValue(processor, dpValue);
                 
         }
