@@ -9,11 +9,17 @@ namespace DpConnect.DIBuilder
 {
     internal class App : IApp
     {
-        public App(ILogger logger, IBoolNodeReader boolNodeReader)
+
+        BoolNodeReader _boolNodeReader;
+
+        public App(ILogger logger, IDpBinder binder)
         {
             logger.Info("Hello from App!");
 
-            boolNodeReader.BoolValuesUpdated += (sender, val) =>
+
+            _boolNodeReader = binder.CreateProcessor<BoolNodeReader>("RedNode1");
+
+            _boolNodeReader.BoolValuesUpdated += (sender, val) =>
             {
                 logger.Info("From App, new value accepted: " + val);
             };

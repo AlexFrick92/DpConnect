@@ -6,6 +6,6 @@ namespace DpConnect.DIBuilder
     {
         void Bind(IDpProcessor processor);
 
-
+        T CreateProcessor<T>(string name) where T : IDpProcessor;
     }
 }

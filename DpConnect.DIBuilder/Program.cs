@@ -16,17 +16,23 @@ namespace DpConnect.DIBuilder
 
             container.RegisterInstance(container);
 
-            container.RegisterInstance<ILogger>(new ConsoleLogger());
-
-            container.Register<IBoolNodeReader, BoolNodeReader>();
+            container.RegisterInstance<ILogger>(new ConsoleLogger());            
 
             container.Register<IOpcProvider, OpcUaProvider>();
 
+            container.Register<IDpProcessorFactory<BoolNodeReader>, BoolNodeReaderFactory>();
+           
             container.Register<IDpBinder, DpBinder>();
 
             container.Register<IDpProviderConfigurator, DumbProviderConfigurator>();
 
             container.Register<IApp, App>();
+
+
+
+
+
+
 
 
             container.Resolve<IApp>();

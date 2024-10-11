@@ -6,36 +6,29 @@ using System;
 
 namespace DpConnect.DIBuilder
 {
-    public class BoolNodeReader : IDpProcessor, IBoolNodeReader
+    internal class BoolNodeReader : DpProcessorBase
     {
 
-        private readonly ILogger _logger;
-        private readonly IDpBinder _builder;
+        private readonly ILogger _logger;        
 
         public event EventHandler<bool> BoolValuesUpdated;
 
-        public BoolNodeReader(ILogger logger, IDpBinder dpBinder)
+        public BoolNodeReader(ILogger logger, IDpBinder dpBinder, string name) : base(dpBinder, name) 
         {
-
-            Name = "BoolReader";
-            _builder = dpBinder;
+                    
             _logger = logger;
-            _logger.Info("Создан BoolNodeReader");
+            _logger.Info("Создан " + Name);
 
-            dpBinder.Bind(this);
+        }
 
+        public override void OnDpInitialized()
+        {
             BoolNode.ValueUpdated += (sender, args) =>
             {
                 BoolValuesUpdated?.Invoke(this, args);
             };
         }
 
-        public string Name { get; set; }
-
-        public void OnDpInitialized()
-        {
-            
-        }
 
         public string GetValues()
         {
