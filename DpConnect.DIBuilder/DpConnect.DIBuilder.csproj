@@ -49,12 +49,12 @@
     <Compile Include="App.cs" />
     <Compile Include="BoolNodeReader.cs" />
     <Compile Include="BoolNodeReaderFactory.cs" />
-    <Compile Include="DpBinder.cs" />
+    <Compile Include="DpBuilder.cs" />
     <Compile Include="DpProcessorBase.cs" />
     <Compile Include="DpValue.cs" />
     <Compile Include="DumbProviderConfigurator.cs" />
     <Compile Include="IApp.cs" />
-    <Compile Include="IDpBinder.cs" />
+    <Compile Include="IDpBuilder.cs" />
     <Compile Include="IDpProcessorFactory.cs" />
     <Compile Include="IOpcProvider.cs" />
     <Compile Include="OpcUaProvider.cs" />

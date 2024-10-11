@@ -2,7 +2,7 @@
 
 namespace DpConnect.DIBuilder
 {
-    public interface IDpBinder
+    public interface IDpBuilder
     {
         void Bind(IDpProcessor processor);
 

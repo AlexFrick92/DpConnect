@@ -18,13 +18,15 @@ namespace DpConnect.DIBuilder
 
             container.RegisterInstance<ILogger>(new ConsoleLogger());            
 
+
             container.Register<IOpcProvider, OpcUaProvider>();
 
             container.Register<IDpProcessorFactory<BoolNodeReader>, BoolNodeReaderFactory>();
            
-            container.Register<IDpBinder, DpBinder>();
+            container.Register<IDpProviderConfigurator, DumbProviderConfigurator>(); //Это не нужно.
+            
+            container.Register<IDpBuilder, DpBuilder>();
 
-            container.Register<IDpProviderConfigurator, DumbProviderConfigurator>();
 
             container.Register<IApp, App>();
 

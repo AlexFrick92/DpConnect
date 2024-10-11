@@ -13,7 +13,7 @@ namespace DpConnect.DIBuilder
 
         public event EventHandler<bool> BoolValuesUpdated;
 
-        public BoolNodeReader(ILogger logger, IDpBinder dpBinder, string name) : base(dpBinder, name) 
+        public BoolNodeReader(ILogger logger, string name) : base(name) 
         {
                     
             _logger = logger;

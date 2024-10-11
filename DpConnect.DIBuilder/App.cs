@@ -12,19 +12,17 @@ namespace DpConnect.DIBuilder
 
         BoolNodeReader _boolNodeReader;
 
-        public App(ILogger logger, IDpBinder binder)
+        public App(ILogger logger, IDpBuilder builder)
         {
             logger.Info("Hello from App!");
 
 
-            _boolNodeReader = binder.CreateProcessor<BoolNodeReader>("RedNode1");
+            _boolNodeReader = builder.CreateProcessor<BoolNodeReader>("RedNode1");
 
             _boolNodeReader.BoolValuesUpdated += (sender, val) =>
             {
                 logger.Info("From App, new value accepted: " + val);
-            };
-
-            
+            };            
 
         }
         

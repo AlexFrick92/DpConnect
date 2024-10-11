@@ -8,13 +8,11 @@ using System.Threading.Tasks;
 namespace DpConnect.DIBuilder
 {
     internal abstract class DpProcessorBase : IDpProcessor
-    {        
-        private readonly IDpBinder _binder;        
+    {                
 
-        public DpProcessorBase(IDpBinder dpBinder, string name)
+        public DpProcessorBase(string name)
         {
-            
-            _binder = dpBinder;
+                        
             Name = name;
 
             
@@ -29,7 +27,7 @@ namespace DpConnect.DIBuilder
         //Точки из ПЛК. 
         //То есть, разные объекты Вентилятора будут связаны с разными ПЛК.
         //Кто осуществляет эту привязку? 
-        //Логично, что DpBinder или DpBuilder, так как он знает конфигурацию. Тогда, он должен создавать эти объекты?
+        //Логично, что DpBuilder или DpBuilder, так как он знает конфигурацию. Тогда, он должен создавать эти объекты?
         //Тогда в эти объекты не получится передать зависимости из контейнера...
         //А если объекты создает контейнер, то контейнер не сможет дать имя такому объекту.
         //Может использовать фабрику?
