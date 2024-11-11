@@ -1,0 +1,126 @@
+﻿using System;
+
+using System.Collections.Generic;
+
+using Promatis.Opc.UA.Client;
+using Promatis.Core.Logging;
+
+using DpConnect.Interface;
+
+using DpConnect.Configuration;
+
+namespace DpConnect.OpcUa
+{
+    public class OpcUaConnection : IOpcUaConnection
+    {
+        Client client;
+        ILogger logger;
+        OpcUaConnectionConfiguration connectionConfiguration;
+
+        IList<object> nodes = new List<object>();
+
+        public string Id { get; private set; }
+
+        public OpcUaConnection(ILogger logger)
+        {
+            this.logger = logger;
+        }
+
+        public void Configure(IDpConnectionConfiguration configuration)
+        {
+            Id = configuration.ConnectionId;
+
+            if (configuration is OpcUaConnectionConfiguration)
+                connectionConfiguration = (OpcUaConnectionConfiguration)configuration;
+            else if (configuration is DpConnectionXmlConfiguration)
+                connectionConfiguration = new OpcUaConnectionConfiguration((DpConnectionXmlConfiguration)configuration);
+            else
+                throw new ArgumentException("Неверный тип конфигурации соединения");
+
+            logger.Info("Соединение ОПС сконфигурировано");
+        }
+        
+        public void Open()
+        {
+            logger.Info($"{Id}: Запуск...");
+
+            if (client != null && client.IsConnected)
+            {
+                logger.Info("Клиент уже запущен!");
+                return;
+            }
+
+            try
+            {
+                logger.Info("Подключение к " + connectionConfiguration.Endpoint);
+                if (client == null)
+                    client = new Client(connectionConfiguration.Endpoint, logger);
+
+                client.Start();
+
+                logger.Info($"{Id}: Запустился!, конфигурируем точки...");
+
+                foreach (var node in nodes)
+                {
+                    client.Subscription(node as dynamic);                    
+                }
+                logger.Info($"{Id}: Точки законфигурированы.");
+
+            }
+            catch (Exception ex)
+            {
+                logger.Info($"{Id}: Не удалось запустить! {ex.Message}");
+                throw;
+            }
+
+        }
+        public void Close()
+        {
+            client?.Stop();
+            logger.Info($"{Id}: Остановился");
+        }
+
+        public void ConnectDpValue<T>(IDpValue<T> dpValue, IDpValueSourceConfiguration sourceConfiguration)
+        {
+
+            OpcUaDpValueSourceConfiguration opcuaSourceConfig;
+
+            if (sourceConfiguration is OpcUaDpValueSourceConfiguration)
+            {
+                opcuaSourceConfig = (OpcUaDpValueSourceConfiguration)sourceConfiguration;
+            }
+            else if (sourceConfiguration is DpValueSourceXmlConfiguration)
+            {
+                opcuaSourceConfig = new OpcUaDpValueSourceConfiguration((DpValueSourceXmlConfiguration)sourceConfiguration);
+            }
+            else
+                throw new ArgumentException("Неправильный тип source-конфигурации");
+
+            nodes.Add(ConfigureNodeValue(dpValue, opcuaSourceConfig));
+
+            Console.WriteLine($"Зарегистрирована точка {opcuaSourceConfig.NodeId}");            
+        }
+
+
+        NodeValue<T> ConfigureNodeValue<T>(IDpValue<T> dpValue, OpcUaDpValueSourceConfiguration config)
+        {
+            NodeValue<T> node = new NodeValue<T>(config.NodeId, (e, v) => dpValue.UpdateValueFromSource(v));
+
+            dpValue.ValueWritten += (e, v) =>
+            {
+                node.Value = v;
+                if (client != null)
+                {
+                    client.ModifyNodeValue(node);
+                    Console.WriteLine($"{Id}: В ноду {node.NodeId} записано значение {v}");
+                }
+                else
+                {
+                    throw new Exception($"{Id}: Подключение сервером не установлено!");
+                }
+            };
+
+            return node;
+        }
+    }
+}
