@@ -5,6 +5,6 @@ namespace DpConnect.Configuration
 {
     public class DpValueSourceXmlConfiguration : IDpValueSourceConfiguration
     {
-        XDocument Configuration;
+        public XDocument Configuration { get; set; }
     }
 }

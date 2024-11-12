@@ -48,6 +48,7 @@
     <Compile Include="Configuration\DpValueConfiguration.cs" />
     <Compile Include="Configuration\DpValueSourceXmlConfiguration.cs" />
     <Compile Include="Configuration\DpXmlBuilder.cs" />
+    <Compile Include="ContainerizedWorkerManager.cs" />
     <Compile Include="DpBinder.cs" />
     <Compile Include="ContainerizedConnectionManager.cs" />
     <Compile Include="DpValue.cs" />

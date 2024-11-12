@@ -21,9 +21,9 @@ namespace DpConnect
 
         public IDpConnection CreateConnection<T>(IDpConnectionConfiguration configuration) where T : IDpConnection
         {            
-            IDpConnection con = container.Resolve<T>();
+            IDpConnection con = container.Resolve<T>();            
 
-            logger.Info($"Менеджер соединений: Создано новое подключение: {con.GetType()}");
+            logger.Info($"Менеджер соединений: Создано новое подключение: {configuration.ConnectionId} с типом {con.GetType()}");
             con.Configure(configuration);
 
             connections.Add(con);
@@ -39,7 +39,9 @@ namespace DpConnect
 
         public void OpenConnections()
         {
+            logger.Info("Открываем соединения...");
             connections.ForEach(c => c.Open());
+            logger.Info("Соединения открыты.");
         }
     }
 }

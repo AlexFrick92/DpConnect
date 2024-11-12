@@ -32,12 +32,14 @@ namespace DpConnect.OpcUa
 
             if (configuration is OpcUaConnectionConfiguration)
                 connectionConfiguration = (OpcUaConnectionConfiguration)configuration;
-            else if (configuration is DpConnectionXmlConfiguration)
-                connectionConfiguration = new OpcUaConnectionConfiguration((DpConnectionXmlConfiguration)configuration);
-            else
-                throw new ArgumentException("Неверный тип конфигурации соединения");
 
-            logger.Info("Соединение ОПС сконфигурировано");
+            else if (configuration is DpConnectionXmlConfiguration)
+                connectionConfiguration = new OpcUaConnectionXmlConfiguration((DpConnectionXmlConfiguration)configuration);
+
+            else
+                throw new ArgumentException($"{nameof(OpcUaConnection)}: Неверный тип конфигурации соединения");
+
+            logger.Info($"{nameof(OpcUaConnection)}: Соединение {connectionConfiguration.ConnectionId} законфигурировано: {connectionConfiguration.Endpoint}");
         }
         
         public void Open()
@@ -85,14 +87,12 @@ namespace DpConnect.OpcUa
 
             OpcUaDpValueSourceConfiguration opcuaSourceConfig;
 
-            if (sourceConfiguration is OpcUaDpValueSourceConfiguration)
-            {
+            if (sourceConfiguration is OpcUaDpValueSourceConfiguration)            
                 opcuaSourceConfig = (OpcUaDpValueSourceConfiguration)sourceConfiguration;
-            }
-            else if (sourceConfiguration is DpValueSourceXmlConfiguration)
-            {
-                opcuaSourceConfig = new OpcUaDpValueSourceConfiguration((DpValueSourceXmlConfiguration)sourceConfiguration);
-            }
+            
+            else if (sourceConfiguration is DpValueSourceXmlConfiguration)            
+                opcuaSourceConfig = new OpcUaDpValueSourceXmlConfiguration( (DpValueSourceXmlConfiguration)sourceConfiguration);   
+            
             else
                 throw new ArgumentException("Неправильный тип source-конфигурации");
 
