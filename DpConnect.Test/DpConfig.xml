@@ -18,17 +18,17 @@
 				</SourceConfiguration>
 			</DpValue>
 
-			<DpAction PropertyName ="FloatMultiply">
+			<DpMethod PropertyName ="FloatMultiply">
 				<SourceConfiguration ConnectionId ="Stend AKF">
 					<NodeId>ns=3;s="OPCUA_Mul_Real"</NodeId>
 				</SourceConfiguration>
-			</DpAction>
+			</DpMethod>
 
-			<DpAction PropertyName ="DpGetDate">
+			<DpMethod PropertyName ="DpGetDate">
 				<SourceConfiguration ConnectionId ="Stend AKF">
 					<NodeId>ns=3;s="OPCUA_GetActualDTL_Scalar"</NodeId>
 				</SourceConfiguration>
-			</DpAction>
+			</DpMethod>
 
 		</Worker>	
 	</Workers>

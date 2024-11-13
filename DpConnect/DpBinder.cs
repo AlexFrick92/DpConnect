@@ -51,7 +51,7 @@ namespace DpConnect
                 }
                 else
                 {
-                    string messageError = $"Ошибка при связывании воркера. Свойство {prop.Name} : {prop.PropertyType} воркера должно быть одним из следующих типов: {typeof(IDpValue<>)}, {typeof(IDpFunc<,>)}";
+                    string messageError = $"Ошибка при связывании воркера. Свойство {prop.Name} : {prop.PropertyType} воркера должно быть одним из следующих типов: {typeof(IDpValue<>)}, {typeof(IDpAction<>)}";
                     logger.Error(messageError);
                     throw new DpConfigurationException(messageError);
                 }

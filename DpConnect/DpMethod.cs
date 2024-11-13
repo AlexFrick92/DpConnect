@@ -79,15 +79,12 @@ namespace DpConnect
                         throw new NotImplementedException("При использовании нескольких входных аргументов, каждый должен быть значимым типом");
 
                 result = SourceDelegate(args);
-            }
-
-            Console.WriteLine(result.GetType() + " " + delegateReturnType);
+            }            
 
             if (delegateReturnType == typeof(void))
                 return result;
             else if (delegateReturnType.IsValueType)
-            {
-                Console.WriteLine(result[0]);
+            {                
                 return result[0];
             }
             else if (delegateReturnType.IsClass)
@@ -118,15 +115,8 @@ namespace DpConnect
             
             foreach (var property in delegateReturnType.GetProperties())
             {               
-                try
-                {
-                    property.SetValue(objectResult, listOfResult[i]);
-                }
-                catch (Exception ex)
-                {
-                    Console.WriteLine("Ошибка при кастинге результатов метода");
-                    break;
-                }
+
+                property.SetValue(objectResult, listOfResult[i]);
                 i++;
             }            
 

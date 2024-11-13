@@ -50,7 +50,7 @@ namespace DpConnect.Test
 
                     logger.Error(DpGetDate.Call().ToString());
 
-
+                    FloatMultiply.Call(2, 3);
                 }
                 catch (Exception ex)
                 {
