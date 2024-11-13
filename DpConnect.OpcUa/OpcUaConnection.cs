@@ -98,7 +98,7 @@ namespace DpConnect.OpcUa
 
             nodes.Add(ConfigureNodeValue(dpValue, opcuaSourceConfig));
 
-            Console.WriteLine($"Зарегистрирована точка {opcuaSourceConfig.NodeId}");            
+            Console.WriteLine($"{Id}: Зарегистрирована точка {opcuaSourceConfig.NodeId}");            
         }
 
 
@@ -137,7 +137,18 @@ namespace DpConnect.OpcUa
                 throw new ArgumentException("Неправильный тип source-конфигурации");
 
 
-            dpMethod.SourceDelegate += (e) => client.CallMethod(opcuaSourceConfig.NodeId, e);
+            dpMethod.SourceDelegate += (e) =>
+            {
+                if(client != null)
+                {
+                    
+                    return client.CallMethod(opcuaSourceConfig.NodeId, e);
+                }
+                else
+                {
+                    throw new Exception($"{Id}: Подключение сервером не установлено!");
+                }
+            };
         }        
 
     }

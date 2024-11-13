@@ -18,12 +18,18 @@
 				</SourceConfiguration>
 			</DpValue>
 
-
-			<DpAction PropertyName ="SimpleAction">
+			<DpAction PropertyName ="FloatMultiply">
 				<SourceConfiguration ConnectionId ="Stend AKF">
 					<NodeId>ns=3;s="OPCUA_Mul_Real"</NodeId>
 				</SourceConfiguration>
 			</DpAction>
+
+			<DpAction PropertyName ="DpGetDate">
+				<SourceConfiguration ConnectionId ="Stend AKF">
+					<NodeId>ns=3;s="OPCUA_GetActualDTL_Scalar"</NodeId>
+				</SourceConfiguration>
+			</DpAction>
+
 		</Worker>	
 	</Workers>
 	

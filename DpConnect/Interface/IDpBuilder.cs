@@ -11,5 +11,6 @@ namespace DpConnect.Interface
         void Build();
 
         IDpConnectionManager ConnectionManager { get; }
+        IDpWorkerManager WorkerManager { get; }
     }
 }

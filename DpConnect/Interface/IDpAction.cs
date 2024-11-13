@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace DpConnect.Interface
 {
-    public interface IDpFunc<TResult, T>
+    public interface IDpAction<T> where T : Delegate
     {
-        TResult Call(T arg1);
+        T Call { get; }
     }
 }

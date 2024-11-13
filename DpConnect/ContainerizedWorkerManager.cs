@@ -29,5 +29,10 @@ namespace DpConnect
 
             return worker;
         }
+
+        public IDpWorker GetWorker()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

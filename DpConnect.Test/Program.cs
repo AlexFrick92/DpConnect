@@ -7,6 +7,10 @@ using Promatis.IoC.DryIoc;
 
 
 using System;
+using System.Linq;
+using System.Linq.Expressions;
+using System.Reflection;
+using System.Reflection.Emit;
 
 
 namespace DpConnect.Test
@@ -34,7 +38,14 @@ namespace DpConnect.Test
 
             container.Resolve<IApp>().Start();            
 
+
+
+            
+
             Console.ReadLine();
         }
+
+
+
     }
 }

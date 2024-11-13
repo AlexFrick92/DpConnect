@@ -44,17 +44,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Configuration\DpConfigurationException.cs" />
     <Compile Include="Configuration\DpConnectionXmlConfiguration.cs" />
-    <Compile Include="Configuration\DpValueConfiguration.cs" />
+    <Compile Include="Configuration\DpConfiguration.cs" />
     <Compile Include="Configuration\DpSourceXmlConfiguration.cs" />
     <Compile Include="Configuration\DpXmlBuilder.cs" />
     <Compile Include="ContainerizedWorkerManager.cs" />
+    <Compile Include="DpMethod.cs" />
     <Compile Include="DpBinder.cs" />
     <Compile Include="ContainerizedConnectionManager.cs" />
-    <Compile Include="DpMethod.cs" />
     <Compile Include="DpValue.cs" />
+    <Compile Include="Interface\IDpAction.cs" />
     <Compile Include="Interface\IDpMethod.cs" />
-    <Compile Include="Interface\IDpFunc.cs" />
     <Compile Include="Interface\IDpBinder.cs" />
     <Compile Include="Interface\IDpBuilder.cs" />
     <Compile Include="Interface\IDpConnection.cs" />

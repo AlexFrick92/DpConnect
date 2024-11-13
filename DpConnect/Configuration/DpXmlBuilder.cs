@@ -35,9 +35,9 @@ namespace DpConnect.Configuration
 
         const string Xml_DpValueDeclareTag = "DpValue";
         const string Xml_DpValuePropNameAttribute = "PropertyName";
-        const string Xml_DpValueSourceConfigurationTag = "SourceConfiguration";
+        const string Xml_DpSourceConfigurationTag = "SourceConfiguration";
 
-        const string Xml_DpActionDeclareTag = "DpAction";
+        const string Xml_DpActionDeclareTag = "DpMethod";
 
 
         public DpXmlBuilder(IDpConnectionManager connectionManager, IDpWorkerManager workerManager, ILogger logger)
@@ -107,23 +107,31 @@ namespace DpConnect.Configuration
 
                 //Создадим точки
 
-                List<DpValueConfiguration> workerDpConfig = new List<DpValueConfiguration>();
+                List<DpConfiguration> workerDpConfig = new List<DpConfiguration>();
 
                 foreach(XElement configuredDp in configuredWorker.Elements(Xml_DpValueDeclareTag))
                 {
-                    IDpSourceConfiguration sourceConfig = new DpSourceXmlConfiguration() { Configuration = new XDocument(configuredDp.Element(Xml_DpValueSourceConfigurationTag))};
+                    IDpSourceConfiguration sourceConfig = new DpSourceXmlConfiguration() { Configuration = new XDocument(configuredDp.Element(Xml_DpSourceConfigurationTag))};
 
                     string propertyName = configuredDp.Attribute(Xml_DpValuePropNameAttribute).Value;
-                    string connectionId = configuredDp.Element(Xml_DpValueSourceConfigurationTag).Attribute(Xml_ConnectionIdAttribute).Value;
+                    string connectionId = configuredDp.Element(Xml_DpSourceConfigurationTag).Attribute(Xml_ConnectionIdAttribute).Value;
 
-                    DpValueConfiguration dpValueConfig = new DpValueConfiguration() { PropertyName = propertyName, ConnectionId = connectionId, SourceConfiguration = sourceConfig };
+                    DpConfiguration dpValueConfig = new DpConfiguration() { PropertyName = propertyName, ConnectionId = connectionId, SourceConfiguration = sourceConfig };
 
                     workerDpConfig.Add(dpValueConfig);
                 }
 
                 foreach(XElement configuredDpAction in configuredWorker.Elements(Xml_DpActionDeclareTag))
                 {
-                    
+                    IDpSourceConfiguration sourceConfig = new DpSourceXmlConfiguration() { Configuration = new XDocument(configuredDpAction.Element(Xml_DpSourceConfigurationTag)) };
+
+                    string propertyName = configuredDpAction.Attribute(Xml_DpValuePropNameAttribute).Value;
+                    string connectionId = configuredDpAction.Element(Xml_DpSourceConfigurationTag).Attribute(Xml_ConnectionIdAttribute).Value;
+
+                    DpConfiguration dpValueConfig = new DpConfiguration() { PropertyName = propertyName, ConnectionId = connectionId, SourceConfiguration = sourceConfig };
+
+                    workerDpConfig.Add(dpValueConfig);
+
                 }
 
                 dpBinder.Bind(worker, workerDpConfig);

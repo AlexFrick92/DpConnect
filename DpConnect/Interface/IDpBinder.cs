@@ -7,6 +7,6 @@ namespace DpConnect.Interface
 {
     internal interface IDpBinder
     {
-        void Bind(IDpWorker worker, IEnumerable<DpValueConfiguration> configs);
+        void Bind(IDpWorker worker, IEnumerable<DpConfiguration> configs);
     }
 }
