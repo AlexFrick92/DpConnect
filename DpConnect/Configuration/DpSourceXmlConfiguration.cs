@@ -3,7 +3,7 @@ using System.Xml.Linq;
 
 namespace DpConnect.Configuration
 {
-    public class DpValueSourceXmlConfiguration : IDpValueSourceConfiguration
+    public class DpSourceXmlConfiguration : IDpSourceConfiguration
     {
         public XDocument Configuration { get; set; }
     }

@@ -82,7 +82,7 @@ namespace DpConnect.OpcUa
             logger.Info($"{Id}: Остановился");
         }
 
-        public void ConnectDpValue<T>(IDpValue<T> dpValue, IDpValueSourceConfiguration sourceConfiguration)
+        public void ConnectDpValue<T>(IDpValue<T> dpValue, IDpSourceConfiguration sourceConfiguration)
         {
 
             OpcUaDpValueSourceConfiguration opcuaSourceConfig;
@@ -90,8 +90,8 @@ namespace DpConnect.OpcUa
             if (sourceConfiguration is OpcUaDpValueSourceConfiguration)            
                 opcuaSourceConfig = (OpcUaDpValueSourceConfiguration)sourceConfiguration;
             
-            else if (sourceConfiguration is DpValueSourceXmlConfiguration)            
-                opcuaSourceConfig = new OpcUaDpValueSourceXmlConfiguration( (DpValueSourceXmlConfiguration)sourceConfiguration);   
+            else if (sourceConfiguration is DpSourceXmlConfiguration)            
+                opcuaSourceConfig = new OpcUaDpValueSourceXmlConfiguration( (DpSourceXmlConfiguration)sourceConfiguration);   
             
             else
                 throw new ArgumentException("Неправильный тип source-конфигурации");
@@ -122,5 +122,23 @@ namespace DpConnect.OpcUa
 
             return node;
         }
+
+        public void ConnectDpMethod(IDpMethod dpMethod, IDpSourceConfiguration sourceConfiguration)
+        {
+            OpcUaDpValueSourceConfiguration opcuaSourceConfig;
+
+            if (sourceConfiguration is OpcUaDpValueSourceConfiguration)
+                opcuaSourceConfig = (OpcUaDpValueSourceConfiguration)sourceConfiguration;
+
+            else if (sourceConfiguration is DpSourceXmlConfiguration)
+                opcuaSourceConfig = new OpcUaDpValueSourceXmlConfiguration((DpSourceXmlConfiguration)sourceConfiguration);
+
+            else
+                throw new ArgumentException("Неправильный тип source-конфигурации");
+
+
+            dpMethod.SourceDelegate += (e) => client.CallMethod(opcuaSourceConfig.NodeId, e);
+        }        
+
     }
 }

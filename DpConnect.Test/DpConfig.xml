@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+
+<DpConfiguration Test="sad">
+
+	<Connections>
+		<Connection TypeName="DpConnect.OpcUa.IOpcUaConnection, DpConnect.OpcUa" ConnectionId ="Stend AKF">
+			<Endpoint>opc.tcp://10.10.10.95:4840</Endpoint>
+		</Connection>
+		
+	</Connections>
+
+	<Workers>
+		<Worker TypeName="DpConnect.Test.IBoolWorker, DpConnect.Test">
+			<DpValue PropertyName="BoolValueProp">
+				<SourceConfiguration ConnectionId ="Stend AKF">
+					<NodeId>ns=3;s="PrimitiveTypesDynamic"."BoolTypeVar"</NodeId>
+				</SourceConfiguration>
+			</DpValue>
+
+
+			<DpAction PropertyName ="SimpleAction">
+				<SourceConfiguration ConnectionId ="Stend AKF">
+					<NodeId>ns=3;s="OPCUA_Mul_Real"</NodeId>
+				</SourceConfiguration>
+			</DpAction>
+		</Worker>	
+	</Workers>
+	
+	
+	
+	
+</DpConfiguration>	

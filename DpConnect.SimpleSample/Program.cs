@@ -9,6 +9,7 @@ using Promatis.IoC.DryIoc;
 using DpConnect.Configuration;
 using DpConnect.Provider.OpcUa;
 using DpConnect.Interface;
+using Promatis.Opc.UA.Client;
 
 
 namespace DpConnect.SimpleSample
@@ -38,11 +39,11 @@ namespace DpConnect.SimpleSample
 
             var dpBuilder = container.Resolve<IDpFluentBuilder>()
                 .AddConfiguration($"{currentDirectory}/DpConfig.xml")
-                .SetProcessors(new IDpProcessor[] { new ReadComplexNode() {Name = "RcNode3Pro" } })
+                .SetProcessors(new IDpProcessor[] { new ReadComplexNode() { Name = "RcNode3Pro" } })
                 .Build();
-                              
-                
-           dpBuilder.StartProviders();
+
+
+            dpBuilder.StartProviders();
 
 
             while (true)

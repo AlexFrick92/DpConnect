@@ -4,9 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DpConnect.Interface
+namespace DpConnect
 {
-    public interface IDpValueSourceConfiguration
-    {
-    }
+    public delegate IList<object> SourceDelegate(params object[] args);
 }

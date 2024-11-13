@@ -3,12 +3,12 @@
 
 namespace DpConnect.Configuration
 {
-    public class DpValueConfiguration
+    internal class DpValueConfiguration
     {
         public string PropertyName { get; set; }
 
         public string ConnectionId { get; set; }
 
-        public IDpValueSourceConfiguration SourceConfiguration { get; set; }
+        public IDpSourceConfiguration SourceConfiguration { get; set; }
     }
 }

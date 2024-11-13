@@ -46,22 +46,26 @@
   <ItemGroup>
     <Compile Include="Configuration\DpConnectionXmlConfiguration.cs" />
     <Compile Include="Configuration\DpValueConfiguration.cs" />
-    <Compile Include="Configuration\DpValueSourceXmlConfiguration.cs" />
+    <Compile Include="Configuration\DpSourceXmlConfiguration.cs" />
     <Compile Include="Configuration\DpXmlBuilder.cs" />
     <Compile Include="ContainerizedWorkerManager.cs" />
     <Compile Include="DpBinder.cs" />
     <Compile Include="ContainerizedConnectionManager.cs" />
+    <Compile Include="DpMethod.cs" />
     <Compile Include="DpValue.cs" />
+    <Compile Include="Interface\IDpMethod.cs" />
+    <Compile Include="Interface\IDpFunc.cs" />
     <Compile Include="Interface\IDpBinder.cs" />
     <Compile Include="Interface\IDpBuilder.cs" />
     <Compile Include="Interface\IDpConnection.cs" />
     <Compile Include="Interface\IDpConnectionConfiguration.cs" />
     <Compile Include="Interface\IDpConnectionManager.cs" />
-    <Compile Include="Interface\IDpValueSourceConfiguration.cs" />
+    <Compile Include="Interface\IDpSourceConfiguration.cs" />
     <Compile Include="Interface\IDpValue.cs" />
     <Compile Include="Interface\IDpWorker.cs" />
     <Compile Include="Interface\IDpWorkerManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SourceDelegate.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

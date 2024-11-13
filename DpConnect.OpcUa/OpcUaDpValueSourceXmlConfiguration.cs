@@ -4,7 +4,7 @@ namespace DpConnect.OpcUa
 {
     public class OpcUaDpValueSourceXmlConfiguration : OpcUaDpValueSourceConfiguration
     {
-        public OpcUaDpValueSourceXmlConfiguration(DpValueSourceXmlConfiguration config)
+        public OpcUaDpValueSourceXmlConfiguration(DpSourceXmlConfiguration config)
         {
 
             NodeId = config.Configuration.Root.Element("NodeId").Value;            

@@ -60,6 +60,9 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="DpConfigProc.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <Content Include="DpConfig.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -68,6 +71,10 @@
     <ProjectReference Include="..\..\Tools\IoC\Source\DryIoC\Promatis.IoC.DryIoc.csproj">
       <Project>{536c73c1-951c-4062-bcaa-01f1b86e483b}</Project>
       <Name>Promatis.IoC.DryIoc</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Tools\Opc.UA\Source\Client\Promatis.Opc.UA.Client.csproj">
+      <Project>{d6b9f819-ddca-4cbd-98cc-8d13a67a18f3}</Project>
+      <Name>Promatis.Opc.UA.Client</Name>
     </ProjectReference>
     <ProjectReference Include="..\DpConnect.Configuration\DpConnect.Configuration.csproj">
       <Project>{1afbc91a-389c-438c-ac3b-89af22139d0d}</Project>

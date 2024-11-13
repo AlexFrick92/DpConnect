@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace DpConnect
 {
-    public class DpValue<T> : IDpValue<T>
+    internal class DpValue<T> : IDpValue<T>
     {
         public T Value { get; set; }
 

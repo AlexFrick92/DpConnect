@@ -2,7 +2,7 @@
 
 namespace DpConnect.OpcUa
 {
-    public class OpcUaDpValueSourceConfiguration : IDpValueSourceConfiguration
+    public class OpcUaDpValueSourceConfiguration : IDpSourceConfiguration
     {
         public string NodeId { get; set; }
     }

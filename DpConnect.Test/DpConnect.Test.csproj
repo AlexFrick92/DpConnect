@@ -4,16 +4,17 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{58470ADD-50FD-479D-862B-65BA360714EF}</ProjectGuid>
-    <OutputType>Library</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>DpConnect.Interface</RootNamespace>
-    <AssemblyName>DpConnect.Interface</AssemblyName>
-    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <ProjectGuid>{91EEAFD7-62D4-4B71-8D1C-732E86AFE01D}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <RootNamespace>DpConnect.Test</RootNamespace>
+    <AssemblyName>DpConnect.Test</AssemblyName>
+    <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -23,6 +24,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -44,25 +46,35 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DpProcessor.cs" />
-    <Compile Include="IDpFluentBuilder.cs" />
-    <Compile Include="IDpProcessor.cs" />
-    <Compile Include="IDpProcessorConfigurator.cs" />
-    <Compile Include="IDpProvider.cs" />
-    <Compile Include="IDataPoint.cs" />
-    <Compile Include="IDpComplexValueConfig.cs" />
-    <Compile Include="IDpMethod.cs" />
-    <Compile Include="IDpMethodConfig.cs" />
-    <Compile Include="IDpMethodSource.cs" />
-    <Compile Include="IDpProviderConfigurator.cs" />
-    <Compile Include="IDpSourceConfiguration.cs" />
-    <Compile Include="IDpValue.cs" />
-    <Compile Include="IDpValueSource.cs" />
+    <Compile Include="Application.cs" />
+    <Compile Include="BoolWorker.cs" />
+    <Compile Include="IApp.cs" />
+    <Compile Include="IBoolWorker.cs" />
+    <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
+    <None Include="App.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Tools\IoC\Source\DryIoC\Promatis.IoC.DryIoc.csproj">
+      <Project>{536c73c1-951c-4062-bcaa-01f1b86e483b}</Project>
+      <Name>Promatis.IoC.DryIoc</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DpConnect.OpcUa\DpConnect.OpcUa.csproj">
+      <Project>{3e2376e1-1220-4dd2-9e5c-297d5253c1ef}</Project>
+      <Name>DpConnect.OpcUa</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DpConnect\DpConnect.csproj">
+      <Project>{1a030acc-f558-4a1f-b0fa-6de280b3d8d3}</Project>
+      <Name>DpConnect</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="DpConfig.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
