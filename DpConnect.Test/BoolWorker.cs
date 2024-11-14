@@ -34,9 +34,21 @@ namespace DpConnect.Test
 
         public IDpAction<Func<DateTime>> DpGetDate { get; set; }        
 
+        public IDpValue<CmlVal> ComplexValue { get; set; }
+
+        public class CmlVal
+        {
+            public bool BoolTypeVar { get; set; }
+            public float RealTypeVar { get; set; }
+        }
+
         public void DpBound()
         {                                  
-            BoolValueProp.ValueUpdated += BoolValueProp_ValueUpdated;
+            //BoolValueProp.ValueUpdated += BoolValueProp_ValueUpdated;
+
+            ComplexValue.ValueUpdated += ComplexValue_ValueUpdated;
+
+            return;
 
             Task.Run(async () =>
             {
@@ -57,6 +69,15 @@ namespace DpConnect.Test
                     logger.Error(ex.Message);
                 }
             });
+        }
+
+        private void ComplexValue_ValueUpdated(object sender, CmlVal e)
+        {
+            logger.Info(e.RealTypeVar + " " + e.BoolTypeVar);
+
+            Task.Delay(1000).Wait();
+
+            ComplexValue.Value = new CmlVal() { RealTypeVar = e.RealTypeVar + 1.0f, BoolTypeVar = !e.BoolTypeVar };
         }
 
         private void BoolValueProp_ValueUpdated(object sender, bool e)

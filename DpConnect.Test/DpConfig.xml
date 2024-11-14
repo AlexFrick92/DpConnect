@@ -12,11 +12,7 @@
 
 	<Workers>
 		<Worker TypeName="DpConnect.Test.IBoolWorker, DpConnect.Test">
-			<DpValue PropertyName="BoolValueProp">
-				<SourceConfiguration ConnectionId ="Stend AKF">
-					<NodeId>ns=3;s="PrimitiveTypesDynamic"."BoolTypeVar"</NodeId>
-				</SourceConfiguration>
-			</DpValue>
+
 
 			<DpMethod PropertyName ="FloatMultiply">
 				<SourceConfiguration ConnectionId ="Stend AKF">
@@ -30,6 +26,13 @@
 				</SourceConfiguration>
 			</DpMethod>
 
+
+			<DpValue PropertyName="ComplexValue">
+				<SourceConfiguration ConnectionId ="Stend AKF">
+					<NodeId>ns=3;s="PrimitiveTypes"."Complex"</NodeId>
+				</SourceConfiguration>
+			</DpValue>
+			
 		</Worker>	
 	</Workers>
 	

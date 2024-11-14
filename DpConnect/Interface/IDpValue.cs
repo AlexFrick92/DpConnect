@@ -4,7 +4,7 @@ using System;
 
 namespace DpConnect.Interface
 {
-    public interface IDpValue<T>
+    public interface IDpValue<T> where T : new()
     {
         T Value { get; set; }
 

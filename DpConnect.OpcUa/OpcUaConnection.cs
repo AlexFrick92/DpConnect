@@ -82,7 +82,7 @@ namespace DpConnect.OpcUa
             logger.Info($"{Id}: Остановился");
         }
 
-        public void ConnectDpValue<T>(IDpValue<T> dpValue, IDpSourceConfiguration sourceConfiguration)
+        public void ConnectDpValue<T>(IDpValue<T> dpValue, IDpSourceConfiguration sourceConfiguration) where T : new()
         {
 
             OpcUaDpValueSourceConfiguration opcuaSourceConfig;
@@ -96,13 +96,17 @@ namespace DpConnect.OpcUa
             else
                 throw new ArgumentException("Неправильный тип source-конфигурации");
 
-            nodes.Add(ConfigureNodeValue(dpValue, opcuaSourceConfig));
 
-            Console.WriteLine($"{Id}: Зарегистрирована точка {opcuaSourceConfig.NodeId}");            
+            if (typeof(T).IsClass)
+                nodes.Add(ConfigureNodeComplexValue(dpValue, opcuaSourceConfig));
+            else
+                nodes.Add(ConfigureNodeValue(dpValue, opcuaSourceConfig));
+
+            logger.Info($"{Id}: Зарегистрирована точка {opcuaSourceConfig.NodeId}");            
         }
 
 
-        NodeValue<T> ConfigureNodeValue<T>(IDpValue<T> dpValue, OpcUaDpValueSourceConfiguration config)
+        NodeValue<T> ConfigureNodeValue<T>(IDpValue<T> dpValue, OpcUaDpValueSourceConfiguration config) where T : new()
         {
             NodeValue<T> node = new NodeValue<T>(config.NodeId, (e, v) => dpValue.UpdateValueFromSource(v));
 
@@ -119,7 +123,19 @@ namespace DpConnect.OpcUa
                     throw new Exception($"{Id}: Подключение сервером не установлено!");
                 }
             };
+            return node;
+        }
 
+        NodeValue<ComplexType<T>> ConfigureNodeComplexValue<T>(IDpValue<T> dpValue, OpcUaDpValueSourceConfiguration config) where T : new()
+        {
+            NodeValue<ComplexType<T>> node = new NodeValue<ComplexType<T>>(config.NodeId, (e, v) => dpValue.UpdateValueFromSource(v.ExtractedValue));
+
+            dpValue.ValueWritten += (e, v) =>
+            {
+                Console.WriteLine("Запись сложной ноды");
+                node.Value.ExtractedValue = v;
+                client.ModifyNodeComplexValue(node);                
+            };
             return node;
         }
 

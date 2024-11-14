@@ -7,16 +7,28 @@ using System.Threading.Tasks;
 
 namespace DpConnect
 {
-    internal class DpValue<T> : IDpValue<T>
+    internal class DpValue<T> : IDpValue<T> where T :new()
     {
-        public T Value { get; set; }
+        T value;
+        public T Value
+        {
+            get
+            {
+                return value;
+            }
+            set
+            {
+                ValueWritten(this, value);
+            }
+        }
+        
 
         public event EventHandler<T> ValueWritten;
         public event EventHandler<T> ValueUpdated;
 
         public void UpdateValueFromSource(T value)
         {
-            Value = value;
+            this.value = value;
 
             ValueUpdated.Invoke(this, value);
         }
