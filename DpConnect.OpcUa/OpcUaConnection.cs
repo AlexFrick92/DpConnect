@@ -93,7 +93,7 @@ namespace DpConnect.OpcUa
             }
         }
 
-        public void ConnectDpValue<T>(IDpValueSource<T> dpValue, IDpSourceConfiguration sourceConfiguration) where T : new()
+        public void ConnectDpValue<T>(IDpValueSource<T> dpValue, IDpSourceConfiguration sourceConfiguration)
         {
 
             OpcUaDpValueSourceConfiguration opcuaSourceConfig;
@@ -108,7 +108,7 @@ namespace DpConnect.OpcUa
                 throw new ArgumentException("Неправильный тип source-конфигурации");
 
 
-            if (typeof(T).IsClass)
+            if (typeof(T).IsClass && !(typeof(T) == typeof(string)))
                 nodes.Add(ConfigureNodeComplexValue(dpValue, opcuaSourceConfig));
             else
                 nodes.Add(ConfigureNodeValue(dpValue, opcuaSourceConfig));
@@ -117,7 +117,7 @@ namespace DpConnect.OpcUa
         }
 
 
-        NodeValue<T> ConfigureNodeValue<T>(IDpValueSource<T> dpValue, OpcUaDpValueSourceConfiguration config) where T : new()
+        NodeValue<T> ConfigureNodeValue<T>(IDpValueSource<T> dpValue, OpcUaDpValueSourceConfiguration config)
         {
             NodeValue<T> node = new NodeValue<T>(config.NodeId, (e, v) => dpValue.UpdateValueFromSource(v));
 
@@ -139,7 +139,7 @@ namespace DpConnect.OpcUa
             return node;
         }
 
-        NodeValue<ComplexType<T>> ConfigureNodeComplexValue<T>(IDpValueSource<T> dpValue, OpcUaDpValueSourceConfiguration config) where T : new()
+        NodeValue<ComplexType<T>> ConfigureNodeComplexValue<T>(IDpValueSource<T> dpValue, OpcUaDpValueSourceConfiguration config)
         {
             NodeValue<ComplexType<T>> node = new NodeValue<ComplexType<T>>(config.NodeId, (e, v) => dpValue.UpdateValueFromSource(v.ExtractedValue));
 

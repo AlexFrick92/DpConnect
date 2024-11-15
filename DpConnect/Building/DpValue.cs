@@ -32,7 +32,7 @@ namespace DpConnect.Building
         {
             this.value = value;
 
-            ValueUpdated.Invoke(this, value);
+            ValueUpdated?.Invoke(this, value);
         }
     }    
 }

@@ -9,7 +9,7 @@ namespace DpConnect.Connection
         string Id { get; }
 
         void Configure(IDpConnectionConfiguration configuration);
-        void ConnectDpValue<T>(IDpValueSource<T> dpValue, IDpSourceConfiguration sourceConfiguration) where T : new();
+        void ConnectDpValue<T>(IDpValueSource<T> dpValue, IDpSourceConfiguration sourceConfiguration);
 
         void ConnectDpMethod(IDpActionSource dpMethod, IDpSourceConfiguration sourceConfiguration);
         void Open();
