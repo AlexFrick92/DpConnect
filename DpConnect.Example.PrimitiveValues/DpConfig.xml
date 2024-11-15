@@ -18,11 +18,36 @@
 				</SourceConfiguration>
 			</DpValue>
 
+			<DpValue PropertyName="ShortDp">
+				<SourceConfiguration ConnectionId ="Stend AKF">
+					<NodeId>ns=3;s="PrimitiveTypes"."IntTypeVar"</NodeId>
+				</SourceConfiguration>
+			</DpValue>
+
 			<DpValue PropertyName="FloatDp">
 				<SourceConfiguration ConnectionId ="Stend AKF">
 					<NodeId>ns=3;s="PrimitiveTypes"."RealTypeVar"</NodeId>
 				</SourceConfiguration>
 			</DpValue>
+
+			<DpValue PropertyName="StringDp">
+				<SourceConfiguration ConnectionId ="Stend AKF">
+					<NodeId>ns=3;s="PrimitiveTypes"."StringTypeVar"</NodeId>
+				</SourceConfiguration>
+			</DpValue>
+
+			<DpValue PropertyName="WStringDp">
+				<SourceConfiguration ConnectionId ="Stend AKF">
+					<NodeId>ns=3;s="PrimitiveTypes"."WStringTypeVar"</NodeId>
+				</SourceConfiguration>
+			</DpValue>
+
+			<DpValue PropertyName="DateTimeDp">
+				<SourceConfiguration ConnectionId ="Stend AKF">
+					<NodeId>ns=3;s="PrimitiveTypes"."DateTimeTypeVar"</NodeId>
+				</SourceConfiguration>
+			</DpValue>
+
 
 		</Worker>	
 						
