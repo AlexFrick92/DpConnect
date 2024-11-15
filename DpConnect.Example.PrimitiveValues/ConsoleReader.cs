@@ -12,6 +12,8 @@ namespace DpConnect.Example.PrimitiveValues
 
         public IDpValue<float> FloatDp { get; set; }
 
+        //public IDpValue<string> StringDp { get; set; }
+
         public void DpBound()
         {
             BoolDp.ValueUpdated += (s, v) => logger.Info("Значение булевой точки: {0}", v);

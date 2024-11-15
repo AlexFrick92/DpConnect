@@ -6,7 +6,7 @@ using DpConnect.Connection;
 
 namespace DpConnect.Building
 {
-    internal class DpValue<T> : IDpValueSource<T>, IDpValue<T> where T : new()
+    internal class DpValue<T> : IDpValueSource<T>, IDpValue<T>
     {
         T value;
         public T Value

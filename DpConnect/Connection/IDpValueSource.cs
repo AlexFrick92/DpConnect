@@ -3,7 +3,7 @@
 
 namespace DpConnect.Connection
 {
-    public interface IDpValueSource<T> : IDpStatus where T : new()
+    public interface IDpValueSource<T> : IDpStatus
     {
         void UpdateValueFromSource(T value);
 

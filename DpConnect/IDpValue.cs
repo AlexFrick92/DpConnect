@@ -6,7 +6,7 @@ namespace DpConnect
     /// Объявляется как открытое свойство IDpWorker. В это свойством будет присвоен объект, через который поступают данные
     /// </summary>
     /// <typeparam name="T"> Тип Т - примитивный тип, DateTime, string или класс с открытыми свойствами. Имя свойства должно совпадать с именем свойства в структуре OPC UA </typeparam>
-    public interface IDpValue<T> : IDpStatus where T : new()
+    public interface IDpValue<T> : IDpStatus 
     {
         /// <summary>
         /// Свойство, через которое можно получить актуальное значение
