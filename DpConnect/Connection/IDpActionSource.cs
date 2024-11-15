@@ -1,7 +1,7 @@
 ﻿
 namespace DpConnect.Connection
 {
-    public interface IDpActionSource
+    public interface IDpActionSource : IDpStatus
     {
         SourceDelegate SourceDelegate { get; set; }
     }

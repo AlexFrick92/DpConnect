@@ -19,6 +19,8 @@ namespace DpConnect.OpcUa
 
         IList<object> nodes = new List<object>();
 
+        IList<IDpStatus> dpValuesStatus = new List<IDpStatus>();
+
         public string Id { get; private set; }
 
         public OpcUaConnection(ILogger logger)
@@ -66,6 +68,10 @@ namespace DpConnect.OpcUa
                 {
                     client.Subscription(node as dynamic);                    
                 }
+                foreach (var status in dpValuesStatus)
+                {
+                    status.IsConnected = true;
+                }
                 logger.Info($"{Id}: Точки законфигурированы.");
 
             }
@@ -80,6 +86,11 @@ namespace DpConnect.OpcUa
         {
             client?.Stop();
             logger.Info($"{Id}: Остановился");
+
+            foreach(var status in dpValuesStatus)
+            {
+                status.IsConnected = false;
+            }
         }
 
         public void ConnectDpValue<T>(IDpValueSource<T> dpValue, IDpSourceConfiguration sourceConfiguration) where T : new()
@@ -123,6 +134,8 @@ namespace DpConnect.OpcUa
                     throw new Exception($"{Id}: Подключение сервером не установлено!");
                 }
             };
+
+            dpValuesStatus.Add(dpValue);
             return node;
         }
 
@@ -136,6 +149,7 @@ namespace DpConnect.OpcUa
                 node.Value.ExtractedValue = v;
                 client.ModifyNodeComplexValue(node);                
             };
+            dpValuesStatus.Add(dpValue);
             return node;
         }
 
@@ -165,6 +179,7 @@ namespace DpConnect.OpcUa
                     throw new Exception($"{Id}: Подключение сервером не установлено!");
                 }
             };
+            dpValuesStatus.Add(dpMethod);
         }        
 
     }

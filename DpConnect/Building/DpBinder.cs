@@ -28,8 +28,16 @@ namespace DpConnect.Building
         {
             logger.Info($"Связываем {worker.GetType()}...");
             foreach (DpConfiguration config in configs)
-            {                
-                PropertyInfo prop = worker.GetType().GetProperties().First(p => p.Name == config.PropertyName);
+            {
+                PropertyInfo prop = null;
+                try
+                {
+                    prop = worker.GetType().GetProperties().First(p => p.Name == config.PropertyName);
+                }
+                catch (InvalidOperationException ex)
+                {
+                    throw new DpConfigurationException($"В типе {worker.GetType()} не найдено публичное свойство {config.PropertyName}");
+                }                
 
                 var connection = connectionManager.GetConnection(config.ConnectionId);
 

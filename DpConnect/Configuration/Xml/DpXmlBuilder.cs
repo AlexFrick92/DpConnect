@@ -100,6 +100,9 @@ namespace DpConnect.Configuration.Xml
                 string typeName = configuredWorker.Attribute(Xml_WorkerTypeNameAttribute).Value;
 
                 Type workerType = Type.GetType(typeName);
+                if (!typeof(IDpWorker).IsAssignableFrom(workerType))
+                    throw new DpConfigurationException($"Тип {workerType} должен реализовывать интерфейс {nameof(IDpWorker)}");
+
 
                 MethodInfo methodInfo1 = typeof(IDpWorkerManager).GetMethod(nameof(IDpWorkerManager.CreateWorker));
                 MethodInfo genericMethod1 = methodInfo1.MakeGenericMethod(workerType);

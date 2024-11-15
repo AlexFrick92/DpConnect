@@ -14,6 +14,8 @@ namespace DpConnect.Building
         public SourceDelegate SourceDelegate { get; set; }
 
         public T Call { get; private set; }
+        public bool IsConnected { get; set; }
+        public event EventHandler<EventArgs> StatusChanged;
 
         public DpAction()
         {
@@ -22,6 +24,7 @@ namespace DpConnect.Building
 
 
         Type delegateReturnType;
+
 
         private T CreateDelegate()
         {            
