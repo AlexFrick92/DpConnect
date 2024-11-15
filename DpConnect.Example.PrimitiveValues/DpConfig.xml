@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+
+<DpConfiguration>
+
+	<Connections>
+		<Connection TypeName="DpConnect.OpcUa.IOpcUaConnection, DpConnect.OpcUa" ConnectionId ="Stend AKF">
+			<Endpoint>opc.tcp://10.10.10.95:4840</Endpoint>
+		</Connection>		
+	</Connections>
+
+	<Workers>
+		<Worker TypeName="DpConnect.Example.PrimitiveValues.IConsoleReader, DpConnect.Example.PrimitiveValues">
+
+			<DpValue PropertyName="BoolDp">
+				<SourceConfiguration ConnectionId ="Stend AKF">
+					<NodeId>ns=3;s="PrimitiveTypes"."BoolTypeVar"</NodeId>
+				</SourceConfiguration>
+			</DpValue>
+
+			<DpValue PropertyName="FloatDp">
+				<SourceConfiguration ConnectionId ="Stend AKF">
+					<NodeId>ns=3;s="PrimitiveTypes"."RealTypeVar"</NodeId>
+				</SourceConfiguration>
+			</DpValue>
+
+		</Worker>	
+						
+	</Workers>
+	
+</DpConfiguration>	
