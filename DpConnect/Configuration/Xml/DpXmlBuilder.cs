@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Reflection;
-using System.Runtime.InteropServices;
 using System.Xml.Linq;
-using DpConnect.Interface;
+
 using Promatis.Core.Logging;
 
-namespace DpConnect.Configuration
+using DpConnect.Building;
+
+namespace DpConnect.Configuration.Xml
 {
     public class DpXmlBuilder : IDpBuilder
     {
@@ -37,7 +38,7 @@ namespace DpConnect.Configuration
         const string Xml_DpValuePropNameAttribute = "PropertyName";
         const string Xml_DpSourceConfigurationTag = "SourceConfiguration";
 
-        const string Xml_DpActionDeclareTag = "DpMethod";
+        const string Xml_DpActionDeclareTag = "DpAction";
 
 
         public DpXmlBuilder(IDpConnectionManager connectionManager, IDpWorkerManager workerManager, ILogger logger)

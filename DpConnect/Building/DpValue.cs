@@ -1,13 +1,12 @@
-﻿using DpConnect.Interface;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System;
 
-namespace DpConnect
+using DpConnect;
+using DpConnect.Connection;
+
+
+namespace DpConnect.Building
 {
-    internal class DpValue<T> : IDpValue<T> where T :new()
+    internal class DpValue<T> : IDpValueSource<T>, IDpValue<T> where T :new()
     {
         T value;
         public T Value

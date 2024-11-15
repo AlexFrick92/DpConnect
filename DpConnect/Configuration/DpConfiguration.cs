@@ -1,4 +1,4 @@
-﻿using DpConnect.Interface;
+﻿using System;
 
 
 namespace DpConnect.Configuration

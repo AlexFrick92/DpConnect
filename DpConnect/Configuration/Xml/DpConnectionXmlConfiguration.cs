@@ -1,8 +1,7 @@
 ﻿
-using DpConnect.Interface;
 using System.Xml.Linq;
 
-namespace DpConnect.Configuration
+namespace DpConnect.Configuration.Xml
 {
     public class DpConnectionXmlConfiguration : IDpConnectionConfiguration
     {

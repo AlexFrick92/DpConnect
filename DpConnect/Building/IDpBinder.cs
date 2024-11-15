@@ -1,9 +1,10 @@
 ﻿
 using System.Collections.Generic;
 
+using DpConnect;
 using DpConnect.Configuration;
 
-namespace DpConnect.Interface
+namespace DpConnect.Building
 {
     internal interface IDpBinder
     {

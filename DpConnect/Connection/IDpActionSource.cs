@@ -1,7 +1,7 @@
 ﻿
-namespace DpConnect.Interface
+namespace DpConnect.Connection
 {
-    public interface IDpMethod
+    public interface IDpActionSource
     {
         SourceDelegate SourceDelegate { get; set; }
     }

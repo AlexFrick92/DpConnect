@@ -1,6 +1,9 @@
-﻿using DpConnect.Interface;
+﻿using DpConnect;
+using DpConnect.Connection;
+
 using Promatis.Core;
 using Promatis.Core.Logging;
+
 using System;
 using System.Collections.Generic;
 using System.Linq;

@@ -14,17 +14,17 @@
 		<Worker TypeName="DpConnect.Test.IBoolWorker, DpConnect.Test">
 
 
-			<DpMethod PropertyName ="FloatMultiply">
+			<DpAction PropertyName ="FloatMultiply">
 				<SourceConfiguration ConnectionId ="Stend AKF">
 					<NodeId>ns=3;s="OPCUA_Mul_Real"</NodeId>
 				</SourceConfiguration>
-			</DpMethod>
+			</DpAction>
 
-			<DpMethod PropertyName ="DpGetDate">
+			<DpAction PropertyName ="DpGetDate">
 				<SourceConfiguration ConnectionId ="Stend AKF">
 					<NodeId>ns=3;s="OPCUA_GetActualDTL_Scalar"</NodeId>
 				</SourceConfiguration>
-			</DpMethod>
+			</DpAction>
 
 
 			<DpValue PropertyName="ComplexValue">
@@ -34,6 +34,9 @@
 			</DpValue>
 			
 		</Worker>	
+		
+		
+		
 	</Workers>
 	
 	

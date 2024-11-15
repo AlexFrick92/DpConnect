@@ -1,6 +1,5 @@
 ﻿using System;
 using DpConnect.Configuration;
-using DpConnect.Interface;
 
 
 namespace DpConnect.OpcUa

@@ -45,31 +45,33 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Configuration\DpConfigurationException.cs" />
-    <Compile Include="Configuration\DpConnectionXmlConfiguration.cs" />
+    <Compile Include="Configuration\Xml\DpConnectionXmlConfiguration.cs" />
     <Compile Include="Configuration\DpConfiguration.cs" />
-    <Compile Include="Configuration\DpSourceXmlConfiguration.cs" />
-    <Compile Include="Configuration\DpXmlBuilder.cs" />
+    <Compile Include="Configuration\Xml\DpSourceXmlConfiguration.cs" />
+    <Compile Include="Configuration\Xml\DpXmlBuilder.cs" />
     <Compile Include="ContainerizedWorkerManager.cs" />
-    <Compile Include="DpMethod.cs" />
-    <Compile Include="DpBinder.cs" />
+    <Compile Include="Building\DpAction.cs" />
+    <Compile Include="Building\DpBinder.cs" />
     <Compile Include="ContainerizedConnectionManager.cs" />
-    <Compile Include="DpValue.cs" />
-    <Compile Include="Interface\IDpAction.cs" />
-    <Compile Include="Interface\IDpMethod.cs" />
-    <Compile Include="Interface\IDpBinder.cs" />
-    <Compile Include="Interface\IDpBuilder.cs" />
-    <Compile Include="Interface\IDpConnection.cs" />
-    <Compile Include="Interface\IDpConnectionConfiguration.cs" />
-    <Compile Include="Interface\IDpConnectionManager.cs" />
-    <Compile Include="Interface\IDpSourceConfiguration.cs" />
-    <Compile Include="Interface\IDpValue.cs" />
-    <Compile Include="Interface\IDpWorker.cs" />
-    <Compile Include="Interface\IDpWorkerManager.cs" />
+    <Compile Include="Building\DpValue.cs" />
+    <Compile Include="IDpAction.cs" />
+    <Compile Include="Connection\IDpActionSource.cs" />
+    <Compile Include="Building\IDpBinder.cs" />
+    <Compile Include="IDpBuilder.cs" />
+    <Compile Include="Connection\IDpConnection.cs" />
+    <Compile Include="Configuration\IDpConnectionConfiguration.cs" />
+    <Compile Include="IDpConnectionManager.cs" />
+    <Compile Include="Configuration\IDpSourceConfiguration.cs" />
+    <Compile Include="IDpValue.cs" />
+    <Compile Include="IDpWorker.cs" />
+    <Compile Include="Connection\IDpValueSource.cs" />
+    <Compile Include="IDpWorkerManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SourceDelegate.cs" />
+    <Compile Include="Connection\SourceDelegate.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

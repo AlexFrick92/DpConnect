@@ -1,6 +1,6 @@
 ﻿
 
-namespace DpConnect.Interface
+namespace DpConnect
 {
     public interface IDpConnectionConfiguration
     {

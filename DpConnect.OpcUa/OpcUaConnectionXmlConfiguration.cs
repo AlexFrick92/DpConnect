@@ -1,4 +1,4 @@
-﻿using DpConnect.Configuration;
+﻿using DpConnect.Configuration.Xml;
 
 namespace DpConnect.OpcUa
 {

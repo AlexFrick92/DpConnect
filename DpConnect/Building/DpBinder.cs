@@ -1,14 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Configuration;
 using System.Linq;
 using System.Reflection;
 
 using DpConnect.Configuration;
-using DpConnect.Interface;
+
 using Promatis.Core.Logging;
 
-namespace DpConnect
+namespace DpConnect.Building
 {
     internal class DpBinder : IDpBinder
     {
@@ -71,7 +70,7 @@ namespace DpConnect
         object CreatDpFunc(PropertyInfo property)
         {
             Type[] propGenericType = property.PropertyType.GetGenericArguments();
-            Type genericType = typeof(DpMethod<>).MakeGenericType(propGenericType);            
+            Type genericType = typeof(DpAction<>).MakeGenericType(propGenericType);            
             
             return Activator.CreateInstance(genericType);
 

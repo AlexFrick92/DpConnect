@@ -1,21 +1,21 @@
-﻿using DpConnect.Interface;
+﻿
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace DpConnect
+using DpConnect.Connection;
+
+namespace DpConnect.Building
 {
-    public class DpMethod<T> : IDpAction<T>, IDpMethod where T : Delegate
+    internal class DpAction<T> : IDpAction<T>, IDpActionSource where T : Delegate
     {
         public SourceDelegate SourceDelegate { get; set; }
 
         public T Call { get; private set; }
 
-        public DpMethod()
+        public DpAction()
         {
             Call = CreateDelegate();
         }
@@ -25,7 +25,7 @@ namespace DpConnect
 
         private T CreateDelegate()
         {            
-            MethodInfo sourceMethod = typeof(DpMethod<T>).GetMethod(nameof(SourceMethod));            
+            MethodInfo sourceMethod = typeof(DpAction<T>).GetMethod(nameof(SourceMethod));            
             // Получаем параметры, ожидаемые делегатом T
 
             ParameterInfo[] delegateParameters = typeof(T).GetMethod("Invoke").GetParameters();

@@ -5,9 +5,9 @@ using System.Collections.Generic;
 using Promatis.Opc.UA.Client;
 using Promatis.Core.Logging;
 
-using DpConnect.Interface;
+using DpConnect.Connection;
 
-using DpConnect.Configuration;
+using DpConnect.Configuration.Xml;
 
 namespace DpConnect.OpcUa
 {
@@ -82,7 +82,7 @@ namespace DpConnect.OpcUa
             logger.Info($"{Id}: Остановился");
         }
 
-        public void ConnectDpValue<T>(IDpValue<T> dpValue, IDpSourceConfiguration sourceConfiguration) where T : new()
+        public void ConnectDpValue<T>(IDpValueSource<T> dpValue, IDpSourceConfiguration sourceConfiguration) where T : new()
         {
 
             OpcUaDpValueSourceConfiguration opcuaSourceConfig;
@@ -106,7 +106,7 @@ namespace DpConnect.OpcUa
         }
 
 
-        NodeValue<T> ConfigureNodeValue<T>(IDpValue<T> dpValue, OpcUaDpValueSourceConfiguration config) where T : new()
+        NodeValue<T> ConfigureNodeValue<T>(IDpValueSource<T> dpValue, OpcUaDpValueSourceConfiguration config) where T : new()
         {
             NodeValue<T> node = new NodeValue<T>(config.NodeId, (e, v) => dpValue.UpdateValueFromSource(v));
 
@@ -126,7 +126,7 @@ namespace DpConnect.OpcUa
             return node;
         }
 
-        NodeValue<ComplexType<T>> ConfigureNodeComplexValue<T>(IDpValue<T> dpValue, OpcUaDpValueSourceConfiguration config) where T : new()
+        NodeValue<ComplexType<T>> ConfigureNodeComplexValue<T>(IDpValueSource<T> dpValue, OpcUaDpValueSourceConfiguration config) where T : new()
         {
             NodeValue<ComplexType<T>> node = new NodeValue<ComplexType<T>>(config.NodeId, (e, v) => dpValue.UpdateValueFromSource(v.ExtractedValue));
 
@@ -139,7 +139,7 @@ namespace DpConnect.OpcUa
             return node;
         }
 
-        public void ConnectDpMethod(IDpMethod dpMethod, IDpSourceConfiguration sourceConfiguration)
+        public void ConnectDpMethod(IDpActionSource dpMethod, IDpSourceConfiguration sourceConfiguration)
         {
             OpcUaDpValueSourceConfiguration opcuaSourceConfig;
 
