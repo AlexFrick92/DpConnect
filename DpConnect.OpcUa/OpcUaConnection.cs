@@ -126,8 +126,7 @@ namespace DpConnect.OpcUa
                 node.Value = v;
                 if (client != null)
                 {
-                    client.ModifyNodeValue(node);
-                    Console.WriteLine($"{Id}: В ноду {node.NodeId} записано значение {v}");
+                    client.ModifyNodeValue(node);                    
                 }
                 else
                 {
@@ -144,8 +143,7 @@ namespace DpConnect.OpcUa
             NodeValue<ComplexType<T>> node = new NodeValue<ComplexType<T>>(config.NodeId, (e, v) => dpValue.UpdateValueFromSource(v.ExtractedValue));
 
             dpValue.ValueWritten += (e, v) =>
-            {
-                Console.WriteLine("Запись сложной ноды");
+            {                
                 node.Value.ExtractedValue = v;
                 client.ModifyNodeComplexValue(node);                
             };
