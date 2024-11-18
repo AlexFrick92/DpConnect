@@ -22,6 +22,8 @@ namespace DpConnect
             this.container = container;
         }
 
+
+
         public IDpConnection CreateConnection<T>(IDpConnectionConfiguration configuration) where T : IDpConnection
         {            
             IDpConnection con = container.Resolve<T>();            
@@ -45,6 +47,13 @@ namespace DpConnect
             logger.Info("Открываем соединения...");
             connections.ForEach(c => c.Open());
             logger.Info("Соединения открыты.");
+        }
+
+        public void CloseConnections()
+        {
+            logger.Info("Закрываем соединения...");
+            connections.ForEach(c => c.Close());
+            logger.Info("Соединения закрыты.");
         }
     }
 }

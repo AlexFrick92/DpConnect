@@ -10,5 +10,7 @@ namespace DpConnect
         IDpConnection GetConnection(string Id);
 
         void OpenConnections();
+
+        void CloseConnections();
     }
 }
