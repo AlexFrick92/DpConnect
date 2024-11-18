@@ -4,7 +4,7 @@ using System.Linq;
 using System.Reflection;
 
 using DpConnect.Configuration;
-
+using DpConnect.Connection;
 using Promatis.Core.Logging;
 
 namespace DpConnect.Building
@@ -43,7 +43,7 @@ namespace DpConnect.Building
 
                 if (prop.PropertyType.GetGenericTypeDefinition() == typeof(IDpValue<>))
                 {
-                    object dp = CreateDpValue(prop);
+                    object dp = CreateDpValue(prop);                    
                     connection.ConnectDpValue(dp as dynamic, config.SourceConfiguration);
                     prop.SetValue(worker, dp);
                     logger.Info($"Свойство {config.PropertyName} типа {dp.GetType()} для {config.ConnectionId}");
@@ -100,6 +100,12 @@ namespace DpConnect.Building
         object CreateDpValue(PropertyInfo property)
         {
             Type[] propGenericType = property.PropertyType.GetGenericArguments();
+
+            if(!propGenericType[0].IsVisible)
+            {
+                throw new DpConfigurationException($"Класс {propGenericType[0]} указанный при объявлении IDpValue<>, должен быть public");
+            }            
+
             Type genericType = typeof(DpValue<>).MakeGenericType(propGenericType);
             return Activator.CreateInstance(genericType);
         }
