@@ -11,7 +11,8 @@
 
 	<Workers>
 		<Worker TypeName="DpConnect.Example.PrimitiveValues.IConsoleReader, DpConnect.Example.PrimitiveValues">
-
+			
+			
 			<DpValue PropertyName="BoolDp">
 				<SourceConfiguration ConnectionId ="Stend AKF">
 					<NodeId>ns=3;s="PrimitiveTypes"."BoolTypeVar"</NodeId>
@@ -47,8 +48,6 @@
 					<NodeId>ns=3;s="PrimitiveTypes"."DateTimeTypeVar"</NodeId>
 				</SourceConfiguration>
 			</DpValue>
-
-
 		</Worker>	
 						
 	</Workers>

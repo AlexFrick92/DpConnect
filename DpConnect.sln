@@ -21,6 +21,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DpConnect.Test", "DpConnect
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DpConnect.Example.PrimitiveValues", "DpConnect.Example.PrimitiveValues\DpConnect.Example.PrimitiveValues.csproj", "{BAC0E1E0-6000-4433-AFD8-B19064B63EE3}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DpConnect.Example.Methods", "DpConnect.Example.Methods\DpConnect.Example.Methods.csproj", "{791DA52A-591C-4819-83E2-AF88CA44CD6B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -55,6 +57,10 @@ Global
 		{BAC0E1E0-6000-4433-AFD8-B19064B63EE3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BAC0E1E0-6000-4433-AFD8-B19064B63EE3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BAC0E1E0-6000-4433-AFD8-B19064B63EE3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{791DA52A-591C-4819-83E2-AF88CA44CD6B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{791DA52A-591C-4819-83E2-AF88CA44CD6B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{791DA52A-591C-4819-83E2-AF88CA44CD6B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{791DA52A-591C-4819-83E2-AF88CA44CD6B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
