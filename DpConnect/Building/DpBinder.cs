@@ -61,12 +61,40 @@ namespace DpConnect.Building
                     string messageError = $"Ошибка при связывании воркера. Свойство {prop.Name} : {prop.PropertyType} воркера должно быть одним из следующих типов: {typeof(IDpValue<>)}, {typeof(IDpAction<>)}";
                     logger.Error(messageError);
                     throw new DpConfigurationException(messageError);
-                }
-                                    
+                }                                    
             }
+
+            CheckForUnboundProps(worker);
 
             worker.DpBound();
             logger.Info($"{worker.GetType()} связан.");
+        }
+
+
+        void CheckForUnboundProps(IDpWorker worker)
+        {
+            //проверить, если остались непривязанные свойства
+
+            List<PropertyInfo> unboundProps = new List<PropertyInfo>();
+
+
+            foreach (var prop in worker.GetType().GetProperties().Where(p =>
+                p.PropertyType.GetGenericTypeDefinition() == typeof(IDpAction<>)
+                || p.PropertyType.GetGenericTypeDefinition() == typeof(IDpValue<>)
+            ))
+            {
+                if (prop.GetValue(worker) is null)
+                    unboundProps.Add(prop);
+            }
+            if (unboundProps.Count() > 0)
+            {
+                logger.Info($"Следующие свойства для {worker.GetType()} не были привязаны из за отсутствия конфигурации:");
+                foreach (var prop in unboundProps)
+                {
+                    logger.Info(prop.Name);
+                }
+                throw new DpConfigurationException($"Для {worker.GetType()} остались непривязанные свойства..");
+            }
         }
 
         object CreateDpValue(PropertyInfo property)
