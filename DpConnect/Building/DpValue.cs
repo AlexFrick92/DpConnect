@@ -32,7 +32,6 @@ namespace DpConnect.Building
             }
         }
     
-
         public event EventHandler<T> ValueWritten;
         public event EventHandler<T> ValueUpdated;
         public event EventHandler<EventArgs> StatusChanged;

@@ -78,7 +78,7 @@ namespace DpConnect.Building
             List<PropertyInfo> unboundProps = new List<PropertyInfo>();
 
 
-            foreach (var prop in worker.GetType().GetProperties().Where(p =>
+            foreach (var prop in worker.GetType().GetProperties().Where(p => p.PropertyType.IsGenericType).Where(p =>
                 p.PropertyType.GetGenericTypeDefinition() == typeof(IDpAction<>)
                 || p.PropertyType.GetGenericTypeDefinition() == typeof(IDpValue<>)
             ))
