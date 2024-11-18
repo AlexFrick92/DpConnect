@@ -21,7 +21,16 @@ namespace DpConnect.Building
             }
         }
 
-        public bool IsConnected { get; set; }
+        bool isConnected;
+        public bool IsConnected 
+        { 
+            get => isConnected;
+            set
+            {
+                isConnected = value;
+                StatusChanged(this, EventArgs.Empty);
+            }
+        }
     
 
         public event EventHandler<T> ValueWritten;
