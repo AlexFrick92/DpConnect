@@ -4,12 +4,20 @@ using System.Collections.Generic;
 
 namespace DpConnect
 {
+    /// <summary>
+    /// Интерфейс, через который можно получить коллекцию воркеров
+    /// </summary>
+
     public interface IDpWorkerManager
     {
         IDpWorker CreateWorker<T>() where T : IDpWorker;
+        
 
-        IDpWorker GetWorker();
-
+        /// <summary>
+        /// Получить список воркеров указанного типа
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <returns></returns>
         IEnumerable<T> ResolveWorker<T>();
     }
 }

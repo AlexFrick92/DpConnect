@@ -28,19 +28,12 @@ namespace DpConnect
             return worker;
         }
 
-        public IDpWorker GetWorker()
-        {
-            throw new NotImplementedException();
-        }
-
         public IEnumerable<T> ResolveWorker<T>()
         {
-            IEnumerable<T> resolved = workers.Where(w => typeof(T).IsAssignableFrom( w.GetType())).Select(p => (T)p);            
+            IEnumerable<T> resolved = workers.Where(w => typeof(T).IsAssignableFrom( w.GetType() )).Select(p => (T)p);            
 
-            if(resolved.Count() == 0)
-            {
-                throw new InvalidOperationException($"В коллекции воркеров не найден воркер с интерфейсом {typeof(T)}");
-            }
+            if(resolved.Count() == 0)            
+                throw new InvalidOperationException($"В коллекции воркеров не найден воркер с интерфейсом {typeof(T)}");            
             else
                 return resolved;
         }
