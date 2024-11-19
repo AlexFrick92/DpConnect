@@ -23,6 +23,8 @@ namespace DpConnect.OpcUa
 
         public string Id { get; private set; }
 
+        public bool Active { get; private set; }
+
         public OpcUaConnection(ILogger logger)
         {
             this.logger = logger;
@@ -31,6 +33,7 @@ namespace DpConnect.OpcUa
         public void Configure(IDpConnectionConfiguration configuration)
         {
             Id = configuration.ConnectionId;
+            Active = configuration.Active;
 
             if (configuration is OpcUaConnectionConfiguration)
                 connectionConfiguration = (OpcUaConnectionConfiguration)configuration;

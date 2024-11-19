@@ -29,6 +29,7 @@ namespace DpConnect.Configuration.Xml
         const string Xml_ConnectionDeclareTag = "Connection";
         const string Xml_ConnectionTypeNameAttribute = "TypeName";
         const string Xml_ConnectionIdAttribute = "ConnectionId";
+        const string Xml_ConnectionActiveAttribute = "Active";
 
         const string Xml_WorkerRootTag = "Workers";
         const string Xml_WorkerDeclareTag = "Worker";
@@ -74,9 +75,17 @@ namespace DpConnect.Configuration.Xml
             {                
 
                 string typeName = configuredConnection.Attribute(Xml_ConnectionTypeNameAttribute).Value;
-                string conId = configuredConnection.Attribute(Xml_ConnectionIdAttribute).Value;                
+                string conId = configuredConnection.Attribute(Xml_ConnectionIdAttribute).Value;      
 
-                IDpConnectionConfiguration connetionConfiguration = new DpConnectionXmlConfiguration() { ConnectionId = conId, Configuration = new XDocument(configuredConnection) };
+
+                bool conActive = configuredConnection.Attribute(Xml_ConnectionActiveAttribute) != null ? bool.Parse(configuredConnection.Attribute(Xml_ConnectionActiveAttribute).Value) : true;
+
+                IDpConnectionConfiguration connetionConfiguration = new DpConnectionXmlConfiguration() 
+                {
+                    ConnectionId = conId, 
+                    Active = conActive,
+                    Configuration = new XDocument(configuredConnection) 
+                };
 
                 Type connectionType = Type.GetType(typeName);
 

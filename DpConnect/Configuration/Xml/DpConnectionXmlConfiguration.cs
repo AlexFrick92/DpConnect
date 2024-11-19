@@ -8,6 +8,8 @@ namespace DpConnect.Configuration.Xml
         public string ConnectionId { get; set; }
 
         public XDocument Configuration { get; set; }
+
+        public bool Active { get; set; }
     }    
 
 }

@@ -2,6 +2,7 @@
 using DpConnect.Connection;
 
 using Promatis.Core;
+using Promatis.Core.Extensions;
 using Promatis.Core.Logging;
 
 using System;
@@ -45,14 +46,14 @@ namespace DpConnect
         public void OpenConnections()
         {
             logger.Info("Открываем соединения...");
-            connections.ForEach(c => c.Open());
+            connections.Where(c => c.Active).ForEach(c => c.Open());
             logger.Info("Соединения открыты.");
         }
 
         public void CloseConnections()
         {
             logger.Info("Закрываем соединения...");
-            connections.ForEach(c => c.Close());
+            connections.Where(c => c.Active).ForEach(c => c.Close());
             logger.Info("Соединения закрыты.");
         }
     }

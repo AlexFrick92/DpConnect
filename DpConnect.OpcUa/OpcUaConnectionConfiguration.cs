@@ -9,5 +9,7 @@ namespace DpConnect.OpcUa
         public string ConnectionId { get; set; }
 
         public string Endpoint { get; set; }
-    }
+
+        public bool Active { get; set; }
+}
 }
