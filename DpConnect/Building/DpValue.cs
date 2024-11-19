@@ -28,7 +28,7 @@ namespace DpConnect.Building
             set
             {
                 isConnected = value;
-                StatusChanged(this, EventArgs.Empty);
+                StatusChanged?.Invoke(this, EventArgs.Empty);
             }
         }
     
