@@ -22,7 +22,8 @@ namespace DpConnect.Configuration.Xml
         readonly XDocument ConnectionConfiguration;
         readonly XDocument WorkerConfiguration;
 
-        const string Xml_FileName = "DpConfig.xml";
+        const string Xml_FileName = "DpConnect/DpConfig.xml";                
+
         const string Xml_DpConfigRootTag = "DpConfiguration";
 
         const string Xml_ConnectionRootTag = "Connections";
@@ -52,6 +53,8 @@ namespace DpConnect.Configuration.Xml
 
 
             logger.Info($"Загружаем конфигурацию {Xml_FileName}...");
+
+
             XDocument config = XDocument.Load(Xml_FileName);            
 
             ConnectionConfiguration = new XDocument(config.Element(Xml_DpConfigRootTag).Element(Xml_ConnectionRootTag));
