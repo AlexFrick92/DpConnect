@@ -17,6 +17,8 @@ namespace DpConnect
         IIoCContainer container;
         List<IDpConnection> connections = new List<IDpConnection>();
 
+        public event EventHandler<IDpConnection> NewConnectionCreated;
+
         public ContainerizedConnectionManager(ILogger logger, IIoCContainer container)
         {
             this.logger = logger;
@@ -33,6 +35,8 @@ namespace DpConnect
             con.Configure(configuration);
 
             connections.Add(con);
+
+            NewConnectionCreated?.Invoke(this, con);
 
             return con;
          
