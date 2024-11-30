@@ -1,4 +1,5 @@
 ﻿using DpConnect.Example.TechParamApp.View;
+using DpConnect.Example.TechParamApp.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,7 +16,10 @@ namespace DpConnect.Example.TechParamApp
         }
         public new void Run()
         {
-            MainView view = new MainView();
+
+
+            MainViewModel mainViewModel = new MainViewModel();
+            MainView view = new MainView(mainViewModel);
             view.Show();
 
             base.Run();

@@ -16,14 +16,17 @@ using System.Windows.Shapes;
 namespace DpConnect.Example.TechParamApp.View
 {
     /// <summary>
-    /// Interaction logic for MainView.xaml
+    /// Interaction logic for CreateConnectionView.xaml
     /// </summary>
-    public partial class MainView : Window
+    public partial class CreateConnectionView : Window
     {
-        public MainView(MainViewModel vm)
+        public CreateConnectionView(CreateConnectionViewModel viewModel)
         {
             InitializeComponent();
-            DataContext = vm;
+
+            DataContext = viewModel;
+
+            EditConnectionType.Focus();
         }
     }
 }
