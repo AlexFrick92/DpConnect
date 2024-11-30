@@ -1,6 +1,8 @@
 ﻿
 using DpConnect.Connection;
 using System;
+using System.Collections;
+using System.Collections.Generic;
 
 namespace DpConnect
 {
@@ -9,6 +11,8 @@ namespace DpConnect
         IDpConnection CreateConnection<T>(IDpConnectionConfiguration configuration) where T : IDpConnection;
 
         IDpConnection GetConnection(string Id);
+
+        IEnumerable<IDpConnection> ConfiguredConnections { get; }
 
         event EventHandler<IDpConnection> NewConnectionCreated;        
 
