@@ -9,7 +9,8 @@
         WindowStartupLocation="CenterScreen"
         WindowStyle="None"
         xmlns:viewmodel="clr-namespace:DpConnect.Example.TechParamApp.ViewModel" 
-        d:DataContext="{d:DesignInstance Type=viewmodel:CreateConnectionViewModel}"        
+        d:DataContext="{d:DesignInstance Type=viewmodel:CreateConnectionViewModel}"   
+        ResizeMode="NoResize"
         >
 
     <Window.Resources>
@@ -23,51 +24,54 @@
     
     <Window.InputBindings>
         <KeyBinding Key="Esc" Command="{Binding CancelCmd}"/>
+        <KeyBinding Key="Enter" Command="{Binding CreateConnectionCmd}"/>
+
     </Window.InputBindings>
+    <Border BorderThickness="1" BorderBrush="Black">
+        <Grid Margin="10">
+            <Grid.Resources>
+                <Style TargetType="TextBox" x:Key="TextboxStyle">
+                    <Setter Property="Margin" Value="4"/>
+                    <Setter Property="BorderThickness" Value="0,0,0,0"/>
+                </Style>
+                <Style TargetType="TextBox" x:Key="TextboxRead" BasedOn="{StaticResource TextboxStyle}">
+                    <Setter Property="IsReadOnly" Value="True"/>
+                    <Setter Property="Grid.Column" Value="0"/>
+                </Style>
+                <Style TargetType="TextBox" x:Key="TextboxEdit" BasedOn="{StaticResource TextboxStyle}">
+                    <Setter Property="Grid.Column" Value="1"/>
+                    <Setter Property="BorderThickness" Value="0,0,0,1"/>
+                    <Setter Property="BorderBrush" Value="{StaticResource ColorGrid1Brush}"/>
+                </Style>
 
-    <Grid Margin="10">
-        <Grid.Resources>
-            <Style TargetType="TextBox" x:Key="TextboxStyle">
-                <Setter Property="Margin" Value="4"/>
-                <Setter Property="BorderThickness" Value="0,0,0,0"/>
-            </Style>
-            <Style TargetType="TextBox" x:Key="TextboxRead" BasedOn="{StaticResource TextboxStyle}">
-                <Setter Property="IsReadOnly" Value="True"/>
-                <Setter Property="Grid.Column" Value="0"/>
-            </Style>
-            <Style TargetType="TextBox" x:Key="TextboxEdit" BasedOn="{StaticResource TextboxStyle}">
-                <Setter Property="Grid.Column" Value="1"/>
-                <Setter Property="BorderThickness" Value="0,0,0,1"/>
-                <Setter Property="BorderBrush" Value="{StaticResource ColorGrid1Brush}"/>
-            </Style>
+            </Grid.Resources>
 
-        </Grid.Resources>
-        
-        <Grid.RowDefinitions>
-            <RowDefinition Height="AUTO"/>
-            <RowDefinition Height="auto"/>
-            <RowDefinition Height="auto"/>
-            <RowDefinition/>
-            <RowDefinition Height="auto"/>
-        </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition/>
-            <ColumnDefinition/>
-        </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="AUTO"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition/>
+                <RowDefinition Height="auto"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
 
-        <TextBox 
+            <TextBox 
             Style="{StaticResource TextboxRead}"
             Grid.Row="0"
             Grid.ColumnSpan="2"
             BorderThickness="0,0,0,1"
+            FontWeight="SemiBold"
             Text="Создание нового соединения"/>
 
-        <TextBox 
+            <TextBox 
             Style="{StaticResource TextboxRead}"
             Grid.Row="1"
             Text="Тип соединения:"/>
 
-        <TextBox 
+            <TextBox 
             x:Name="EditConnectionType"
             TabIndex="0"
             Style="{StaticResource TextboxEdit}"
@@ -75,19 +79,19 @@
             Text="{Binding EditConnection.ConnectionType}"/>
 
 
-        <TextBox 
+            <TextBox 
             Style="{StaticResource TextboxRead}"
             Grid.Row="2"
             Text="Название соединения"/>
-        
-        <TextBox 
+
+            <TextBox 
             TabIndex="1"
             Style="{StaticResource TextboxEdit}"
             Grid.Row="2"
             Text="{Binding EditConnection.ConnectionName}"/>
 
 
-        <Button 
+            <Button 
             TabIndex="2"
             Margin="4"
             Grid.Row="4"
@@ -96,16 +100,8 @@
             Background="{StaticResource ColorActiveBack1Brush}" 
             Command="{Binding CreateConnectionCmd}"
             />
-        
-        <Button 
-            Margin="4"
-            Grid.Row="4"
-            Grid.Column="0"
-            Content="НЕ ДОБАВЛЯТЬ"
-            Background="{StaticResource ColorBackBot1Brush}" 
-            Command="{Binding CancelCmd}"
-            />
-    </Grid>
-    
-    
+
+        </Grid>
+
+    </Border>
 </Window>

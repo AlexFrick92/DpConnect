@@ -13,13 +13,22 @@ namespace DpConnect.Example.TechParamApp.ViewModel
 {
     public class MainViewModel : INotifyPropertyChanged
     {
+        IDpConnectionManager connectionManager;
+
         void OnPropertyChanged(string propName)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propName));
         }
 
-        public MainViewModel()
+        public MainViewModel(IDpConnectionManager conManager)
         {
+            connectionManager = conManager;
+
+            foreach(var con in connectionManager.ConfiguredConnections)
+            {
+                ConfiguredConnections.Add(new ConnectionViewModel(con));
+            }
+
             AddConnectionCmd = new RelayCommand((arg) =>
             {
                 Console.WriteLine("Добавить соединение");                

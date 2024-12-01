@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+
+<DpConfiguration>
+
+	<Connections>
+		<Connection TypeName="DpConnect.OpcUa.IOpcUaConnection, DpConnect.OpcUa" ConnectionId ="Stend AKF">
+			<Endpoint>opc.tcp://10.10.10.95:4840</Endpoint>
+		</Connection>		
+	</Connections>
+
+	
+	
+</DpConfiguration>	
