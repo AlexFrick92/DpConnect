@@ -6,6 +6,7 @@ using System.Xml.Linq;
 using Promatis.Core.Logging;
 
 using DpConnect.Building;
+using System.Linq;
 
 namespace DpConnect.Configuration.Xml
 {
@@ -106,6 +107,18 @@ namespace DpConnect.Configuration.Xml
         void CreateWorkers()
         {
             logger.Info("Создаём воркеров...");
+
+            try
+            {
+                IEnumerable<XElement> workers = WorkerConfiguration.Root.Elements(Xml_WorkerDeclareTag);
+                if (workers == null || workers.Count() == 0)
+                    throw new ArgumentNullException();
+            }
+            catch 
+            {
+                logger.Info("Нет воркеров в конфигурации.");
+                return;
+            }
 
             foreach (XElement configuredWorker in WorkerConfiguration.Root.Elements(Xml_WorkerDeclareTag))
             {

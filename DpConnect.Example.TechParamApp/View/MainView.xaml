@@ -1,0 +1,176 @@
+﻿<Window x:Class="DpConnect.Example.TechParamApp.View.MainView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:DpConnect.Example.TechParamApp.View" 
+        
+        xmlns:viewmodel="clr-namespace:DpConnect.Example.TechParamApp.ViewModel" 
+        d:DataContext="{d:DesignInstance Type=viewmodel:MainViewModel}"
+        
+        WindowStartupLocation="CenterScreen"
+        mc:Ignorable="d"
+        Title="MainView" Height="650" Width="1000">
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Styles.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+
+    </Window.Resources>
+    <Window.InputBindings>
+        <KeyBinding Key="F1" Command="{Binding AddConnectionCmd}"/>
+        <KeyBinding Key="F2" Command="{Binding AddTechParamCmd}"/>
+    </Window.InputBindings>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="20"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="20"/>
+            <RowDefinition/>
+            <RowDefinition Height="20"/>
+        </Grid.RowDefinitions>
+
+        <Border  Grid.Column="0" Grid.Row="0" BorderThickness="0,0,1,1" BorderBrush="{StaticResource ColorGrid1Brush}" Background="{StaticResource ColorBack1Brush}"/>
+        <Border  Grid.Column="1" Grid.Row="0" BorderThickness="0,0,0,1" BorderBrush="{StaticResource ColorGrid1Brush}" Background="{StaticResource ColorBack1Brush}"/>
+        <Border  Grid.Column="0" Grid.Row="1" BorderThickness="0,0,1,0" BorderBrush="{StaticResource ColorGrid1Brush}" Background="{StaticResource ColorBack1Brush}"/>
+        <Border  Grid.Column="1" Grid.Row="1" BorderThickness="0" Background="{StaticResource ColorBack1Brush}">
+            
+            <Grid>
+                <Grid.Resources>
+                    <!-- СТИЛЬ ДЛЯ ТЕКСТБОКСОВ В СПИСКЕ -->
+                    <Style TargetType="TextBox" x:Key="ListTextbox">
+                        <Setter Property="FontWeight" Value="SemiBold"/>
+                        <Setter Property="BorderThickness" Value="0,0,0,1"/>
+                        <Setter Property="BorderBrush" Value="{StaticResource ColorGrid1Brush}"/>
+                        <Setter Property="Foreground" Value="{StaticResource ColorText1Brush}"/>
+                        <Setter Property="IsReadOnly" Value="True"/>
+                    </Style>
+                    
+                </Grid.Resources>
+                
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="350"/>
+                    <ColumnDefinition Width="200"/>
+                    <ColumnDefinition Width="200"/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition />
+                    <RowDefinition Height="auto"/>
+                </Grid.RowDefinitions>
+
+                <!--СОЕДИНЕНИЯ-->
+                <Border Margin="4,4,2,4" Grid.Row="0" Grid.Column="0" Background="{StaticResource ColorBack2Brush}">
+                    <Label Content="СОЕДИНЕНИЯ" HorizontalAlignment="Center" Foreground="{StaticResource ColorText1Brush}" FontWeight="Bold"/>
+
+                </Border>
+
+                <Grid Grid.Row="1" Grid.Column="0" Margin="4,4,2,4">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                    </Grid.RowDefinitions>
+
+                    <Border Grid.Row="0">
+                        <ScrollViewer VerticalScrollBarVisibility="Auto">
+                            <ItemsControl 
+                                ItemsSource="{Binding ConfiguredConnections}">
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate>
+                                        <Grid Margin="2">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition />
+                                                <ColumnDefinition Width="100"/>
+                                            </Grid.ColumnDefinitions>
+
+                                            <TextBox 
+                                                Grid.Column="0"
+                                                Style="{StaticResource ListTextbox}"
+                                                Text="{Binding ConnectionType}"
+                                                Foreground="{StaticResource ColorText1Brush}"
+                                                />
+                                            <TextBox 
+                                                Grid.Column="1"
+                                                Style="{StaticResource ListTextbox}"
+                                                Text="{Binding ConnectionName}"
+                                                Foreground="{StaticResource ColorText1Brush}"
+                                                />
+                                        </Grid>
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                            </ItemsControl>
+                        </ScrollViewer>
+                    </Border>
+
+
+                    <Button Grid.Row="1" Height="30" Width="30" Margin="5,10,5,5"
+                            HorizontalAlignment="Left" 
+                            Background="{StaticResource ColorActiveBack1Brush}"                             
+                            Content="+"
+                            Command="{Binding AddConnectionCmd}">
+                    </Button>
+                </Grid>
+                
+                
+
+                
+                <!--ВОРКЕРЫ-->
+                <Border Margin="2,4,2,4" Grid.Row="0" Grid.Column="1" Background="{StaticResource ColorBack2Brush}">
+                    <Label Content="ВОРКЕРЫ" HorizontalAlignment="Center" Foreground="{StaticResource ColorText1Brush}" FontWeight="Bold"/>
+
+                </Border>
+
+                <Grid Grid.Row="1" Grid.Column="1" Margin="4,4,2,4">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                    </Grid.RowDefinitions>
+
+                    <Border Grid.Row="0">
+
+                    </Border>
+                </Grid>
+
+
+
+
+
+                <!-- ТЕХ. ПАРАМЕТРЫ -->
+                <Border Margin="2,4,4,4" Grid.Row="0" Grid.Column="2" Background="{StaticResource ColorBack2Brush}">
+                    <Label Content="ТЕХ. ПАРАМЕТРЫ" HorizontalAlignment="Center" Foreground="{StaticResource ColorText1Brush}" FontWeight="Bold"/>
+
+                </Border>
+
+                <Grid Grid.Row="1" Grid.Column="2" Margin="4,4,2,4">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                    </Grid.RowDefinitions>
+
+                    <Border Grid.Row="0">
+
+                    </Border>
+
+
+                    <Button Grid.Row="1" Height="30" Width="30"  Margin="5,10,5,5"
+                            HorizontalAlignment="Left" 
+                            Background="{StaticResource ColorActiveBack1Brush}"                             
+                            Content="+"
+                            Command="{Binding AddTechParamCmd}">
+                    </Button>
+                </Grid>
+
+
+
+            </Grid>
+        </Border>
+
+        <Border Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="2" Background="{StaticResource ColorBackBot1Brush}"/>
+    </Grid>
+</Window>

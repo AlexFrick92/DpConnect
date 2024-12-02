@@ -1,0 +1,13 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <!--ИСПОЛЬЗУЕМЫЕ ЦВЕТА-->
+    <SolidColorBrush x:Key="ColorText1Brush" Color="#216554"/>
+    <SolidColorBrush x:Key="ColorBack1Brush" Color="White"/>
+    <SolidColorBrush x:Key="ColorBack2Brush" Color="#A7CDC3"/>
+    <SolidColorBrush x:Key="ColorGrid1Brush" Color="LightGray"/>
+    <SolidColorBrush x:Key="ColorActiveBack1Brush" Color="LightGoldenrodYellow"/>
+    <SolidColorBrush x:Key="ColorBackBot1Brush" Color="Gray"/>
+    
+    
+</ResourceDictionary>

@@ -34,9 +34,6 @@ namespace DpConnect.Example.PrimitiveValues
             container.Register<IDpBuilder, DpXmlBuilder>();
 
 
-
-
-
             IDpBuilder builder = container.Resolve<IDpBuilder>();
             builder.Build();
 
