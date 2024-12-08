@@ -10,4 +10,21 @@
     <SolidColorBrush x:Key="ColorBackBot1Brush" Color="Gray"/>
     
     
+    <!-- ПОЛЯ И ЛЕЙБЛЫ -->
+    <Style TargetType="TextBox" x:Key="TextboxStyle">
+        <Setter Property="Margin" Value="4"/>
+        <Setter Property="BorderThickness" Value="0,0,0,0"/>
+    </Style>
+    <Style TargetType="TextBox" x:Key="TextboxRead" BasedOn="{StaticResource TextboxStyle}">
+        <Setter Property="IsReadOnly" Value="True"/>
+        <Setter Property="Grid.Column" Value="0"/>
+    </Style>
+    <Style TargetType="TextBox" x:Key="TextboxEdit" BasedOn="{StaticResource TextboxStyle}">
+        <Setter Property="Grid.Column" Value="1"/>
+        <Setter Property="BorderThickness" Value="0,0,0,1"/>
+        <Setter Property="BorderBrush" Value="{StaticResource ColorGrid1Brush}"/>
+    </Style>
+    
+    
+
 </ResourceDictionary>

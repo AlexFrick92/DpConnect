@@ -5,12 +5,14 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:DpConnect.Example.TechParamApp.View"
         mc:Ignorable="d"
-        Title="CreateConnectionView" Height="150" Width="400"
+        Title="CreateConnectionView" Height="250" Width="400"
         WindowStartupLocation="CenterScreen"
         WindowStyle="None"
         xmlns:viewmodel="clr-namespace:DpConnect.Example.TechParamApp.ViewModel" 
         d:DataContext="{d:DesignInstance Type=viewmodel:CreateConnectionViewModel}"   
         ResizeMode="NoResize"
+        
+        
         >
 
     <Window.Resources>
@@ -29,25 +31,10 @@
     </Window.InputBindings>
     <Border BorderThickness="1" BorderBrush="Black">
         <Grid Margin="10">
-            <Grid.Resources>
-                <Style TargetType="TextBox" x:Key="TextboxStyle">
-                    <Setter Property="Margin" Value="4"/>
-                    <Setter Property="BorderThickness" Value="0,0,0,0"/>
-                </Style>
-                <Style TargetType="TextBox" x:Key="TextboxRead" BasedOn="{StaticResource TextboxStyle}">
-                    <Setter Property="IsReadOnly" Value="True"/>
-                    <Setter Property="Grid.Column" Value="0"/>
-                </Style>
-                <Style TargetType="TextBox" x:Key="TextboxEdit" BasedOn="{StaticResource TextboxStyle}">
-                    <Setter Property="Grid.Column" Value="1"/>
-                    <Setter Property="BorderThickness" Value="0,0,0,1"/>
-                    <Setter Property="BorderBrush" Value="{StaticResource ColorGrid1Brush}"/>
-                </Style>
-
-            </Grid.Resources>
 
             <Grid.RowDefinitions>
                 <RowDefinition Height="AUTO"/>
+                <RowDefinition Height="auto"/>
                 <RowDefinition Height="auto"/>
                 <RowDefinition Height="auto"/>
                 <RowDefinition/>
@@ -91,15 +78,24 @@
             Text="{Binding EditConnection.ConnectionName}"/>
 
 
+            <ContentControl
+                Grid.Row="3"
+                Grid.ColumnSpan="2">
+                <ContentControl.Content>
+                    <local:OpcUaConnectionSettingsView/>
+                </ContentControl.Content>
+
+            </ContentControl>
+
             <Button 
-            TabIndex="2"
-            Margin="4"
-            Grid.Row="4"
-            Grid.Column="1"
-            Content="ДОБАВИТЬ"
-            Background="{StaticResource ColorActiveBack1Brush}" 
-            Command="{Binding CreateConnectionCmd}"
-            />
+                TabIndex="2"
+                Margin="4"
+                Grid.Row="5"
+                Grid.Column="1"
+                Content="ДОБАВИТЬ"
+                Background="{StaticResource ColorActiveBack1Brush}" 
+                Command="{Binding CreateConnectionCmd}"
+                />
 
         </Grid>
 
