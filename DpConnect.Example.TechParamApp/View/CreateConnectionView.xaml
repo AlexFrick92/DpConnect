@@ -46,25 +46,26 @@
             </Grid.ColumnDefinitions>
 
             <TextBox 
-            Style="{StaticResource TextboxRead}"
-            Grid.Row="0"
-            Grid.ColumnSpan="2"
-            BorderThickness="0,0,0,1"
-            FontWeight="SemiBold"
-            Text="Создание нового соединения"/>
+                Style="{StaticResource TextboxRead}"
+                Grid.Row="0"
+                Grid.ColumnSpan="2"
+                BorderThickness="0,0,0,1"
+                FontWeight="SemiBold"
+                Text="Создание нового соединения"/>
 
             <TextBox 
-            Style="{StaticResource TextboxRead}"
-            Grid.Row="1"
-            Text="Тип соединения:"/>
+                Style="{StaticResource TextboxRead}"
+                Grid.Row="1"
+                Text="Тип соединения:"/>
 
-            <TextBox 
-            x:Name="EditConnectionType"
-            TabIndex="0"
-            Style="{StaticResource TextboxEdit}"
-            Grid.Row="1"
-            Text="{Binding EditConnection.ConnectionType}"/>
+            <ComboBox
+                Grid.Row="1"
+                Grid.Column="1"
+                ItemsSource="{Binding ConnectionsTypes}"
+                SelectedItem="{Binding SelectedConnectionType}"
+                >
 
+            </ComboBox>
 
             <TextBox 
             Style="{StaticResource TextboxRead}"
@@ -80,10 +81,8 @@
 
             <ContentControl
                 Grid.Row="3"
-                Grid.ColumnSpan="2">
-                <ContentControl.Content>
-                    <local:OpcUaConnectionSettingsView/>
-                </ContentControl.Content>
+                Grid.ColumnSpan="2"
+                Content="{Binding SelectedConnectionSettingsView}">
 
             </ContentControl>
 

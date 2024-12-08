@@ -25,8 +25,7 @@ namespace DpConnect.Example.TechParamApp.View
             InitializeComponent();
 
             DataContext = viewModel;
-
-            EditConnectionType.Focus();
+            
         }
     }
 }
