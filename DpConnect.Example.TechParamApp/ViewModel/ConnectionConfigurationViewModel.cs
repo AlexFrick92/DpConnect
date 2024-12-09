@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace DpConnect.Example.TechParamApp.ViewModel
 {
-    public class OpcUaConnectionSettingsViewModel
+    public class ConnectionConfigurationViewModel : BaseViewModel
     {
+        public IDpConnectionConfiguration dpConConfig { get; set; }
     }
 }

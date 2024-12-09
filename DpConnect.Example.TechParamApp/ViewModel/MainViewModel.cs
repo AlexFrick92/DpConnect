@@ -11,14 +11,9 @@ using DpConnect.Example.TechParamApp.View;
 
 namespace DpConnect.Example.TechParamApp.ViewModel
 {
-    public class MainViewModel : INotifyPropertyChanged
+    public class MainViewModel : BaseViewModel
     {
         IDpConnectionManager connectionManager;
-
-        void OnPropertyChanged(string propName)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propName));
-        }
 
         public MainViewModel(IDpConnectionManager conManager)
         {
@@ -37,7 +32,8 @@ namespace DpConnect.Example.TechParamApp.ViewModel
                 CreateConnectionView createConnectionView = new CreateConnectionView(createConnectionViewModel);
                 createConnectionViewModel.ConnectionCreated += (s, v) =>
                 {
-                    ConfiguredConnections.Add(v);
+                    //Тут нужно создать соединение через билдер
+                    //ConfiguredConnections.Add(v);
                     createConnectionView.Close();
                 };
                 createConnectionViewModel.CreatingCanceled += (s, v) => createConnectionView.Close();                
@@ -50,8 +46,6 @@ namespace DpConnect.Example.TechParamApp.ViewModel
                 Console.WriteLine("Добавить тех. параметр");
             });
         }
-
-        public event PropertyChangedEventHandler PropertyChanged;
         public ICommand AddConnectionCmd { get; private set; }
         public ICommand AddTechParamCmd  { get; private set; }
 

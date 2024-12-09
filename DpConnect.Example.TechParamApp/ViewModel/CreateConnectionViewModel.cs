@@ -10,7 +10,7 @@ using System.Windows.Input;
 
 namespace DpConnect.Example.TechParamApp.ViewModel
 {
-    public class CreateConnectionViewModel : INotifyPropertyChanged
+    public class CreateConnectionViewModel : BaseViewModel
     {
 
 
@@ -23,15 +23,10 @@ namespace DpConnect.Example.TechParamApp.ViewModel
             CancelCmd = new RelayCommand((arg) => CreatingCanceled?.Invoke(this, EditConnection));
         }
 
-        public  ConnectionViewModel EditConnection { get; set; } = new ConnectionViewModel();
+        public  ConnectionConfigurationViewModel EditConnection { get; set; }
 
-        public event EventHandler<ConnectionViewModel> ConnectionCreated;
-        public event EventHandler<ConnectionViewModel> CreatingCanceled;
-        public event PropertyChangedEventHandler PropertyChanged;
-        void OnPropertyChanged(string propName)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propName));
-        }
+        public event EventHandler<ConnectionConfigurationViewModel> ConnectionCreated;
+        public event EventHandler<ConnectionConfigurationViewModel> CreatingCanceled;
 
         public UIElement SelectedConnectionSettingsView { get; set; }
 
@@ -53,7 +48,7 @@ namespace DpConnect.Example.TechParamApp.ViewModel
                     case "OpcUa":
 
                         SelectedConnectionSettingsView =
-                            new OpcUaConnectionSettingsView(new OpcUaConnectionSettingsViewModel());
+                            new OpcUaConnectionConfigurationView(new OpcUaConnectionConfigurationViewModel());
                         OnPropertyChanged(nameof(SelectedConnectionSettingsView));
                         break;
                     default:

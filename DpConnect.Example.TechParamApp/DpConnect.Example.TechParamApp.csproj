@@ -54,10 +54,12 @@
     <Compile Include="App.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModel\BaseViewModel.cs" />
+    <Compile Include="ViewModel\ConnectionConfigurationViewModel.cs" />
     <Compile Include="ViewModel\ConnectionViewModel.cs" />
     <Compile Include="ViewModel\CreateConnectionViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
-    <Compile Include="ViewModel\OpcUaConnectionSettingsViewModel.cs" />
+    <Compile Include="ViewModel\OpcUaConnectionConfigurationViewModel.cs" />
     <Compile Include="ViewModel\RelayCommand.cs" />
     <Compile Include="View\CreateConnectionView.xaml.cs">
       <DependentUpon>CreateConnectionView.xaml</DependentUpon>
