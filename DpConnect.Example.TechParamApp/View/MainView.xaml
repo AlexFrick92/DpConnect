@@ -92,13 +92,13 @@
                                             <TextBox 
                                                 Grid.Column="0"
                                                 Style="{StaticResource ListTextbox}"
-                                                Text="{Binding ConnectionType}"
+                                                Text="{Binding ConnectionType, Mode=OneWay}"
                                                 Foreground="{StaticResource ColorText1Brush}"
                                                 />
                                             <TextBox 
                                                 Grid.Column="1"
                                                 Style="{StaticResource ListTextbox}"
-                                                Text="{Binding ConnectionName}"
+                                                Text="{Binding ConnectionName, Mode=OneWay}"
                                                 Foreground="{StaticResource ColorText1Brush}"
                                                 />
                                         </Grid>
