@@ -15,10 +15,14 @@ namespace DpConnect.Example.TechParamApp.ViewModel
     public class MainViewModel : BaseViewModel
     {
         IDpConnectionManager connectionManager;
+        IDpWorkerManager workerManager;
+        IDpBuilder dpBuilder;
 
-        public MainViewModel(IDpConnectionManager conManager)
+        public MainViewModel(IDpConnectionManager conManager, IDpWorkerManager workerManager, IDpBuilder builder)
         {
             connectionManager = conManager;
+            this.workerManager = workerManager;
+            this.dpBuilder = builder;
 
             foreach(var con in connectionManager.ConfiguredConnections)
             {

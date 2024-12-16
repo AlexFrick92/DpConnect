@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:DpConnect.Example.TechParamApp.View"
         mc:Ignorable="d"
-            xmlns:viewmodel="clr-namespace:DpConnect.Example.TechParamApp.ViewModel" 
+        xmlns:viewmodel="clr-namespace:DpConnect.Example.TechParamApp.ViewModel" 
         d:DataContext="{d:DesignInstance Type=viewmodel:CreateWorkerViewModel}" 
         Title="CreateWorker" Height="250" Width="400"
         WindowStartupLocation="CenterScreen"

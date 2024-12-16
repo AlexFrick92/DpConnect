@@ -167,5 +167,13 @@ namespace DpConnect.Configuration.Xml
             }
             logger.Info("Воркеры созданы.");
         }
+
+        public IDpWorker BuildWorker<T>(IEnumerable<DpConfiguration> propertyConfiguration) where T : IDpWorker
+        {
+            IDpWorker worker = workerManager.CreateWorker<T>();
+            dpBinder.Bind(worker, propertyConfiguration);
+
+            return worker;
+        }
     }
 }

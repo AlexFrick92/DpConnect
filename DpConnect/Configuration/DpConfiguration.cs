@@ -3,7 +3,7 @@
 
 namespace DpConnect.Configuration
 {
-    internal class DpConfiguration
+    public class DpConfiguration
     {
         public string PropertyName { get; set; }
 
