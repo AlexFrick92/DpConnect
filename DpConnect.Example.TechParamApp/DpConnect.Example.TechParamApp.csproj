@@ -57,11 +57,15 @@
     <Compile Include="ViewModel\BaseViewModel.cs" />
     <Compile Include="ViewModel\ConnectionViewModel.cs" />
     <Compile Include="ViewModel\CreateConnectionViewModel.cs" />
+    <Compile Include="ViewModel\CreateWorkerViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\OpcUaConnectionConfigurationViewModel.cs" />
     <Compile Include="ViewModel\RelayCommand.cs" />
     <Compile Include="View\CreateConnectionView.xaml.cs">
       <DependentUpon>CreateConnectionView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\CreateWorkerView.xaml.cs">
+      <DependentUpon>CreateWorkerView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\DefaultConnectionSettingsView.xaml.cs">
       <DependentUpon>DefaultConnectionSettingsView.xaml</DependentUpon>
@@ -79,6 +83,10 @@
   </ItemGroup>
   <ItemGroup>
     <Page Include="View\CreateConnectionView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\CreateWorkerView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

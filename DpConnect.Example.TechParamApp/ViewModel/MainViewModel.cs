@@ -47,6 +47,14 @@ namespace DpConnect.Example.TechParamApp.ViewModel
             AddTechParamCmd = new RelayCommand((arg) =>
             {
                 Console.WriteLine("Добавить тех. параметр");
+
+                CreateWorkerViewModel createWorkerViewModel = new CreateWorkerViewModel(ConfiguredConnections);
+                CreateWorkerView createWorkerView = new CreateWorkerView(createWorkerViewModel);
+
+                createWorkerViewModel.CreatingCanceled += (s, v) => createWorkerView.Close();
+                createWorkerView.ShowDialog();
+                
+
             });
         }
         public ICommand AddConnectionCmd { get; private set; }

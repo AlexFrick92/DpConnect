@@ -1,0 +1,52 @@
+﻿<Window x:Class="DpConnect.Example.TechParamApp.View.CreateWorkerView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:DpConnect.Example.TechParamApp.View"
+        mc:Ignorable="d"
+            xmlns:viewmodel="clr-namespace:DpConnect.Example.TechParamApp.ViewModel" 
+        d:DataContext="{d:DesignInstance Type=viewmodel:CreateWorkerViewModel}" 
+        Title="CreateWorker" Height="250" Width="400"
+        WindowStartupLocation="CenterScreen"
+        WindowStyle="None"
+        ResizeMode="NoResize"
+        >
+
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Styles.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+
+    </Window.Resources>
+    <Window.InputBindings>
+        <KeyBinding Key="Esc" Command="{Binding CancelCmd}"/>
+        <KeyBinding Key="Enter" Command="{Binding CreateWorkerCmd}"/>
+    </Window.InputBindings>
+    <Border BorderThickness="1" BorderBrush="Black">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition />
+                <RowDefinition Height="auto"/>
+            </Grid.RowDefinitions>
+
+            <Button 
+                TabIndex="2"
+                Margin="4"
+                Grid.Row="3"
+                Grid.Column="1"
+                Content="ДОБАВИТЬ"
+                Background="{StaticResource ColorActiveBack1Brush}" 
+                Command="{Binding CreateWorkerCmd}"
+                />
+        </Grid>
+    </Border>
+</Window>
