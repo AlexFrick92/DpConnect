@@ -34,7 +34,7 @@ namespace DpConnect.Example.TechParamApp.ViewModel
                 {
                     //Тут нужно создать соединение через билдер
                     //ConfiguredConnections.Add(v);
-                    createConnectionView.Close();
+                    //createConnectionView.Close();
                 };
                 createConnectionViewModel.CreatingCanceled += (s, v) => createConnectionView.Close();                
                 createConnectionView.ShowDialog();

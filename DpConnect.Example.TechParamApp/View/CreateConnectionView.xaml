@@ -35,7 +35,7 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="AUTO"/>
                 <RowDefinition Height="auto"/>
-                <RowDefinition Height="auto"/>
+                <RowDefinition Height="Auto"/>
                 <RowDefinition Height="auto"/>
                 <RowDefinition/>
                 <RowDefinition Height="auto"/>
@@ -67,20 +67,8 @@
 
             </ComboBox>
 
-            <TextBox 
-            Style="{StaticResource TextboxRead}"
-            Grid.Row="2"
-            Text="Название соединения"/>
-
-            <TextBox 
-            TabIndex="1"
-            Style="{StaticResource TextboxEdit}"
-            Grid.Row="2"
-            Text="{Binding EditConnection.ConnectionName}"/>
-
-
             <ContentControl
-                Grid.Row="3"
+                Grid.Row="2"
                 Grid.ColumnSpan="2"
                 Content="{Binding SelectedConnectionSettingsView}">
 

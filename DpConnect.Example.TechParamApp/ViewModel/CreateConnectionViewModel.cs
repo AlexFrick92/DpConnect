@@ -1,4 +1,5 @@
 ﻿using DpConnect.Example.TechParamApp.View;
+using DpConnect.OpcUa;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -12,22 +13,25 @@ namespace DpConnect.Example.TechParamApp.ViewModel
 {
     public class CreateConnectionViewModel : BaseViewModel
     {
-
-
         public CreateConnectionViewModel()
         {
             CreateConnectionCmd = new RelayCommand((arg) => 
-            {
+            {                                
                 ConnectionCreated?.Invoke(this, EditConnection);
             });
             CancelCmd = new RelayCommand((arg) => CreatingCanceled?.Invoke(this, EditConnection));
-        }
 
-        public  ConnectionConfigurationViewModel EditConnection { get; set; }
+            EditConnection = new OpcUaConnectionConfiguration();
 
-        public event EventHandler<ConnectionConfigurationViewModel> ConnectionCreated;
-        public event EventHandler<ConnectionConfigurationViewModel> CreatingCanceled;
+            SelectedConnectionSettingsView =
+                new DefaultConnectionSettingsView();
 
+        }        
+
+        public event EventHandler<IDpConnectionConfiguration> ConnectionCreated;
+        public event EventHandler<IDpConnectionConfiguration> CreatingCanceled;        
+
+        public IDpConnectionConfiguration EditConnection { get; set; }
         public UIElement SelectedConnectionSettingsView { get; set; }
 
         public List<string> ConnectionsTypes { get; set; } = new List<string>()
@@ -45,14 +49,18 @@ namespace DpConnect.Example.TechParamApp.ViewModel
                 switch
                     (selectedConnectionType)
                 {
-                    case "OpcUa":
+                    case "OpcUa":                        
+                        EditConnection = new OpcUaConnectionConfiguration();
 
                         SelectedConnectionSettingsView =
-                            new OpcUaConnectionConfigurationView(new OpcUaConnectionConfigurationViewModel());
+                            new OpcUaConnectionConfigurationView(new OpcUaConnectionConfigurationViewModel(EditConnection as OpcUaConnectionConfiguration));
+                        
                         OnPropertyChanged(nameof(SelectedConnectionSettingsView));
                         break;
+
                     default:
-                        SelectedConnectionSettingsView = null;
+                        Console.WriteLine("gg");
+                        SelectedConnectionSettingsView = new DefaultConnectionSettingsView();
                         OnPropertyChanged(nameof(SelectedConnectionSettingsView));
                         break;
                 }

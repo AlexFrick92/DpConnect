@@ -5,6 +5,8 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:DpConnect.Example.TechParamApp.View"
              mc:Ignorable="d" 
+             xmlns:viewmodel="clr-namespace:DpConnect.Example.TechParamApp.ViewModel" 
+             d:DataContext="{d:DesignInstance Type=viewmodel:OpcUaConnectionConfigurationViewModel}" 
              d:DesignHeight="450" d:DesignWidth="800">
     <UserControl.Resources>
         <ResourceDictionary>
@@ -18,35 +20,48 @@
             <RowDefinition/>
             <RowDefinition/>
             <RowDefinition/>
+            <RowDefinition/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
 
-        <!--Эндпоинт-->
+        <!--Название-->
         <TextBox 
             Style="{StaticResource TextboxRead}"
             Grid.Row="0"
+            Text="Название "/>
+
+        <TextBox 
+            TabIndex="1"
+            Style="{StaticResource TextboxEdit}"
+            Grid.Row="0"
+            Text="{Binding ConId}"/>
+        
+        <!--Эндпоинт-->
+        <TextBox 
+            Style="{StaticResource TextboxRead}"
+            Grid.Row="1"
             Text="Адрес "/>
                 
         <TextBox 
             TabIndex="1"
             Style="{StaticResource TextboxEdit}"
-            Grid.Row="0"
+            Grid.Row="1"
             Text="{Binding Endpoint}"/>
 
         
         <!--Паблиш интервал-->
         <TextBox 
             Style="{StaticResource TextboxRead}"
-            Grid.Row="1"
+            Grid.Row="2"
             Text="Паблиш интервал"/>
 
         <TextBox 
             TabIndex="1"
             Style="{StaticResource TextboxEdit}"
-            Grid.Row="1"
+            Grid.Row="2"
             Text="{Binding PublishInterval}"/>
 
         
@@ -54,13 +69,13 @@
         
         <TextBox 
             Style="{StaticResource TextboxRead}"
-            Grid.Row="2"
+            Grid.Row="3"
             Text="Таймаут"/>
 
         <TextBox 
             TabIndex="1"
             Style="{StaticResource TextboxEdit}"
-            Grid.Row="2"
+            Grid.Row="3"
             Text="{Binding ConnectTimeout}"/> 
 
     </Grid>
