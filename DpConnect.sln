@@ -25,6 +25,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DpConnect.Example.ComplexTy
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DpConnect.Example.TechParamApp", "DpConnect.Example.TechParamApp\DpConnect.Example.TechParamApp.csproj", "{019B402D-D20B-4A18-9C95-905C5DBFAC10}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DpConnect.ExampleWorker", "DpConnect.ExampleWorker\DpConnect.ExampleWorker.csproj", "{07E1F60C-B28B-4FA9-B9B9-D1EEDE11287F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -67,6 +69,10 @@ Global
 		{019B402D-D20B-4A18-9C95-905C5DBFAC10}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{019B402D-D20B-4A18-9C95-905C5DBFAC10}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{019B402D-D20B-4A18-9C95-905C5DBFAC10}.Release|Any CPU.Build.0 = Release|Any CPU
+		{07E1F60C-B28B-4FA9-B9B9-D1EEDE11287F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{07E1F60C-B28B-4FA9-B9B9-D1EEDE11287F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{07E1F60C-B28B-4FA9-B9B9-D1EEDE11287F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{07E1F60C-B28B-4FA9-B9B9-D1EEDE11287F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

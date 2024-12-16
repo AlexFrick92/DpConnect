@@ -113,6 +113,10 @@
       <Project>{536c73c1-951c-4062-bcaa-01f1b86e483b}</Project>
       <Name>Promatis.IoC.DryIoc</Name>
     </ProjectReference>
+    <ProjectReference Include="..\DpConnect.ExampleWorker\DpConnect.ExampleWorker.csproj">
+      <Project>{07e1f60c-b28b-4fa9-b9b9-d1eede11287f}</Project>
+      <Name>DpConnect.ExampleWorker</Name>
+    </ProjectReference>
     <ProjectReference Include="..\DpConnect.OpcUa\DpConnect.OpcUa.csproj">
       <Project>{3e2376e1-1220-4dd2-9e5c-297d5253c1ef}</Project>
       <Name>DpConnect.OpcUa</Name>

@@ -34,14 +34,49 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="auto"/>
                 <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
                 <RowDefinition />
                 <RowDefinition Height="auto"/>
             </Grid.RowDefinitions>
 
+
+            <TextBox 
+                Style="{StaticResource TextboxRead}"
+                Grid.Row="0"
+                Grid.ColumnSpan="2"
+                BorderThickness="0,0,0,1"
+                FontWeight="SemiBold"
+                Text="Создание нового воркера"/>
+
+            <TextBox 
+                Style="{StaticResource TextboxRead}"
+                Grid.Row="1"
+                Text="Тип воркера:"/>
+
+            <ComboBox
+                Grid.Row="1"
+                Grid.Column="1"
+                ItemsSource="{Binding AvaibleWorkers}"
+                SelectedItem="{Binding SelectedWorkerType}"
+                />
+
+            <TextBox 
+                Style="{StaticResource TextboxRead}"
+                Grid.Row="2"
+                Text="Соединение: "/>
+
+            <ComboBox
+                Grid.Row="2"
+                Grid.Column="1"
+                ItemsSource="{Binding AvaibleConnections}"
+                DisplayMemberPath="ConnectionName"
+                SelectedItem="{Binding SelectedConnection}"
+                />
+
             <Button 
                 TabIndex="2"
                 Margin="4"
-                Grid.Row="3"
+                Grid.Row="4"
                 Grid.Column="1"
                 Content="ДОБАВИТЬ"
                 Background="{StaticResource ColorActiveBack1Brush}" 
