@@ -21,8 +21,6 @@ namespace DpConnect.Example.TechParamApp.ViewModel
             });
             CancelCmd = new RelayCommand((arg) => CreatingCanceled?.Invoke(this, EditConnection));
 
-            EditConnection = new OpcUaConnectionConfiguration();
-
             SelectedConnectionSettingsView =
                 new DefaultConnectionSettingsView();
 

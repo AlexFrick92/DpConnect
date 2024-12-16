@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 
 using DpConnect.Example.TechParamApp.View;
+using DpConnect.OpcUa;
 
 namespace DpConnect.Example.TechParamApp.ViewModel
 {
@@ -33,8 +34,10 @@ namespace DpConnect.Example.TechParamApp.ViewModel
                 createConnectionViewModel.ConnectionCreated += (s, v) =>
                 {
                     //Тут нужно создать соединение через билдер
-                    //ConfiguredConnections.Add(v);
-                    //createConnectionView.Close();
+
+                    var con = conManager.CreateConnection<IOpcUaConnection>(v);
+                    ConfiguredConnections.Add(new ConnectionViewModel(con));
+                    createConnectionView.Close();
                 };
                 createConnectionViewModel.CreatingCanceled += (s, v) => createConnectionView.Close();                
                 createConnectionView.ShowDialog();
