@@ -11,5 +11,7 @@ namespace DpConnect.OpcUa
         public string Endpoint { get; set; }
 
         public bool Active { get; set; }
-}
+
+        public Type ConnectionType { get; set; }    
+    }
 }

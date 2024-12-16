@@ -1,4 +1,5 @@
 ﻿
+using System;
 using System.Xml.Linq;
 
 namespace DpConnect.Configuration.Xml
@@ -10,6 +11,8 @@ namespace DpConnect.Configuration.Xml
         public XDocument Configuration { get; set; }
 
         public bool Active { get; set; }
+
+        public Type ConnectionType { get; set; }
     }    
 
 }
