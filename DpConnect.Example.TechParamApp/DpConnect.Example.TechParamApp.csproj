@@ -57,21 +57,25 @@
     <Compile Include="ViewModel\BaseViewModel.cs" />
     <Compile Include="ViewModel\ConnectionViewModel.cs" />
     <Compile Include="ViewModel\CreateConnectionViewModel.cs" />
-    <Compile Include="ViewModel\CreateWorkerViewModel.cs" />
+    <Compile Include="ViewModel\CreateTechParamViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
+    <Compile Include="ViewModel\OpcUaConfigSourceViewModel.cs" />
     <Compile Include="ViewModel\OpcUaConnectionConfigurationViewModel.cs" />
     <Compile Include="ViewModel\RelayCommand.cs" />
     <Compile Include="View\CreateConnectionView.xaml.cs">
       <DependentUpon>CreateConnectionView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\CreateWorkerView.xaml.cs">
-      <DependentUpon>CreateWorkerView.xaml</DependentUpon>
+    <Compile Include="View\CreateTechParamView.xaml.cs">
+      <DependentUpon>CreateTechParamView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\DefaultConnectionSettingsView.xaml.cs">
       <DependentUpon>DefaultConnectionSettingsView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\MainView.xaml.cs">
       <DependentUpon>MainView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\OpcUaConfigSourceView.xaml.cs">
+      <DependentUpon>OpcUaConfigSourceView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\OpcUaConnectionSettingsView.xaml.cs">
       <DependentUpon>OpcUaConnectionSettingsView.xaml</DependentUpon>
@@ -86,7 +90,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\CreateWorkerView.xaml">
+    <Page Include="View\CreateTechParamView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -95,6 +99,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\MainView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\OpcUaConfigSourceView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -8,9 +8,9 @@ using System.Windows.Input;
 
 namespace DpConnect.Example.TechParamApp.ViewModel
 {
-    public class CreateWorkerViewModel : BaseViewModel
+    public class CreateTechParamViewModel : BaseViewModel
     {
-        public CreateWorkerViewModel(IEnumerable<ConnectionViewModel> configuredConnections)
+        public CreateTechParamViewModel(IEnumerable<ConnectionViewModel> configuredConnections)
         {
             AvaibleConnections = configuredConnections;
 

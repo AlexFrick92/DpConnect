@@ -16,11 +16,11 @@ using System.Windows.Shapes;
 namespace DpConnect.Example.TechParamApp.View
 {
     /// <summary>
-    /// Interaction logic for CreateWorkerView.xaml
+    /// Interaction logic for CreateTechParamView.xaml
     /// </summary>
-    public partial class CreateWorkerView : Window
+    public partial class CreateTechParamView : Window
     {
-        public CreateWorkerView(CreateWorkerViewModel vm)
+        public CreateTechParamView(CreateTechParamViewModel vm)
         {
             InitializeComponent();
             DataContext = vm;

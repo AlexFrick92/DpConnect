@@ -52,8 +52,8 @@ namespace DpConnect.Example.TechParamApp.ViewModel
             {
                 Console.WriteLine("Добавить тех. параметр");
 
-                CreateWorkerViewModel createWorkerViewModel = new CreateWorkerViewModel(ConfiguredConnections);
-                CreateWorkerView createWorkerView = new CreateWorkerView(createWorkerViewModel);
+                CreateTechParamViewModel createWorkerViewModel = new CreateTechParamViewModel(ConfiguredConnections);
+                CreateTechParamView createWorkerView = new CreateTechParamView(createWorkerViewModel);
 
                 createWorkerViewModel.CreatingCanceled += (s, v) => createWorkerView.Close();
                 createWorkerView.ShowDialog();
