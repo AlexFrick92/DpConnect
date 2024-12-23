@@ -6,7 +6,7 @@ using DpConnect.Configuration;
 
 namespace DpConnect.Building
 {
-    internal interface IDpBinder
+    public interface IDpBinder
     {
         void Bind(IDpWorker worker, IEnumerable<DpConfiguration> configs);
     }

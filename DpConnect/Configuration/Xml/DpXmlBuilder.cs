@@ -44,13 +44,13 @@ namespace DpConnect.Configuration.Xml
         const string Xml_DpActionDeclareTag = "DpAction";
 
 
-        public DpXmlBuilder(IDpConnectionManager connectionManager, IDpWorkerManager workerManager, ILogger logger)
+        public DpXmlBuilder(IDpConnectionManager connectionManager, IDpWorkerManager workerManager, ILogger logger, IDpBinder binder)
         {
             this.logger = logger;
             this.connectionManager = connectionManager;
             this.workerManager = workerManager;
 
-            dpBinder = new DpBinder(this.connectionManager, this.logger);
+            dpBinder = binder;
 
 
             logger.Info($"Загружаем конфигурацию {Xml_FileName}...");

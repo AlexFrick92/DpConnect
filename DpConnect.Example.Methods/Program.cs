@@ -1,4 +1,5 @@
-﻿using DpConnect.Configuration.Xml;
+﻿using DpConnect.Building;
+using DpConnect.Configuration.Xml;
 using DpConnect.OpcUa;
 using Promatis.Core;
 using Promatis.Core.Logging;
@@ -23,11 +24,13 @@ namespace DpConnect.Example.Methods
             container.RegisterInstance(new ConsoleLogger() as ILogger);
 
             container.Register<IOpcUaConnection, OpcUaConnection>();
-            container.Register<IDpConnectionManager, ContainerizedConnectionManager>();
+            container.RegisterSingleton<IDpConnectionManager, ContainerizedConnectionManager>();
 
 
             container.Register<IMethodCall, MethodCall>();
-            container.Register<IDpWorkerManager, ContainerizedWorkerManager>();
+            container.RegisterSingleton<IDpWorkerManager, ContainerizedWorkerManager>();
+
+            container.RegisterSingleton<IDpBinder, DpBinder>();
 
             container.Register<IDpBuilder, DpXmlBuilder>();
 

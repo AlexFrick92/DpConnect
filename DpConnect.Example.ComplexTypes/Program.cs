@@ -1,4 +1,5 @@
-﻿using DpConnect.Configuration.Xml;
+﻿using DpConnect.Building;
+using DpConnect.Configuration.Xml;
 using DpConnect.OpcUa;
 using Promatis.Core;
 using Promatis.Core.Logging;
@@ -29,6 +30,9 @@ namespace DpConnect.Example.ComplexTypes
             container.Register<IComplexMethodCall, ComplexMethodCall>();
             container.Register<IComplexValueReadWrite, ComplexValueReadWrite>();
             container.Register<IDpWorkerManager, ContainerizedWorkerManager>();
+
+
+            container.RegisterSingleton<IDpBinder, DpBinder>();
 
             container.Register<IDpBuilder, DpXmlBuilder>();
 

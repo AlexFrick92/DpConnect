@@ -9,7 +9,7 @@ using Promatis.Core.Logging;
 
 namespace DpConnect.Building
 {
-    internal class DpBinder : IDpBinder
+    public class DpBinder : IDpBinder
     {
 
         readonly IDpConnectionManager connectionManager;
