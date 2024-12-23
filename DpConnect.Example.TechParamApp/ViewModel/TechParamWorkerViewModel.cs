@@ -16,10 +16,10 @@ namespace DpConnect.Example.TechParamApp.ViewModel
 
         private void Worker_ValueUpdated(object sender, float e)
         {
-            Value = e;
-            OnPropertyChanged(nameof(Value));
+            LastValue = e;
+            OnPropertyChanged(nameof(LastValue));
         }
 
-        public float Value { get; set; }
+        public float LastValue { get; set; }
     }
 }

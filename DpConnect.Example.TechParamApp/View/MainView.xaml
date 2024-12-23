@@ -56,7 +56,7 @@
 
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="350"/>
-                    <ColumnDefinition Width="200"/>
+                    <ColumnDefinition Width="350"/>
                     <ColumnDefinition Width="200"/>
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
@@ -135,7 +135,28 @@
                     </Grid.RowDefinitions>
 
                     <Border Grid.Row="0">
+                        <ScrollViewer VerticalScrollBarVisibility="Auto">
+                            <ItemsControl 
+                                ItemsSource="{Binding ConfiguredWorkers}">
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate>
+                                        <Grid Margin="2">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition />
+                                                
+                                            </Grid.ColumnDefinitions>
 
+                                            <TextBox 
+                                                Grid.Column="0"
+                                                Style="{StaticResource ListTextbox}"
+                                                Text="{Binding WorkerType, Mode=OneWay}"
+                                                Foreground="{StaticResource ColorText1Brush}"
+                                                />
+                                        </Grid>
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                            </ItemsControl>
+                        </ScrollViewer>
                     </Border>
                 </Grid>
 
@@ -156,7 +177,27 @@
                     </Grid.RowDefinitions>
 
                     <Border Grid.Row="0">
+                        <ScrollViewer VerticalScrollBarVisibility="Auto">
+                            <ItemsControl 
+                                ItemsSource="{Binding TechParamWorkers}">
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate>
+                                        <Grid Margin="2">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition />
+                                            </Grid.ColumnDefinitions>
 
+                                            <TextBox 
+                                                Grid.Column="0"
+                                                Style="{StaticResource ListTextbox}"
+                                                Text="{Binding LastValue, Mode=OneWay}"
+                                                Foreground="{StaticResource ColorText1Brush}"
+                                                />
+                                        </Grid>
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                            </ItemsControl>
+                        </ScrollViewer>
                     </Border>
 
 
