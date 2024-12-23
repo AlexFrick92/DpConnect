@@ -1,5 +1,7 @@
-﻿using DpConnect.Configuration;
+﻿using DpConnect.Building;
+using DpConnect.Configuration;
 using DpConnect.Connection;
+using DpConnect.ExampleWorker;
 using DpConnect.ExampleWorker.Console;
 using System;
 using System.Collections.Generic;
@@ -12,26 +14,28 @@ namespace DpConnect.Example.TechParamApp.ViewModel
 {
     public class CreateTechParamViewModel : BaseViewModel
     {
-        public CreateTechParamViewModel(IEnumerable<ConnectionViewModel> configuredConnections, IDpWorkerManager workerManager)
+        public CreateTechParamViewModel(IEnumerable<ConnectionViewModel> configuredConnections, IDpWorkerManager workerManager, IDpBinder binder)
         {
             AvaibleConnections = configuredConnections;
 
-            CreateConnectionCmd = new RelayCommand((arg) =>
+            CreateWorkerCmd = new RelayCommand((arg) =>
             {
-                //ConnectionCreated?.Invoke(this, EditConnection);
+                
             });
             CancelCmd = new RelayCommand((arg) => CreatingCanceled?.Invoke(this, null));
 
             this.workerManager = workerManager;
+            this.binder = binder;
 
         }
 
-        IDpWorkerManager workerManager { get; set; }
+        IDpWorkerManager workerManager;
+        IDpBinder binder;
 
-        public event EventHandler<IDpConnectionConfiguration> ConnectionCreated;
+        public event EventHandler<ITechParamWorker> WorkerCreated;
         public event EventHandler<IDpConnectionConfiguration> CreatingCanceled;
 
-        public ICommand CreateConnectionCmd { get; set; }
+        public ICommand CreateWorkerCmd { get; set; }
         public ICommand CancelCmd { get; set; }
 
         public List<string> AvaibleWorkers { get; set; } = new List<string> { "Простой тех. параметр", "Непростой тех. параметр"};
@@ -48,8 +52,8 @@ namespace DpConnect.Example.TechParamApp.ViewModel
                 {
                     case "Простой тех. параметр":
 
-                        workerManager.CreateWorker<TechParamReader>();
-
+                        IDpWorker techParamWorker = workerManager.CreateWorker<TechParamReader>();
+                        binder.Bind(techParamWorker, new DpConfiguration[] { dpConfig });
 
                         break;
 

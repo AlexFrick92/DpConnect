@@ -62,6 +62,8 @@
     <Compile Include="ViewModel\OpcUaConfigSourceViewModel.cs" />
     <Compile Include="ViewModel\OpcUaConnectionConfigurationViewModel.cs" />
     <Compile Include="ViewModel\RelayCommand.cs" />
+    <Compile Include="ViewModel\TechParamWorkerViewModel.cs" />
+    <Compile Include="ViewModel\WorkerViewModel.cs" />
     <Compile Include="View\CreateConnectionView.xaml.cs">
       <DependentUpon>CreateConnectionView.xaml</DependentUpon>
     </Compile>

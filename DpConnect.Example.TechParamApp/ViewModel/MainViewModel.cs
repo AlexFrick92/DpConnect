@@ -6,8 +6,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
-
+using DpConnect.Building;
 using DpConnect.Example.TechParamApp.View;
+using DpConnect.ExampleWorker;
 using DpConnect.OpcUa;
 
 namespace DpConnect.Example.TechParamApp.ViewModel
@@ -16,13 +17,20 @@ namespace DpConnect.Example.TechParamApp.ViewModel
     {
         IDpConnectionManager connectionManager;
         IDpWorkerManager workerManager;
+        IDpBinder binder;
         IDpBuilder dpBuilder;
 
-        public MainViewModel(IDpConnectionManager conManager, IDpWorkerManager workerManager, IDpBuilder builder)
+
+        public MainViewModel(IDpConnectionManager conManager, IDpWorkerManager workerManager, IDpBuilder builder, IDpBinder binder)
         {
             connectionManager = conManager;
             this.workerManager = workerManager;
             this.dpBuilder = builder;
+            this.binder = binder;
+
+            
+
+
 
             foreach(var con in connectionManager.ConfiguredConnections)
             {
@@ -52,10 +60,15 @@ namespace DpConnect.Example.TechParamApp.ViewModel
             {
                 Console.WriteLine("Добавить тех. параметр");
 
-                CreateTechParamViewModel createWorkerViewModel = new CreateTechParamViewModel(ConfiguredConnections);
+                CreateTechParamViewModel createWorkerViewModel = new CreateTechParamViewModel(ConfiguredConnections, workerManager, binder);
                 CreateTechParamView createWorkerView = new CreateTechParamView(createWorkerViewModel);
 
                 createWorkerViewModel.CreatingCanceled += (s, v) => createWorkerView.Close();
+                createWorkerViewModel.WorkerCreated += (s, v) =>
+                {
+                    TechParamWorkers.Add(new TechParamWorkerViewModel(v));
+                };
+
                 createWorkerView.ShowDialog();
                 
 
@@ -64,8 +77,10 @@ namespace DpConnect.Example.TechParamApp.ViewModel
         public ICommand AddConnectionCmd { get; private set; }
         public ICommand AddTechParamCmd  { get; private set; }
 
-        public ObservableCollection<ConnectionViewModel> ConfiguredConnections { get; private set; } =
-            new ObservableCollection<ConnectionViewModel>();
+
+        public ObservableCollection<WorkerViewModel> ConfiguredWorkers { get; private set; } = new ObservableCollection<WorkerViewModel>();
+        public ObservableCollection<TechParamWorkerViewModel> TechParamWorkers { get; private set; } = new ObservableCollection<TechParamWorkerViewModel>();
+        public ObservableCollection<ConnectionViewModel> ConfiguredConnections { get; private set; } = new ObservableCollection<ConnectionViewModel>();
 
     }
 }

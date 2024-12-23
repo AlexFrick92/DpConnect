@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace DpConnect.ExampleWorker.Console
 {
-    public class TechParamReader : IDpWorker
+    public class TechParamReader : IDpWorker, ITechParamWorker
     {
         ILogger logger;
         public TechParamReader(ILogger logger)
@@ -15,6 +15,8 @@ namespace DpConnect.ExampleWorker.Console
             this.logger = logger;
         }
         public IDpValue<float> TechParam { get; set; }
+
+        public event EventHandler<float> ValueUpdated;
 
         public void DpBound()
         {
@@ -24,6 +26,7 @@ namespace DpConnect.ExampleWorker.Console
         private void TechParam_ValueUpdated(object sender, float e)
         {
             logger.Info("Считано значение: " + e.ToString());
+            ValueUpdated?.Invoke(this, e);
         }
     }
 }
