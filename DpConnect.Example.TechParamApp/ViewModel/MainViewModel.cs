@@ -75,9 +75,17 @@ namespace DpConnect.Example.TechParamApp.ViewModel
                 
 
             });
+
+            OpenConnectionsCmd = new RelayCommand((arg) =>
+            {
+                Console.WriteLine("Открываем соединения...");
+                Task.Run(() => connectionManager.OpenConnections());
+                
+            });
         }
         public ICommand AddConnectionCmd { get; private set; }
         public ICommand AddTechParamCmd  { get; private set; }
+        public ICommand OpenConnectionsCmd { get; private set; }
         
 
         public ObservableCollection<WorkerViewModel> ConfiguredWorkers { get; private set; } = new ObservableCollection<WorkerViewModel>();

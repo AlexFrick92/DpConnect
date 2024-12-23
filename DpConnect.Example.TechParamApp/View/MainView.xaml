@@ -32,6 +32,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="20"/>
             <RowDefinition/>
+            <RowDefinition Height="auto"/>
             <RowDefinition Height="20"/>
         </Grid.RowDefinitions>
 
@@ -39,7 +40,7 @@
         <Border  Grid.Column="1" Grid.Row="0" BorderThickness="0,0,0,1" BorderBrush="{StaticResource ColorGrid1Brush}" Background="{StaticResource ColorBack1Brush}"/>
         <Border  Grid.Column="0" Grid.Row="1" BorderThickness="0,0,1,0" BorderBrush="{StaticResource ColorGrid1Brush}" Background="{StaticResource ColorBack1Brush}"/>
         <Border  Grid.Column="1" Grid.Row="1" BorderThickness="0" Background="{StaticResource ColorBack1Brush}">
-            
+
             <Grid>
                 <Grid.Resources>
                     <!-- СТИЛЬ ДЛЯ ТЕКСТБОКСОВ В СПИСКЕ -->
@@ -50,9 +51,9 @@
                         <Setter Property="Foreground" Value="{StaticResource ColorText1Brush}"/>
                         <Setter Property="IsReadOnly" Value="True"/>
                     </Style>
-                    
+
                 </Grid.Resources>
-                
+
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="350"/>
                     <ColumnDefinition Width="200"/>
@@ -63,6 +64,7 @@
                     <RowDefinition Height="auto"/>
                     <RowDefinition />
                     <RowDefinition Height="auto"/>
+                    <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
 
                 <!--СОЕДИНЕНИЯ-->
@@ -116,10 +118,10 @@
                             Command="{Binding AddConnectionCmd}">
                     </Button>
                 </Grid>
-                
-                
 
-                
+
+
+
                 <!--ВОРКЕРЫ-->
                 <Border Margin="2,4,2,4" Grid.Row="0" Grid.Column="1" Background="{StaticResource ColorBack2Brush}">
                     <Label Content="ВОРКЕРЫ" HorizontalAlignment="Center" Foreground="{StaticResource ColorText1Brush}" FontWeight="Bold"/>
@@ -167,10 +169,10 @@
                 </Grid>
 
 
-
+                <Button HorizontalAlignment="Left" Grid.Column="0" Grid.Row="2" Command="{Binding OpenConnectionsCmd}" Content="Открыть соединения" Margin="5,10,5,5" Height="40" Width="150"/>
             </Grid>
         </Border>
 
-        <Border Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="2" Background="{StaticResource ColorBackBot1Brush}"/>
+        <Border Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="3" Background="{StaticResource ColorBackBot1Brush}"/>
     </Grid>
 </Window>
