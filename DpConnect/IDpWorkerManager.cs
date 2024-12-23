@@ -1,5 +1,6 @@
 ﻿
 
+using System;
 using System.Collections.Generic;
 
 namespace DpConnect
@@ -20,7 +21,10 @@ namespace DpConnect
         /// <returns></returns>
         IEnumerable<T> ResolveWorker<T>();
 
-
+        /// <summary>
+        /// Создан новый воркер
+        /// </summary>
+        event EventHandler<IDpWorker> WorkerCreated;
         
     }
 }

@@ -6,7 +6,22 @@ using System.Threading.Tasks;
 
 namespace DpConnect.Example.TechParamApp.ViewModel
 {
-    public class WorkerViewModel
+    public class WorkerViewModel : BaseViewModel
     {
+
+        IDpWorker worker;
+
+        public string WorkerType { get; set; }
+
+        public WorkerViewModel(IDpWorker worker)
+        {
+            this.worker = worker;
+
+            WorkerType = worker.GetType().ToString();
+            OnPropertyChanged(nameof(WorkerType));
+            
+        }
+
+
     }
 }

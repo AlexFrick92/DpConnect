@@ -28,8 +28,8 @@ namespace DpConnect.Example.TechParamApp.ViewModel
             this.dpBuilder = builder;
             this.binder = binder;
 
-            
 
+            workerManager.WorkerCreated += (s, w) => ConfiguredWorkers.Add(new WorkerViewModel(w));
 
 
             foreach(var con in connectionManager.ConfiguredConnections)

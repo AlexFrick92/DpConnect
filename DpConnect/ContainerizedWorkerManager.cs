@@ -20,10 +20,14 @@ namespace DpConnect
             this.container = container;
         }
 
+        public event EventHandler<IDpWorker> WorkerCreated;
+
         public IDpWorker CreateWorker<T>() where T : IDpWorker
         {
             IDpWorker worker = container.Resolve<T>();
             workers.Add(worker);
+
+            WorkerCreated?.Invoke(this, worker);
 
             return worker;
         }
