@@ -1,4 +1,6 @@
-﻿using DpConnect.Connection;
+﻿using DpConnect.Configuration;
+using DpConnect.Connection;
+using DpConnect.ExampleWorker.Console;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,7 +12,7 @@ namespace DpConnect.Example.TechParamApp.ViewModel
 {
     public class CreateTechParamViewModel : BaseViewModel
     {
-        public CreateTechParamViewModel(IEnumerable<ConnectionViewModel> configuredConnections)
+        public CreateTechParamViewModel(IEnumerable<ConnectionViewModel> configuredConnections, IDpWorkerManager workerManager)
         {
             AvaibleConnections = configuredConnections;
 
@@ -20,7 +22,12 @@ namespace DpConnect.Example.TechParamApp.ViewModel
             });
             CancelCmd = new RelayCommand((arg) => CreatingCanceled?.Invoke(this, null));
 
+            this.workerManager = workerManager;
+
         }
+
+        IDpWorkerManager workerManager { get; set; }
+
         public event EventHandler<IDpConnectionConfiguration> ConnectionCreated;
         public event EventHandler<IDpConnectionConfiguration> CreatingCanceled;
 
@@ -39,8 +46,11 @@ namespace DpConnect.Example.TechParamApp.ViewModel
                 switch
                     (selectedWorkerType)
                 {
-                    case "Простой тех. параметр":      
-                        
+                    case "Простой тех. параметр":
+
+                        workerManager.CreateWorker<TechParamReader>();
+
+
                         break;
 
                     default:
@@ -48,6 +58,9 @@ namespace DpConnect.Example.TechParamApp.ViewModel
                 }
             }
         }
+
+        //Конфигурация
+        DpConfiguration dpConfig;
 
 
         public IEnumerable<ConnectionViewModel> AvaibleConnections { get; private set; }

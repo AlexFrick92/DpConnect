@@ -8,6 +8,7 @@ using Promatis.Core.Logging;
 using Promatis.IoC.DryIoc;
 using DpConnect.Configuration.Xml;
 using DpConnect.OpcUa;
+using DpConnect.ExampleWorker.Console;
 
 namespace DpConnect.Example.TechParamApp
 {
@@ -26,8 +27,8 @@ namespace DpConnect.Example.TechParamApp
             container.RegisterSingleton(typeof(IDpConnectionManager), typeof(ContainerizedConnectionManager));
 
 
+            container.Register<TechParamReader, TechParamReader>();
             container.RegisterSingleton(typeof(IDpWorkerManager), typeof(ContainerizedWorkerManager));
-
 
             container.Register<IDpBuilder, DpXmlBuilder>();
 
