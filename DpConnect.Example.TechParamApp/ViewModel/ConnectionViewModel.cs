@@ -19,6 +19,8 @@ namespace DpConnect.Example.TechParamApp.ViewModel
 
         public string ConnectionType { get => dpConnection.GetType().ToString(); }
 
+        public Type ConnectionTypeType { get => dpConnection.GetType(); }
+
         IDpConnection dpConnection;
     }
 }

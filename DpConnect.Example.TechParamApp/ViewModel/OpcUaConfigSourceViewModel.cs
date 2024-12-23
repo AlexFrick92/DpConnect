@@ -10,8 +10,12 @@ namespace DpConnect.Example.TechParamApp.ViewModel
     public class OpcUaConfigSourceViewModel
     {
 
-        private OpcUaDpValueSourceConfiguration sourceConfiguration;
+        public OpcUaDpValueSourceConfiguration sourceConfiguration = new OpcUaDpValueSourceConfiguration();
 
-        public string NodeId { get; set; }
+        public string NodeId
+        {
+            get => sourceConfiguration.NodeId;
+            set => sourceConfiguration.NodeId = value;
+        }
     }
 }

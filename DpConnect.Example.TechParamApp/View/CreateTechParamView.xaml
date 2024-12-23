@@ -73,6 +73,13 @@
                 SelectedItem="{Binding SelectedConnection}"
                 />
 
+            <ContentControl
+                Grid.Row="3"
+                Grid.ColumnSpan="2"
+                Content="{Binding SelectedConnectionSourceConfig}">
+
+            </ContentControl>
+
             <Button 
                 TabIndex="2"
                 Margin="4"

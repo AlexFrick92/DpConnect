@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DpConnect.Example.TechParamApp.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,9 +21,10 @@ namespace DpConnect.Example.TechParamApp.View
     /// </summary>
     public partial class OpcUaConfigSourceView : UserControl
     {
-        public OpcUaConfigSourceView()
+        public OpcUaConfigSourceView(OpcUaConfigSourceViewModel vm)
         {
             InitializeComponent();
+            DataContext = vm;
         }
     }
 }

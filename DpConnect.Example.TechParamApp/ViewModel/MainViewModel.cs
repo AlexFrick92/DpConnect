@@ -5,6 +5,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 using DpConnect.Building;
 using DpConnect.Example.TechParamApp.View;
@@ -67,6 +68,7 @@ namespace DpConnect.Example.TechParamApp.ViewModel
                 createWorkerViewModel.WorkerCreated += (s, v) =>
                 {
                     TechParamWorkers.Add(new TechParamWorkerViewModel(v));
+                    createWorkerView.Close();
                 };
 
                 createWorkerView.ShowDialog();
@@ -76,7 +78,7 @@ namespace DpConnect.Example.TechParamApp.ViewModel
         }
         public ICommand AddConnectionCmd { get; private set; }
         public ICommand AddTechParamCmd  { get; private set; }
-
+        
 
         public ObservableCollection<WorkerViewModel> ConfiguredWorkers { get; private set; } = new ObservableCollection<WorkerViewModel>();
         public ObservableCollection<TechParamWorkerViewModel> TechParamWorkers { get; private set; } = new ObservableCollection<TechParamWorkerViewModel>();
