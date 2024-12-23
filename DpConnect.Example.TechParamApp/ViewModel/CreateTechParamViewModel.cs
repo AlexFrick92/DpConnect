@@ -27,7 +27,7 @@ namespace DpConnect.Example.TechParamApp.ViewModel
         public ICommand CreateConnectionCmd { get; set; }
         public ICommand CancelCmd { get; set; }
 
-        public List<string> AvaibleWorkers { get; set; } = new List<string> { "TechParamReader", "TechParamTrendDrawer"};
+        public List<string> AvaibleWorkers { get; set; } = new List<string> { "Простой тех. параметр", "Непростой тех. параметр"};
 
         string selectedWorkerType;
         public string SelectedWorkerType
@@ -39,7 +39,8 @@ namespace DpConnect.Example.TechParamApp.ViewModel
                 switch
                     (selectedWorkerType)
                 {
-                    case "TechParamReader":                        
+                    case "Простой тех. параметр":      
+                        
                         break;
 
                     default:
