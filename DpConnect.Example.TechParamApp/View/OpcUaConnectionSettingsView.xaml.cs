@@ -31,5 +31,7 @@ namespace DpConnect.Example.TechParamApp.View
         public IDpConnectionConfiguration Configuration => (DataContext as OpcUaConnectionConfigurationViewModel).Config;
 
         public string ConnectionName { get; set; } = "OpcUa";
+
+        public UIElement View => this;
     }
 }

@@ -20,7 +20,7 @@ namespace DpConnect.Example.TechParamApp.ViewModel
         {
             dpConnectionManager = connectionManager;
 
-            ConnectionsTypes = avaibleConnectionsTypes;
+            ConnectionsTypes = avaibleConnectionsTypes;   
 
             CreateConnectionCmd = new RelayCommand((arg) => 
             {
@@ -48,8 +48,9 @@ namespace DpConnect.Example.TechParamApp.ViewModel
             set
             {
                 selectedConnectionType = value;
-                SelectedConnectionSettingsView = value as UIElement;
-                OnPropertyChanged(nameof(SelectedConnectionSettingsView));                
+                SelectedConnectionSettingsView = value.View;
+                OnPropertyChanged(nameof(SelectedConnectionSettingsView));
+                OnPropertyChanged(nameof(SelectedConnectionType));
             }
         }
 

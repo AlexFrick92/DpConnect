@@ -38,20 +38,20 @@
             Style="{StaticResource TextboxEdit}"
             Grid.Row="0"
             Text="{Binding ConId}"/>
-        
+
         <!--Эндпоинт-->
         <TextBox 
             Style="{StaticResource TextboxRead}"
             Grid.Row="1"
             Text="Адрес "/>
-                
+
         <TextBox 
             TabIndex="1"
             Style="{StaticResource TextboxEdit}"
             Grid.Row="1"
             Text="{Binding Endpoint}"/>
 
-        
+
         <!--Паблиш интервал-->
         <TextBox 
             Style="{StaticResource TextboxRead}"
@@ -64,9 +64,9 @@
             Grid.Row="2"
             Text="{Binding PublishInterval}"/>
 
-        
+
         <!--Таймаут подключения-->
-        
+
         <TextBox 
             Style="{StaticResource TextboxRead}"
             Grid.Row="3"
@@ -76,7 +76,7 @@
             TabIndex="1"
             Style="{StaticResource TextboxEdit}"
             Grid.Row="3"
-            Text="{Binding ConnectTimeout}"/> 
+            Text="{Binding ConnectTimeout}"/>
 
     </Grid>
 </UserControl>

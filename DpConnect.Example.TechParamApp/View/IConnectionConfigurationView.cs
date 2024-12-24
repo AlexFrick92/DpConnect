@@ -12,5 +12,7 @@ namespace DpConnect.Example.TechParamApp.View
         string ConnectionName { get; set;  }
 
         IDpConnectionConfiguration Configuration { get; }
+
+        UIElement View { get; }
     }
 }

@@ -9,7 +9,6 @@ namespace DpConnect.Example.TechParamApp.ViewModel
 {
     public class OpcUaConnectionConfigurationViewModel
     {
-
         public OpcUaConnectionConfigurationViewModel(OpcUaConnectionConfiguration configuration)
         {
             if(configuration != null)
@@ -25,5 +24,7 @@ namespace DpConnect.Example.TechParamApp.ViewModel
         public string PublishInterval { get; set; }
 
         public string ConnectTimeout { get; set; }
+
+
     }
 }
