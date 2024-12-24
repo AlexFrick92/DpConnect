@@ -13,14 +13,14 @@ namespace DpConnect.Example.TechParamApp.ViewModel
         public OpcUaConnectionConfigurationViewModel(OpcUaConnectionConfiguration configuration)
         {
             if(configuration != null)
-                config = configuration;
+                Config = configuration;
             else
                 throw new ArgumentNullException(nameof(configuration));
         }
 
-        OpcUaConnectionConfiguration config;
-        public string Endpoint { get => config.Endpoint; set => config.Endpoint = value; }
-        public string ConId { get => config.ConnectionId; set => config.ConnectionId = value; }  
+        public OpcUaConnectionConfiguration Config { get; set; }
+        public string Endpoint { get => Config.Endpoint; set => Config.Endpoint = value; }
+        public string ConId { get => Config.ConnectionId; set => Config.ConnectionId = value; }  
         
         public string PublishInterval { get; set; }
 

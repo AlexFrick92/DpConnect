@@ -19,12 +19,17 @@ namespace DpConnect.Example.TechParamApp.View
     /// <summary>
     /// Interaction logic for OpcUaConnectionSettingsView.xaml
     /// </summary>
-    public partial class OpcUaConnectionConfigurationView : UserControl
+    public partial class OpcUaConnectionConfigurationView : UserControl, IConnectionConfigurationView
+
     {
-        public OpcUaConnectionConfigurationView(OpcUaConnectionConfigurationViewModel vm)
+        public OpcUaConnectionConfigurationView()
         {
             InitializeComponent();
-            DataContext = vm;
+            DataContext = new OpcUaConnectionConfigurationViewModel(new OpcUa.OpcUaConnectionConfiguration());           
         }
+
+        public IDpConnectionConfiguration Configuration => (DataContext as OpcUaConnectionConfigurationViewModel).Config;
+
+        public string ConnectionName { get; set; } = "OpcUa";
     }
 }

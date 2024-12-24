@@ -62,7 +62,8 @@
                 Grid.Row="1"
                 Grid.Column="1"
                 ItemsSource="{Binding ConnectionsTypes}"
-                SelectedItem="{Binding SelectedConnectionType}"
+                DisplayMemberPath="ConnectionName"
+                SelectedItem="{Binding SelectedConnectionType, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                 >
 
             </ComboBox>

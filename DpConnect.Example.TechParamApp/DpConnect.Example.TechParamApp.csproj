@@ -73,6 +73,7 @@
     <Compile Include="View\DefaultConnectionSettingsView.xaml.cs">
       <DependentUpon>DefaultConnectionSettingsView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\IConnectionConfigurationView.cs" />
     <Compile Include="View\MainView.xaml.cs">
       <DependentUpon>MainView.xaml</DependentUpon>
     </Compile>

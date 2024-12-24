@@ -16,58 +16,40 @@ namespace DpConnect.Example.TechParamApp.ViewModel
     public class CreateConnectionViewModel : BaseViewModel
     {
         IDpConnectionManager dpConnectionManager;
-        public CreateConnectionViewModel(IDpConnectionManager connectionManager)
+        public CreateConnectionViewModel(IDpConnectionManager connectionManager, IEnumerable<IConnectionConfigurationView> avaibleConnectionsTypes)
         {
             dpConnectionManager = connectionManager;
+
+            ConnectionsTypes = avaibleConnectionsTypes;
 
             CreateConnectionCmd = new RelayCommand((arg) => 
             {
 
-                IDpConnection con = dpConnectionManager.CreateConnection(EditConnection);                
+                IDpConnection con = dpConnectionManager.CreateConnection(selectedConnectionType.Configuration);                
 
                 ConnectionCreated?.Invoke(this, con);
             });
-            CancelCmd = new RelayCommand((arg) => CreatingCanceled?.Invoke(this, EditConnection));
+            CancelCmd = new RelayCommand((arg) => CreatingCanceled?.Invoke(this, selectedConnectionType.Configuration));
 
             SelectedConnectionSettingsView = new DefaultConnectionSettingsView();
         }        
 
         public event EventHandler<IDpConnection> ConnectionCreated;
         public event EventHandler<IDpConnectionConfiguration> CreatingCanceled;        
-
-        public IDpConnectionConfiguration EditConnection { get; set; }
+        
         public UIElement SelectedConnectionSettingsView { get; set; }
 
-        public List<string> ConnectionsTypes { get; set; } = new List<string>()
-        {
-            "Не выбрано" , "OpcUa", "Modbus"
-        };
+        public IEnumerable<IConnectionConfigurationView> ConnectionsTypes { get; private set; }
 
-        string selectedConnectionType;
-        public string SelectedConnectionType
+        IConnectionConfigurationView selectedConnectionType;
+        public IConnectionConfigurationView SelectedConnectionType
         {
             get => selectedConnectionType;
             set
             {
                 selectedConnectionType = value;
-                switch
-                    (selectedConnectionType)
-                {
-                    case "OpcUa":                        
-                        EditConnection = new OpcUaConnectionConfiguration();
-
-                        SelectedConnectionSettingsView =
-                            new OpcUaConnectionConfigurationView(new OpcUaConnectionConfigurationViewModel(EditConnection as OpcUaConnectionConfiguration));
-                        
-                        OnPropertyChanged(nameof(SelectedConnectionSettingsView));
-                        break;
-
-                    default:
-                        Console.WriteLine("gg");
-                        SelectedConnectionSettingsView = new DefaultConnectionSettingsView();
-                        OnPropertyChanged(nameof(SelectedConnectionSettingsView));
-                        break;
-                }
+                SelectedConnectionSettingsView = value as UIElement;
+                OnPropertyChanged(nameof(SelectedConnectionSettingsView));                
             }
         }
 
