@@ -31,6 +31,7 @@ namespace DpConnect.Example.TechParamApp.ViewModel
 
 
             workerManager.WorkerCreated += (s, w) => ConfiguredWorkers.Add(new WorkerViewModel(w));
+            connectionManager.NewConnectionCreated += (s, c) => ConfiguredConnections.Add(new ConnectionViewModel(c));
 
 
             foreach(var con in connectionManager.ConfiguredConnections)
@@ -42,14 +43,10 @@ namespace DpConnect.Example.TechParamApp.ViewModel
             {
                 Console.WriteLine("Добавить соединение");                
 
-                CreateConnectionViewModel createConnectionViewModel = new CreateConnectionViewModel();
+                CreateConnectionViewModel createConnectionViewModel = new CreateConnectionViewModel(connectionManager);
                 CreateConnectionView createConnectionView = new CreateConnectionView(createConnectionViewModel);
                 createConnectionViewModel.ConnectionCreated += (s, v) =>
                 {
-                    //Тут нужно создать соединение через билдер
-
-                    var con = conManager.CreateConnection<IOpcUaConnection>(v);
-                    ConfiguredConnections.Add(new ConnectionViewModel(con));
                     createConnectionView.Close();
                 };
                 createConnectionViewModel.CreatingCanceled += (s, v) => createConnectionView.Close();                

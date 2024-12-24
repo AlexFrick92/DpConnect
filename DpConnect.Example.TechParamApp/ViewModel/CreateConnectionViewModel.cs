@@ -1,4 +1,5 @@
-﻿using DpConnect.Example.TechParamApp.View;
+﻿using DpConnect.Connection;
+using DpConnect.Example.TechParamApp.View;
 using DpConnect.OpcUa;
 using System;
 using System.Collections.Generic;
@@ -11,22 +12,27 @@ using System.Windows.Input;
 
 namespace DpConnect.Example.TechParamApp.ViewModel
 {
+
     public class CreateConnectionViewModel : BaseViewModel
     {
-        public CreateConnectionViewModel()
+        IDpConnectionManager dpConnectionManager;
+        public CreateConnectionViewModel(IDpConnectionManager connectionManager)
         {
+            dpConnectionManager = connectionManager;
+
             CreateConnectionCmd = new RelayCommand((arg) => 
-            {                                
-                ConnectionCreated?.Invoke(this, EditConnection);
+            {
+
+                IDpConnection con = dpConnectionManager.CreateConnection<IOpcUaConnection>(EditConnection);                
+
+                ConnectionCreated?.Invoke(this, con);
             });
             CancelCmd = new RelayCommand((arg) => CreatingCanceled?.Invoke(this, EditConnection));
 
-            SelectedConnectionSettingsView =
-                new DefaultConnectionSettingsView();
-
+            SelectedConnectionSettingsView = new DefaultConnectionSettingsView();
         }        
 
-        public event EventHandler<IDpConnectionConfiguration> ConnectionCreated;
+        public event EventHandler<IDpConnection> ConnectionCreated;
         public event EventHandler<IDpConnectionConfiguration> CreatingCanceled;        
 
         public IDpConnectionConfiguration EditConnection { get; set; }
