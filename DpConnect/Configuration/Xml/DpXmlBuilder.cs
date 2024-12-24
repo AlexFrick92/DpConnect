@@ -88,15 +88,18 @@ namespace DpConnect.Configuration.Xml
                 {
                     ConnectionId = conId, 
                     Active = conActive,
-                    Configuration = new XDocument(configuredConnection) 
+                    Configuration = new XDocument(configuredConnection),
+                    ConnectionType = Type.GetType(typeName)
                 };
 
-                Type connectionType = Type.GetType(typeName);
+                connectionManager.CreateConnection(connetionConfiguration);
 
-                MethodInfo methodInfo = typeof(IDpConnectionManager).GetMethod(nameof(IDpConnectionManager.CreateConnection));
-                MethodInfo genericMethod = methodInfo.MakeGenericMethod(connectionType);
+                //MethodInfo methodInfo = typeof(IDpConnectionManager).GetMethod(nameof(IDpConnectionManager.CreateConnection));
+                //MethodInfo genericMethod = methodInfo.MakeGenericMethod(connectionType);
 
-                genericMethod.Invoke(connectionManager, new[] { connetionConfiguration });
+
+
+                //genericMethod.Invoke(connectionManager, new[] { connetionConfiguration });
 
             }
 

@@ -8,7 +8,13 @@ namespace DpConnect
 {
     public interface IDpConnectionManager
     {
-        IDpConnection CreateConnection<T>(IDpConnectionConfiguration configuration) where T : IDpConnection;        
+        /// <summary>
+        /// Создать соединение на основе конфигурации
+        /// </summary>
+        /// <param name="configuration"></param>
+        /// <returns></returns>
+        IDpConnection CreateConnection(IDpConnectionConfiguration configuration);
+        IDpConnection CreateConnection<T>(IDpConnectionConfiguration configuration) where T : IDpConnection;
 
         IDpConnection GetConnection(string Id);
 

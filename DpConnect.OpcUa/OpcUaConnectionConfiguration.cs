@@ -12,6 +12,6 @@ namespace DpConnect.OpcUa
 
         public bool Active { get; set; }
 
-        public Type ConnectionType { get; set; }    
+        public Type ConnectionType { get; private set; } = typeof(IOpcUaConnection);
     }
 }

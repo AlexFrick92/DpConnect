@@ -8,6 +8,7 @@ using Promatis.Core.Logging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 
 namespace DpConnect
 {
@@ -27,8 +28,27 @@ namespace DpConnect
             this.container = container;
         }
 
+        
+        public IDpConnection CreateConnection(IDpConnectionConfiguration configuration)
+        {            
+            var method = typeof(IDpConnectionManager).GetMethods()
+                            .Where(m => m.Name == nameof(IDpConnectionManager.CreateConnection) && m.IsGenericMethodDefinition)
+                            .FirstOrDefault(m =>
+                            {
+                                var parameters = m.GetParameters();
+                                return parameters.Length == 1 && parameters[0].ParameterType == typeof(IDpConnectionConfiguration);
+                            });
 
+            if (method != null)
+            {
+                var genericMethod = method.MakeGenericMethod(configuration.ConnectionType);
+                object result = genericMethod.Invoke(this, new object[] { configuration });
 
+                return (IDpConnection)result;
+            }
+            else
+                throw new InvalidOperationException("Не найден обобщенный метод создания соединения");
+        }
         public IDpConnection CreateConnection<T>(IDpConnectionConfiguration configuration) where T : IDpConnection
         {            
             IDpConnection con = container.Resolve<T>();            
@@ -43,6 +63,7 @@ namespace DpConnect
             return con;
          
         }
+
 
         public IDpConnection GetConnection(string Id)
         {
@@ -62,5 +83,7 @@ namespace DpConnect
             connections.Where(c => c.Active).ForEach(c => c.Close());
             logger.Info("Соединения закрыты.");
         }
+
+
     }
 }
