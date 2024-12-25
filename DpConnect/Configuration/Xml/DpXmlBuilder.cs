@@ -74,49 +74,45 @@ namespace DpConnect.Configuration.Xml
 
         void CreateConnections()
         {
-
             logger.Info("Создаём соединения...");
-
+            
+            //Пройдемся по всем элементом в xml, которые объявляют соединение
             foreach(XElement configuredConnection in ConnectionConfiguration.Root.Elements(Xml_ConnectionDeclareTag))
             {                
-                string typeName = configuredConnection.Attribute(Xml_ConnectionTypeNameAttribute).Value;                
-                bool conActive = configuredConnection.Attribute(Xml_ConnectionActiveAttribute) != null ? bool.Parse(configuredConnection.Attribute(Xml_ConnectionActiveAttribute).Value) : true;
-
-                // Получаем тип 
+                //Нам важен тип соединения, который объявлен в xml. Именно такой тип мы и будем создавать
+                string typeName = configuredConnection.Attribute(Xml_ConnectionTypeNameAttribute).Value;                                                
                 Type connectionType = Type.GetType(typeName);
 
-                // Получаем все интерфейсы, которые реализует 
-                Type iface = connectionType.GetInterfaces()
-                    .Where(i => i.IsGenericType && i.GetGenericTypeDefinition() == typeof(IDpConfigurableConnection<>))
-                    .FirstOrDefault();
+                //Соединение создается с аргументом - его конфигурация. Этот тип мы должны выяснить, чтобы создать эту конфигурацию.
+                Type connectionTypeGenericArg = GetConnectionTypeGenericArg(connectionType);                
+                
+                //Здесь мы создаем этот тип, но нам нужен только его интерфейс, чтобы загрузкить xml конфиг
+                IDpConnectionConfiguration connectionConfig = Activator.CreateInstance(connectionTypeGenericArg) as IDpConnectionConfiguration;
+                connectionConfig.FromXml(new XDocument(configuredConnection));
 
-                if(iface != null)
-                {
-                    Type[] genericArguments = iface.GetGenericArguments();
-
-                    Type connectionConfigurationType = genericArguments[0];
-
-                    Console.WriteLine("TConnectionConfiguration: " + genericArguments[0].Name); // Первый тип: TConnectionConfiguration                    
-
-                    MethodInfo methodInfo = typeof(IDpConnectionManager).GetMethod(nameof(IDpConnectionManager.CreateConnection));
-                    MethodInfo createConnectionMethod = methodInfo.MakeGenericMethod(connectionType, connectionConfigurationType);
-
-                    IDpConnectionConfiguration connectionConfig = Activator.CreateInstance(connectionConfigurationType) as IDpConnectionConfiguration;
-
-                    connectionConfig.FromXml(new XDocument(configuredConnection));
-
-                    createConnectionMethod.Invoke(connectionManager, new object[] { connectionConfig });                    
-                }
-                else
-                {
-                    Console.WriteLine("GG");
-                }
-
+                //Теперь вызываем метод у менеджера, который создаст соединение нужного типа и с нужной конфигурацией.
+                //Этот метод обобщенный - он принимает тип соединения и тип конфигурации, чтобы законфигурировать соединение
+                MethodInfo createConnectionMethodInfo = typeof(IDpConnectionManager).GetMethod(nameof(IDpConnectionManager.CreateConnection));
+                MethodInfo createConnectionMethod = createConnectionMethodInfo.MakeGenericMethod(connectionType, connectionTypeGenericArg);
+                createConnectionMethod.Invoke(connectionManager, new object[] { connectionConfig });                
             }
 
             logger.Info("Соединения созданы.");
         }
+        Type GetConnectionTypeGenericArg(Type connectionType)
+        {
+            Type iface = connectionType.GetInterfaces()
+                    .Where(i => i.IsGenericType && i.GetGenericTypeDefinition() == typeof(IDpConfigurableConnection<>))
+                    .FirstOrDefault();
 
+            if (iface == null)
+                throw new DpConfigurationException($"Соединение не реализует интерфейс {nameof(IDpConfigurableConnection<IDpConnectionConfiguration>)}");
+
+            Type[] genericArguments = iface.GetGenericArguments();
+            Type connectionConfigurationType = genericArguments[0];            
+
+            return connectionConfigurationType;
+        }
 
         void CreateWorkers()
         {
