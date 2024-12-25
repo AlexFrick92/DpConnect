@@ -40,8 +40,8 @@ namespace DpConnect.Building
 
                 if (prop.PropertyType.GetGenericTypeDefinition() == typeof(IDpValue<>))
                 {
-                    object dp = CreateDpValue(prop);                    
-                   // connection.ConnectDpValue(dp as dynamic, config.SourceConfiguration);
+                    object dp = CreateDpValue(prop);
+                    connectionToBind.ConnectDpValue(dp as dynamic, config.SourceConfiguration);
                     prop.SetValue(worker, dp);
                     logger.Info($"Свойство {config.PropertyName} типа {dp.GetType()} для {config.ConnectionId}");
 
