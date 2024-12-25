@@ -79,9 +79,7 @@ namespace DpConnect.Configuration.Xml
             foreach(XElement configuredConnection in ConnectionConfiguration.Root.Elements(Xml_ConnectionDeclareTag))
             {                
 
-                string typeName = configuredConnection.Attribute(Xml_ConnectionTypeNameAttribute).Value;
-                string conId = configuredConnection.Attribute(Xml_ConnectionIdAttribute).Value;      
-
+                string typeName = configuredConnection.Attribute(Xml_ConnectionTypeNameAttribute).Value;                
 
                 bool conActive = configuredConnection.Attribute(Xml_ConnectionActiveAttribute) != null ? bool.Parse(configuredConnection.Attribute(Xml_ConnectionActiveAttribute).Value) : true;
 

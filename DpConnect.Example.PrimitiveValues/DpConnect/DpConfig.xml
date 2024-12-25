@@ -4,7 +4,8 @@
 <DpConfiguration>
 
 	<Connections>
-		<Connection TypeName="DpConnect.OpcUa.IOpcUaConnection, DpConnect.OpcUa" ConnectionId ="Stend AKF">
+		<Connection TypeName="DpConnect.OpcUa.IOpcUaConnection, DpConnect.OpcUa">
+			<Id>Stend AKF</Id>
 			<Endpoint>opc.tcp://10.10.10.95:4840</Endpoint>
 		</Connection>		
 	</Connections>
