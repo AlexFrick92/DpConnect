@@ -11,7 +11,7 @@ namespace DpConnect.OpcUa
 
         public string Endpoint { get; set; }
 
-        public bool Active { get; set; }
+        public bool Active { get; set; } = true;
 
         public Type ConnectionType { get; private set; } = typeof(IOpcUaConnection);
 
