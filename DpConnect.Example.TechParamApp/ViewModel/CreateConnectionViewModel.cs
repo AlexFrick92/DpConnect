@@ -16,7 +16,7 @@ namespace DpConnect.Example.TechParamApp.ViewModel
     public class CreateConnectionViewModel : BaseViewModel
     {
         IDpConnectionManager dpConnectionManager;
-        public CreateConnectionViewModel(IDpConnectionManager connectionManager, IEnumerable<IConnectionConfigurationView> avaibleConnectionsTypes)
+        public CreateConnectionViewModel(IDpConnectionManager connectionManager)
         {
             dpConnectionManager = connectionManager;
 
@@ -27,9 +27,9 @@ namespace DpConnect.Example.TechParamApp.ViewModel
             CreateConnectionCmd = new RelayCommand((arg) => 
             {
 
-               // IDpConnection con = dpConnectionManager.CreateConnection(selectedConnectionType.Configuration);                
+                SelectedConnectionType.CreateConnection(connectionManager);
 
-                //ConnectionCreated?.Invoke(this, con);
+                ConnectionCreated?.Invoke(this, null);
             });
             CancelCmd = new RelayCommand((arg) => CreatingCanceled?.Invoke(this, null));            
         }        

@@ -6,9 +6,22 @@ using System.Threading.Tasks;
 
 namespace DpConnect.Example.TechParamApp.ViewModel
 {
-    public class NamedConfigParamViewModel
+    public class NamedConfigParamViewModel : BaseViewModel
     {
         public string Name { get; set; }
-        public object Value { get; set; }
+
+        object val;
+        public object Value
+        {
+            get => val;
+            set 
+            {
+                val = value;
+                OnPropertyChanged(nameof(Value));
+            }
+        }
+
+
+
     }
 }

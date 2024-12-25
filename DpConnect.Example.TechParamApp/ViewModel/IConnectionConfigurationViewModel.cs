@@ -10,6 +10,8 @@ namespace DpConnect.Example.TechParamApp.ViewModel
     {
         IEnumerable<NamedConfigParamViewModel> Parameters { get; }
 
-        string ConnectionName { get; }
+        string ConnectionName { get; }        
+
+        void CreateConnection(IDpConnectionManager connectionManager);
     }
 }

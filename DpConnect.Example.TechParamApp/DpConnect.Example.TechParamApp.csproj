@@ -59,6 +59,7 @@
     <Compile Include="ViewModel\CreateConnectionViewModel.cs" />
     <Compile Include="ViewModel\CreateTechParamViewModel.cs" />
     <Compile Include="ViewModel\IConnectionConfigurationViewModel.cs" />
+    <Compile Include="ViewModel\ITechParameterConfigurationViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\NamedConfigParamViewModel.cs" />
     <Compile Include="ViewModel\OpcUaConfigSourceViewModel.cs" />
@@ -75,7 +76,6 @@
     <Compile Include="View\DefaultConnectionSettingsView.xaml.cs">
       <DependentUpon>DefaultConnectionSettingsView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\IConnectionConfigurationView.cs" />
     <Compile Include="View\MainView.xaml.cs">
       <DependentUpon>MainView.xaml</DependentUpon>
     </Compile>

@@ -44,11 +44,8 @@ namespace DpConnect.Example.TechParamApp.ViewModel
                 Console.WriteLine("Добавить соединение");                
 
                 CreateConnectionViewModel createConnectionViewModel = 
-                new CreateConnectionViewModel(connectionManager, 
-                new IConnectionConfigurationView[] 
-                { 
-                    //new OpcUaConnectionConfigurationView(),                    
-                });
+                new CreateConnectionViewModel(connectionManager              
+                );
 
 
                 CreateConnectionView createConnectionView = new CreateConnectionView(createConnectionViewModel);

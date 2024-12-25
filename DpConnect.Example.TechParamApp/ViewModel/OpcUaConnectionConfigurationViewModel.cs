@@ -7,14 +7,25 @@ using System.Threading.Tasks;
 
 namespace DpConnect.Example.TechParamApp.ViewModel
 {
-    public class OpcUaConnectionConfigurationViewModel : IConnectionConfigurationViewModel
-    {
+    public class OpcUaConnectionConfigurationViewModel : BaseViewModel, IConnectionConfigurationViewModel
+    {        
         public OpcUaConnectionConfigurationViewModel()
         {
-            
-        }
+            List<NamedConfigParamViewModel> pars = new List<NamedConfigParamViewModel>();
+            var paramId = new NamedConfigParamViewModel();
+            paramId.Name = "Имя соединения";
+            paramId.PropertyChanged += (s, v) =>
+            {
+                ConId = paramId.Value.ToString();
+            };
 
-        public OpcUaConnectionConfiguration Config { get; set; } = new OpcUaConnectionConfiguration();
+            pars.Add(paramId);
+            Parameters = pars;
+        }        
+
+
+
+        OpcUaConnectionConfiguration Config { get; set; } = new OpcUaConnectionConfiguration();
         public string Endpoint { get => Config.Endpoint; set => Config.Endpoint = value; }
         public string ConId { get => Config.ConnectionId; set => Config.ConnectionId = value; }  
         
@@ -22,12 +33,13 @@ namespace DpConnect.Example.TechParamApp.ViewModel
 
         public string ConnectTimeout { get; set; }
 
-        public IEnumerable<NamedConfigParamViewModel> Parameters => new List<NamedConfigParamViewModel>() 
-        { 
-            new NamedConfigParamViewModel() { Name = "Par1"},
-            new NamedConfigParamViewModel() { Name = "Par1"},
-        };
+        public IEnumerable<NamedConfigParamViewModel> Parameters { get; }   
 
         public string ConnectionName => "OpcUa";
+
+        public void CreateConnection(IDpConnectionManager manager)
+        {
+            manager.CreateConnection<IOpcUaConnection, OpcUaConnectionConfiguration>(Config);
+        }
     }
 }
