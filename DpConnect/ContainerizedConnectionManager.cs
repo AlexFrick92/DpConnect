@@ -29,38 +29,43 @@ namespace DpConnect
         }
 
         
-        public IDpConnection CreateConnection(IDpConnectionConfiguration configuration)
-        {            
-            var method = typeof(IDpConnectionManager).GetMethods()
-                            .Where(m => m.Name == nameof(IDpConnectionManager.CreateConnection) && m.IsGenericMethodDefinition)
-                            .FirstOrDefault(m =>
-                            {
-                                var parameters = m.GetParameters();
-                                return parameters.Length == 1 && parameters[0].ParameterType == typeof(IDpConnectionConfiguration);
-                            });
+        //public IDpConnection CreateConnection(IDpConnectionConfiguration configuration)
+        //{            
+        //    var method = typeof(IDpConnectionManager).GetMethods()
+        //                    .Where(m => m.Name == nameof(IDpConnectionManager.CreateConnection) && m.IsGenericMethodDefinition)
+        //                    .FirstOrDefault(m =>
+        //                    {
+        //                        var parameters = m.GetParameters();
+        //                        return parameters.Length == 1 && parameters[0].ParameterType == typeof(IDpConnectionConfiguration);
+        //                    });
 
-            if (method != null)
-            {
-                var genericMethod = method.MakeGenericMethod(configuration.ConnectionType);
-                object result = genericMethod.Invoke(this, new object[] { configuration });
+        //    if (method != null)
+        //    {
+        //        var genericMethod = method.MakeGenericMethod(configuration.ConnectionType);
+        //        object result = genericMethod.Invoke(this, new object[] { configuration });
 
-                return (IDpConnection)result;
-            }
-            else
-                throw new InvalidOperationException("Не найден обобщенный метод создания соединения");
-        }
-        public IDpConnection CreateConnection<T>(IDpConnectionConfiguration configuration) where T : IDpConnection
-        {            
-            IDpConnection con = container.Resolve<T>();            
+        //        return (IDpConnection)result;
+        //    }
+        //    else
+        //        throw new InvalidOperationException("Не найден обобщенный метод создания соединения");
+        
+
+        public IDpConnection CreateConnection<T, TConnectionConfig>(TConnectionConfig configuration) 
+            where TConnectionConfig : IDpConnectionConfiguration
+            where T : IDpConfigurableConnection<TConnectionConfig>
+            
+        {
+            IDpConfigurableConnection<TConnectionConfig> con = container.Resolve<T>();
 
             logger.Info($"Менеджер соединений: Создано новое подключение: {configuration.ConnectionId} с типом {con.GetType()}");
             con.Configure(configuration);
 
-            connections.Add(con);
 
-            NewConnectionCreated?.Invoke(this, con);
+            connections.Add(con as IDpConnection);
 
-            return con;
+            NewConnectionCreated?.Invoke(this, con as IDpConnection);
+
+            return con as IDpConnection;            
          
         }
 

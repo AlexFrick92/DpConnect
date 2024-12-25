@@ -45,10 +45,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Configuration\DpConfigurationException.cs" />
-    <Compile Include="Configuration\Xml\DpConnectionXmlConfiguration.cs" />
     <Compile Include="Configuration\DpConfiguration.cs" />
     <Compile Include="Configuration\Xml\DpSourceXmlConfiguration.cs" />
     <Compile Include="Configuration\Xml\DpXmlBuilder.cs" />
+    <Compile Include="Connection\IDpBindableConnection.cs" />
+    <Compile Include="Connection\IDpConfigurableConnection.cs" />
     <Compile Include="ContainerizedWorkerManager.cs" />
     <Compile Include="Building\DpAction.cs" />
     <Compile Include="Building\DpBinder.cs" />

@@ -13,8 +13,10 @@ namespace DpConnect
         /// </summary>
         /// <param name="configuration"></param>
         /// <returns></returns>
-        IDpConnection CreateConnection(IDpConnectionConfiguration configuration);
-        IDpConnection CreateConnection<T>(IDpConnectionConfiguration configuration) where T : IDpConnection;
+        //IDpConnection CreateConnection(IDpConnectionConfiguration configuration);
+        IDpConnection CreateConnection<T, TConnectionConfig>(TConnectionConfig configuration)
+            where TConnectionConfig : IDpConnectionConfiguration
+            where T : IDpConfigurableConnection<TConnectionConfig>;
 
         IDpConnection GetConnection(string Id);
 

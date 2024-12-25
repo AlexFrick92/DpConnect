@@ -7,6 +7,7 @@ using Promatis.Core.Logging;
 
 using DpConnect.Building;
 using System.Linq;
+using DpConnect.Connection;
 
 namespace DpConnect.Configuration.Xml
 {
@@ -84,22 +85,46 @@ namespace DpConnect.Configuration.Xml
 
                 bool conActive = configuredConnection.Attribute(Xml_ConnectionActiveAttribute) != null ? bool.Parse(configuredConnection.Attribute(Xml_ConnectionActiveAttribute).Value) : true;
 
-                IDpConnectionConfiguration connetionConfiguration = new DpConnectionXmlConfiguration() 
+                //IDpConnectionConfiguration connetionConfiguration = new DpConnectionXmlConfiguration() 
+                //{
+                //    ConnectionId = conId, 
+                //    Active = conActive,
+                //    Configuration = new XDocument(configuredConnection),
+                //    ConnectionType = Type.GetType(typeName)
+                //};
+
+                //connectionManager.CreateConnection(connetionConfiguration);
+
+
+                // Получаем тип для OpcUaConnection
+                Type connectionType = Type.GetType(typeName);
+
+                // Получаем все интерфейсы, которые реализует OpcUaConnection
+                Type iface = connectionType.GetInterfaces()
+                    .Where(i => i.IsGenericType && i.GetGenericTypeDefinition() == typeof(IDpConfigurableConnection<>))
+                    .FirstOrDefault();
+
+                if(iface != null)
                 {
-                    ConnectionId = conId, 
-                    Active = conActive,
-                    Configuration = new XDocument(configuredConnection),
-                    ConnectionType = Type.GetType(typeName)
-                };
+                    Type[] genericArguments = iface.GetGenericArguments();
 
-                connectionManager.CreateConnection(connetionConfiguration);
+                    Type connectionConfigurationType = genericArguments[0];
 
-                //MethodInfo methodInfo = typeof(IDpConnectionManager).GetMethod(nameof(IDpConnectionManager.CreateConnection));
-                //MethodInfo genericMethod = methodInfo.MakeGenericMethod(connectionType);
+                    Console.WriteLine("TConnectionConfiguration: " + genericArguments[0].Name); // Первый тип: TConnectionConfiguration                    
 
+                    MethodInfo methodInfo = typeof(IDpConnectionManager).GetMethod(nameof(IDpConnectionManager.CreateConnection));
+                    MethodInfo createConnectionMethod = methodInfo.MakeGenericMethod(connectionType, connectionConfigurationType);
 
+                    IDpConnectionConfiguration connectionConfig = Activator.CreateInstance(connectionConfigurationType) as IDpConnectionConfiguration;
 
-                //genericMethod.Invoke(connectionManager, new[] { connetionConfiguration });
+                    connectionConfig.FromXml(new XDocument(configuredConnection));
+
+                    createConnectionMethod.Invoke(connectionManager, new object[] { connectionConfig });                    
+                }
+                else
+                {
+                    Console.WriteLine("GG");
+                }
 
             }
 

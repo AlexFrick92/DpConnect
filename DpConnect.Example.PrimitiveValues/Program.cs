@@ -37,6 +37,10 @@ namespace DpConnect.Example.PrimitiveValues
             container.Register<IDpBuilder, DpXmlBuilder>();
 
 
+            //BIDpConnectionManager man = container.Resolve<IDpConnectionManager>();
+
+            //var con = man.CreateConnection<IOpcUaConnection, OpcUaConnectionConfiguration>(new OpcUaConnectionConfiguration());
+
             IDpBuilder builder = container.Resolve<IDpBuilder>();
             builder.Build();
 

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Xml.Linq;
 using DpConnect.Configuration;
 
 
@@ -13,5 +14,10 @@ namespace DpConnect.OpcUa
         public bool Active { get; set; }
 
         public Type ConnectionType { get; private set; } = typeof(IOpcUaConnection);
+
+        public void FromXml(XDocument config)
+        {
+            Endpoint = config.Root.Element("Endpoint").Value;
+        }
     }
 }

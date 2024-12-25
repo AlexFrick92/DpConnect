@@ -1,6 +1,7 @@
 ﻿
 
 using System;
+using System.Xml.Linq;
 
 namespace DpConnect
 {
@@ -11,6 +12,8 @@ namespace DpConnect
 
         string ConnectionId { get; }
 
-        bool Active { get; }
+        bool Active { get; }        
+
+        void FromXml(XDocument config);
     }
 }

@@ -51,10 +51,10 @@ namespace DpConnect.Building
                 }
                 else if (prop.PropertyType.GetGenericTypeDefinition() == typeof(IDpAction<>))
                 {
-                    object dp = CreatDpFunc(prop);
-                    connection.ConnectDpMethod(dp as dynamic, config.SourceConfiguration);
-                    prop.SetValue(worker, dp);
-                    logger.Info($"Метод {config.PropertyName} типа {dp.GetType()} для {config.ConnectionId}");
+                    //object dp = CreatDpFunc(prop);
+                    //connection.ConnectDpMethod(dp as dynamic, config.SourceConfiguration);
+                    //prop.SetValue(worker, dp);
+                    //logger.Info($"Метод {config.PropertyName} типа {dp.GetType()} для {config.ConnectionId}");
                 }
                 else
                 {

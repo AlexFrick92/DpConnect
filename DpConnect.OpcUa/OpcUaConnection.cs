@@ -30,19 +30,12 @@ namespace DpConnect.OpcUa
             this.logger = logger;
         }
 
-        public void Configure(IDpConnectionConfiguration configuration)
+        public void Configure(OpcUaConnectionConfiguration configuration)
         {
             Id = configuration.ConnectionId;
             Active = configuration.Active;
 
-            if (configuration is OpcUaConnectionConfiguration)
-                connectionConfiguration = (OpcUaConnectionConfiguration)configuration;
-
-            else if (configuration is DpConnectionXmlConfiguration)
-                connectionConfiguration = new OpcUaConnectionXmlConfiguration((DpConnectionXmlConfiguration)configuration);
-
-            else
-                throw new ArgumentException($"{nameof(OpcUaConnection)}: Неверный тип конфигурации соединения");
+            connectionConfiguration = configuration;
 
             logger.Info($"{nameof(OpcUaConnection)}: Соединение {connectionConfiguration.ConnectionId} законфигурировано: {connectionConfiguration.Endpoint}");
         }
@@ -181,7 +174,7 @@ namespace DpConnect.OpcUa
                 }
             };
             dpValuesStatus.Add(dpMethod);
-        }        
+        }
 
     }
 }
