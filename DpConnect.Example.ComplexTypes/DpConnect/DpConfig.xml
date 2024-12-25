@@ -4,7 +4,8 @@
 <DpConfiguration>
 
 	<Connections>
-		<Connection TypeName="DpConnect.OpcUa.IOpcUaConnection, DpConnect.OpcUa" ConnectionId ="Stend AKF">
+		<Connection TypeName="DpConnect.OpcUa.IOpcUaConnection, DpConnect.OpcUa">
+			<ConnectionId>Stend AKF</ConnectionId>
 			<Endpoint>opc.tcp://10.10.10.95:4840</Endpoint>
 		</Connection>		
 	</Connections>
@@ -13,9 +14,9 @@
 
 
 		<Worker TypeName="DpConnect.Example.ComplexTypes.IComplexValueReadWrite, DpConnect.Example.ComplexTypes">
-
+			<ConnectionId>Stend AKF</ConnectionId>
 			<DpValue PropertyName="ComplexValue">
-				<SourceConfiguration ConnectionId ="Stend AKF">
+				<SourceConfiguration>
 					<NodeId>ns=3;s="PrimitiveTypes"."Complex"</NodeId>
 				</SourceConfiguration>
 			</DpValue>
@@ -23,9 +24,9 @@
 		</Worker>
 
 		<Worker TypeName="DpConnect.Example.ComplexTypes.IComplexMethodCall, DpConnect.Example.ComplexTypes">
-
+			<ConnectionId>Stend AKF</ConnectionId>
 			<DpAction PropertyName ="MulMethod">
-				<SourceConfiguration ConnectionId ="Stend AKF">
+				<SourceConfiguration>
 					<NodeId>ns=3;s="OPCUA_Mul_Real"</NodeId>
 				</SourceConfiguration>
 

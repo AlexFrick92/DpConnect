@@ -18,7 +18,7 @@ namespace DpConnect.OpcUa
         public void FromXml(XDocument config)
         {
             Endpoint = config.Root.Element("Endpoint").Value;
-            ConnectionId = config.Root.Element("Id").Value;
+            ConnectionId = config.Root.Element("ConnectionId").Value;
         }
     }
 }
