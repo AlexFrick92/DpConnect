@@ -32,7 +32,7 @@ namespace DpConnect
             return worker;
         }
 
-        public IEnumerable<T> ResolveWorker<T>()
+        public IEnumerable<T> ResolveWorker<T>() where T : IDpWorker
         {
             IEnumerable<T> resolved = workers.Where(w => typeof(T).IsAssignableFrom( w.GetType() )).Select(p => (T)p);            
 

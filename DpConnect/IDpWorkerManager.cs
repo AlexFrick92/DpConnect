@@ -19,7 +19,7 @@ namespace DpConnect
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <returns></returns>
-        IEnumerable<T> ResolveWorker<T>();
+        IEnumerable<T> ResolveWorker<T>() where T : IDpWorker;
 
         /// <summary>
         /// Создан новый воркер
