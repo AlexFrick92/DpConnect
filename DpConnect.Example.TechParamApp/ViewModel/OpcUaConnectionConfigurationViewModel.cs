@@ -7,17 +7,14 @@ using System.Threading.Tasks;
 
 namespace DpConnect.Example.TechParamApp.ViewModel
 {
-    public class OpcUaConnectionConfigurationViewModel
+    public class OpcUaConnectionConfigurationViewModel : IConnectionConfigurationViewModel
     {
-        public OpcUaConnectionConfigurationViewModel(OpcUaConnectionConfiguration configuration)
+        public OpcUaConnectionConfigurationViewModel()
         {
-            if(configuration != null)
-                Config = configuration;
-            else
-                throw new ArgumentNullException(nameof(configuration));
+            
         }
 
-        public OpcUaConnectionConfiguration Config { get; set; }
+        public OpcUaConnectionConfiguration Config { get; set; } = new OpcUaConnectionConfiguration();
         public string Endpoint { get => Config.Endpoint; set => Config.Endpoint = value; }
         public string ConId { get => Config.ConnectionId; set => Config.ConnectionId = value; }  
         
@@ -25,6 +22,12 @@ namespace DpConnect.Example.TechParamApp.ViewModel
 
         public string ConnectTimeout { get; set; }
 
+        public IEnumerable<NamedConfigParamViewModel> Parameters => new List<NamedConfigParamViewModel>() 
+        { 
+            new NamedConfigParamViewModel() { Name = "Par1"},
+            new NamedConfigParamViewModel() { Name = "Par1"},
+        };
 
+        public string ConnectionName => "OpcUa";
     }
 }

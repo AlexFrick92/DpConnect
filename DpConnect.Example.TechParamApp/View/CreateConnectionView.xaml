@@ -69,12 +69,31 @@
 
             </ComboBox>
 
-            <ContentControl
-                Grid.Row="2"
-                Grid.ColumnSpan="2"
-                Content="{Binding SelectedConnectionSettingsView}">
-
-            </ContentControl>
+            <ItemsControl Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2"
+                     ItemsSource="{Binding ConfigParameters}"
+                     BorderThickness="0"
+                     >
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Grid HorizontalAlignment="Stretch">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            
+                            <TextBox Grid.Column="0"
+                                     Text="{Binding Name}"
+                                     Style="{StaticResource TextboxRead}"                                
+                                     />
+                            
+                            <TextBox Grid.Column="1"
+                                     Text="{Binding Value}"
+                                     Style="{StaticResource TextboxEdit}"
+                                     />
+                        </Grid>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
 
             <Button 
                 TabIndex="2"

@@ -20,36 +20,35 @@ namespace DpConnect.Example.TechParamApp.ViewModel
         {
             dpConnectionManager = connectionManager;
 
-            ConnectionsTypes = avaibleConnectionsTypes;   
+            //ConnectionsTypes = avaibleConnectionsTypes;   
+
+            ConnectionsTypes = new List<IConnectionConfigurationViewModel>() { new OpcUaConnectionConfigurationViewModel()};
 
             CreateConnectionCmd = new RelayCommand((arg) => 
             {
 
-                IDpConnection con = dpConnectionManager.CreateConnection(selectedConnectionType.Configuration);                
+               // IDpConnection con = dpConnectionManager.CreateConnection(selectedConnectionType.Configuration);                
 
-                ConnectionCreated?.Invoke(this, con);
+                //ConnectionCreated?.Invoke(this, con);
             });
-            CancelCmd = new RelayCommand((arg) => CreatingCanceled?.Invoke(this, selectedConnectionType.Configuration));
-
-            SelectedConnectionSettingsView = new DefaultConnectionSettingsView();
+            CancelCmd = new RelayCommand((arg) => CreatingCanceled?.Invoke(this, null));            
         }        
 
         public event EventHandler<IDpConnection> ConnectionCreated;
-        public event EventHandler<IDpConnectionConfiguration> CreatingCanceled;        
-        
-        public UIElement SelectedConnectionSettingsView { get; set; }
+        public event EventHandler<IDpConnectionConfiguration> CreatingCanceled;                       
 
-        public IEnumerable<IConnectionConfigurationView> ConnectionsTypes { get; private set; }
+        public IEnumerable<NamedConfigParamViewModel> ConfigParameters { get; set; }
+        public IEnumerable<IConnectionConfigurationViewModel> ConnectionsTypes { get; private set; }
 
-        IConnectionConfigurationView selectedConnectionType;
-        public IConnectionConfigurationView SelectedConnectionType
+        IConnectionConfigurationViewModel selectedConnectionType;
+        public IConnectionConfigurationViewModel SelectedConnectionType
         {
             get => selectedConnectionType;
             set
             {
-                selectedConnectionType = value;
-                SelectedConnectionSettingsView = value.View;
-                OnPropertyChanged(nameof(SelectedConnectionSettingsView));
+                selectedConnectionType = value;      
+                ConfigParameters = value.Parameters;
+                OnPropertyChanged(nameof(ConfigParameters));
                 OnPropertyChanged(nameof(SelectedConnectionType));
             }
         }

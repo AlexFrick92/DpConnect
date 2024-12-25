@@ -26,14 +26,14 @@ namespace DpConnect.Example.TechParamApp.ViewModel
             {
                 IDpWorker techParamWorker = workerManager.CreateWorker<TechParamReader>();
 
-                dpConfig = new DpConfiguration()
-                {
-                    ConnectionId = SelectedConnection.ConnectionName,
-                    PropertyName = "TechParam",
-                    SourceConfiguration = dpSourceConfiguration
-                };
+                //dpConfig = new DpConfiguration()
+                //{
+                //    ConnectionId = SelectedConnection.ConnectionName,
+                //    PropertyName = "TechParam",
+                //    SourceConfiguration = dpSourceConfiguration
+                //};
 
-                binder.Bind(techParamWorker, new DpConfiguration[] { dpConfig });
+                //binder.Bind(techParamWorker, new DpConfiguration[] { dpConfig });
 
 
                 WorkerCreated?.Invoke(this, techParamWorker as ITechParamWorker);
@@ -98,7 +98,7 @@ namespace DpConnect.Example.TechParamApp.ViewModel
 
 
         //Конфигурация
-        DpConfiguration dpConfig;
+        //DpConfiguration dpConfig;
 
         public UIElement SelectedConnectionSourceConfig { get; set; }
         IDpSourceConfiguration dpSourceConfiguration;

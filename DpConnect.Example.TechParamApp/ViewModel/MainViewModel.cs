@@ -47,7 +47,7 @@ namespace DpConnect.Example.TechParamApp.ViewModel
                 new CreateConnectionViewModel(connectionManager, 
                 new IConnectionConfigurationView[] 
                 { 
-                    new OpcUaConnectionConfigurationView(),                    
+                    //new OpcUaConnectionConfigurationView(),                    
                 });
 
 

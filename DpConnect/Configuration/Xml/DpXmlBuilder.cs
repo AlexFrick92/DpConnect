@@ -105,7 +105,7 @@ namespace DpConnect.Configuration.Xml
                 .Where(i => i.IsGenericType && i.GetGenericTypeDefinition() == interfaceType)
                 .FirstOrDefault();
             if (iface == null)            
-                throw new DpConfigurationException($"Тип соединения {connectionType} должен реализовывать интерфейс {interfaceType.Name}");            
+                throw new DpConfigurationException($"Тип соединения {connectionType} должен реализовывать интерфейс {interfaceType.Name}");             
 
             Type[] genericArguments = iface.GetGenericArguments();
             Type sourceConfigurationType = genericArguments[0];

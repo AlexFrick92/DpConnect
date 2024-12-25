@@ -58,7 +58,9 @@
     <Compile Include="ViewModel\ConnectionViewModel.cs" />
     <Compile Include="ViewModel\CreateConnectionViewModel.cs" />
     <Compile Include="ViewModel\CreateTechParamViewModel.cs" />
+    <Compile Include="ViewModel\IConnectionConfigurationViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
+    <Compile Include="ViewModel\NamedConfigParamViewModel.cs" />
     <Compile Include="ViewModel\OpcUaConfigSourceViewModel.cs" />
     <Compile Include="ViewModel\OpcUaConnectionConfigurationViewModel.cs" />
     <Compile Include="ViewModel\RelayCommand.cs" />
@@ -79,9 +81,6 @@
     </Compile>
     <Compile Include="View\OpcUaConfigSourceView.xaml.cs">
       <DependentUpon>OpcUaConfigSourceView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\OpcUaConnectionSettingsView.xaml.cs">
-      <DependentUpon>OpcUaConnectionSettingsView.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -106,10 +105,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\OpcUaConfigSourceView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\OpcUaConnectionSettingsView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
