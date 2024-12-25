@@ -16,37 +16,37 @@
 			<ConnectionId>Stend AKF</ConnectionId>
 			
 			<DpValue PropertyName="BoolDp">
-				<SourceConfiguration TypeName="DpConnect.OpcUa.OpcUaDpValueSourceConfiguration">
+				<SourceConfiguration>
 					<NodeId>ns=3;s="PrimitiveTypes"."BoolTypeVar"</NodeId>
 				</SourceConfiguration>
 			</DpValue>
 
 			<DpValue PropertyName="ShortDp">
-				<SourceConfiguration TypeName="DpConnect.OpcUa.OpcUaDpValueSourceConfiguration">
+				<SourceConfiguration>
 					<NodeId>ns=3;s="PrimitiveTypes"."IntTypeVar"</NodeId>
 				</SourceConfiguration>
 			</DpValue>
 
 			<DpValue PropertyName="FloatDp">
-				<SourceConfiguration TypeName="DpConnect.OpcUa.OpcUaDpValueSourceConfiguration">
+				<SourceConfiguration>
 					<NodeId>ns=3;s="PrimitiveTypes"."RealTypeVar"</NodeId>
 				</SourceConfiguration>
 			</DpValue>
 
 			<DpValue PropertyName="StringDp">
-				<SourceConfiguration TypeName="DpConnect.OpcUa.OpcUaDpValueSourceConfiguration">
+				<SourceConfiguration>
 					<NodeId>ns=3;s="PrimitiveTypes"."StringTypeVar"</NodeId>
 				</SourceConfiguration>
 			</DpValue>
 
 			<DpValue PropertyName="WStringDp">
-				<SourceConfiguration TypeName="DpConnect.OpcUa.OpcUaDpValueSourceConfiguration">
+				<SourceConfiguration>
 					<NodeId>ns=3;s="PrimitiveTypes"."WStringTypeVar"</NodeId>
 				</SourceConfiguration>
 			</DpValue>
 
 			<DpValue PropertyName="DateTimeDp">
-				<SourceConfiguration TypeName="DpConnect.OpcUa.OpcUaDpValueSourceConfiguration">
+				<SourceConfiguration>
 					<NodeId>ns=3;s="PrimitiveTypes"."DateTimeTypeVar"</NodeId>
 				</SourceConfiguration>
 			</DpValue>

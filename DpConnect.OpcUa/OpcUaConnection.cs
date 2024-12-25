@@ -133,39 +133,22 @@ namespace DpConnect.OpcUa
             return node;
         }
 
-        public void ConnectDpMethod(IDpActionSource dpMethod, IDpSourceConfiguration sourceConfiguration)
-        {
-            OpcUaDpValueSourceConfiguration opcuaSourceConfig;
-
-            //if (sourceConfiguration is OpcUaDpValueSourceConfiguration)
-            //    opcuaSourceConfig = (OpcUaDpValueSourceConfiguration)sourceConfiguration;
-
-            //else if (sourceConfiguration is DpSourceXmlConfiguration)
-            //    opcuaSourceConfig = new OpcUaDpValueSourceXmlConfiguration((DpSourceXmlConfiguration)sourceConfiguration);
-
-            //else
-            //    throw new ArgumentException("Неправильный тип source-конфигурации");
-
-
-            //dpMethod.SourceDelegate += (e) =>
-            //{
-            //    if(client != null)
-            //    {
-                    
-            //        return client.CallMethod(opcuaSourceConfig.NodeId, e);
-            //    }
-            //    else
-            //    {
-            //        throw new Exception($"{Id}: Подключение сервером не установлено!");
-            //    }
-            //};
-            //dpValuesStatus.Add(dpMethod);
-        }
-
-
         public void ConnectDpMethod(IDpActionSource dpMethod, OpcUaDpValueSourceConfiguration sourceConfiguration)
         {
-            throw new NotImplementedException();
+
+            dpMethod.SourceDelegate += (e) =>
+            {
+                if (client != null)
+                {
+
+                    return client.CallMethod(sourceConfiguration.NodeId, e);
+                }
+                else
+                {
+                    throw new Exception($"{Id}: Подключение сервером не установлено!");
+                }
+            };
+            dpValuesStatus.Add(dpMethod);
         }
     }
 }

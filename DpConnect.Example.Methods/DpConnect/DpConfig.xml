@@ -4,31 +4,33 @@
 <DpConfiguration>
 
 	<Connections>
-		<Connection TypeName="DpConnect.OpcUa.IOpcUaConnection, DpConnect.OpcUa" ConnectionId ="Stend AKF">
+		<Connection TypeName="DpConnect.OpcUa.IOpcUaConnection, DpConnect.OpcUa">
+			<Id>Stend AKF</Id>
 			<Endpoint>opc.tcp://10.10.10.95:4840</Endpoint>
 		</Connection>		
 	</Connections>
 
 	<Workers>
 		<Worker TypeName="DpConnect.Example.Methods.IMethodCall, DpConnect.Example.Methods">
-
+			
+			<ConnectionId>Stend AKF</ConnectionId>
 
 			<DpAction PropertyName ="GetDate">
-				<SourceConfiguration ConnectionId ="Stend AKF">
+				<SourceConfiguration>
 					<NodeId>ns=3;s="OPCUA_GetActualDTL_Scalar"</NodeId>
 				</SourceConfiguration>
 				
 			</DpAction>
 
 			<DpAction PropertyName ="Multiply">
-				<SourceConfiguration ConnectionId ="Stend AKF">
+				<SourceConfiguration>
 					<NodeId>ns=3;s="OPCUA_Mul_Real"</NodeId>
 				</SourceConfiguration>
 
 			</DpAction>
 
 			<DpAction PropertyName ="Sum">
-				<SourceConfiguration ConnectionId ="Stend AKF">
+				<SourceConfiguration>
 					<NodeId>ns=3;s="OPCUA_Sum_Int"</NodeId>
 				</SourceConfiguration>
 
