@@ -1,14 +1,24 @@
 ﻿using System;
+using System.Xml.Linq;
 
 
 namespace DpConnect.Configuration
 {
-    public class DpConfiguration
+    public class DpConfiguration<T> : IDpConfiguration
+        where T : IDpSourceConfiguration
     {
         public string PropertyName { get; set; }
 
         public string ConnectionId { get; set; }
 
-        public IDpSourceConfiguration SourceConfiguration { get; set; }
+        public T SourceConfiguration { get; set; }
+
+
+        // Явная реализация интерфейса IDpConfiguration
+        IDpSourceConfiguration IDpConfiguration.SourceConfiguration
+        {
+            get => SourceConfiguration;
+            set => SourceConfiguration = (T)value;
+        }
     }
 }

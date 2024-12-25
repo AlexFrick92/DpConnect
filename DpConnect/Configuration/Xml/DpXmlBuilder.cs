@@ -34,6 +34,7 @@ namespace DpConnect.Configuration.Xml
         const string Xml_ConnectionIdAttribute = "ConnectionId";
         const string Xml_ConnectionActiveAttribute = "Active";
 
+        const string Xml_ConnectionIdTag = Xml_ConnectionIdAttribute;
         const string Xml_WorkerRootTag = "Workers";
         const string Xml_WorkerDeclareTag = "Worker";
         const string Xml_WorkerTypeNameAttribute = "TypeName";
@@ -78,26 +79,13 @@ namespace DpConnect.Configuration.Xml
 
             foreach(XElement configuredConnection in ConnectionConfiguration.Root.Elements(Xml_ConnectionDeclareTag))
             {                
-
                 string typeName = configuredConnection.Attribute(Xml_ConnectionTypeNameAttribute).Value;                
-
                 bool conActive = configuredConnection.Attribute(Xml_ConnectionActiveAttribute) != null ? bool.Parse(configuredConnection.Attribute(Xml_ConnectionActiveAttribute).Value) : true;
 
-                //IDpConnectionConfiguration connetionConfiguration = new DpConnectionXmlConfiguration() 
-                //{
-                //    ConnectionId = conId, 
-                //    Active = conActive,
-                //    Configuration = new XDocument(configuredConnection),
-                //    ConnectionType = Type.GetType(typeName)
-                //};
-
-                //connectionManager.CreateConnection(connetionConfiguration);
-
-
-                // Получаем тип для OpcUaConnection
+                // Получаем тип 
                 Type connectionType = Type.GetType(typeName);
 
-                // Получаем все интерфейсы, которые реализует OpcUaConnection
+                // Получаем все интерфейсы, которые реализует 
                 Type iface = connectionType.GetInterfaces()
                     .Where(i => i.IsGenericType && i.GetGenericTypeDefinition() == typeof(IDpConfigurableConnection<>))
                     .FirstOrDefault();
@@ -146,60 +134,91 @@ namespace DpConnect.Configuration.Xml
                 return;
             }
 
+
+            //Пройдемся по всем воркерам
             foreach (XElement configuredWorker in WorkerConfiguration.Root.Elements(Xml_WorkerDeclareTag))
             {
                 string typeName = configuredWorker.Attribute(Xml_WorkerTypeNameAttribute).Value;
+
+                string connectionId = configuredWorker.Element(Xml_ConnectionIdTag).Value;
 
                 Type workerType = Type.GetType(typeName);
                 if (!typeof(IDpWorker).IsAssignableFrom(workerType))
                     throw new DpConfigurationException($"Тип {workerType} должен реализовывать интерфейс {nameof(IDpWorker)}");
 
+                MethodInfo createWorkerMethodInfo = typeof(IDpWorkerManager).GetMethod(nameof(IDpWorkerManager.CreateWorker));
+                MethodInfo createWorkerMethod = createWorkerMethodInfo.MakeGenericMethod(workerType);
+                IDpWorker worker = (IDpWorker)createWorkerMethod.Invoke(workerManager, null);
 
-                MethodInfo methodInfo1 = typeof(IDpWorkerManager).GetMethod(nameof(IDpWorkerManager.CreateWorker));
-                MethodInfo genericMethod1 = methodInfo1.MakeGenericMethod(workerType);
+                //Получим соединение, к которому привязан воркер
+                IDpConnection connection = connectionManager.GetConnection(connectionId);
+                //Теперь мы должны взять тип конфигурации точки и создать эту конфигурацию.
+                //Для этого, соединение должна реализовывать интерфейс IDpBindableConnection<T>, где T - тип конфигурации.
 
-                IDpWorker worker = (IDpWorker)genericMethod1.Invoke(workerManager, null);
+                Type connectionType = connection.GetType();
+                //if(!typeof(IDpConfigurableConnection<>).IsAssignableFrom(connectionType))
+                //    throw new DpConfigurationException($"Тип соединения {connectionType} должен реализовывать интерфейс {nameof(IDpBindableConnection<IDpSourceConfiguration>)}");
 
-                //Создадим точки
-
-                List<DpConfiguration> workerDpConfig = new List<DpConfiguration>();
-
-                foreach(XElement configuredDp in configuredWorker.Elements(Xml_DpValueDeclareTag))
+                // Найдем интерфейс
+                Type iface = connectionType.GetInterfaces()
+                    .Where(i => i.IsGenericType && i.GetGenericTypeDefinition() == typeof(IDpBindableConnection<>))
+                    .FirstOrDefault();
+                if (iface == null) 
                 {
-                    IDpSourceConfiguration sourceConfig = new DpSourceXmlConfiguration() { Configuration = new XDocument(configuredDp.Element(Xml_DpSourceConfigurationTag))};
-
-                    string propertyName = configuredDp.Attribute(Xml_DpValuePropNameAttribute).Value;
-                    string connectionId = configuredDp.Element(Xml_DpSourceConfigurationTag).Attribute(Xml_ConnectionIdAttribute).Value;
-
-                    DpConfiguration dpValueConfig = new DpConfiguration() { PropertyName = propertyName, ConnectionId = connectionId, SourceConfiguration = sourceConfig };
-
-                    workerDpConfig.Add(dpValueConfig);
+                    throw new DpConfigurationException($"Тип соединения {connectionType} должен реализовывать интерфейс {nameof(IDpBindableConnection<IDpSourceConfiguration>)}");
                 }
 
-                foreach(XElement configuredDpAction in configuredWorker.Elements(Xml_DpActionDeclareTag))
+                Type[] genericArguments = iface.GetGenericArguments();
+
+                Type sourceConfigurationType = genericArguments[0];
+                Type genericDpConfigType = typeof(DpConfiguration<>).MakeGenericType(sourceConfigurationType);
+                Console.WriteLine("TSourceConfiguration: " + genericArguments[0].Name); // Первый тип: TConnectionConfiguration
+                    
+                //Создадим список конфигураций
+                //List<object> listOfConfigs = new List<object>();
+                // Создаём список с типом 'List<>', который соответствует IEnumerable<T>
+                var listType = typeof(List<>).MakeGenericType(genericDpConfigType);
+                var listOfConfigs = Activator.CreateInstance(listType);
+
+                // Добавляем элемент в коллекцию (например, создаём экземпляр объекта)
+                var addMethod = listType.GetMethod("Add");
+
+
+                foreach (XElement configuredDp in configuredWorker.Elements(Xml_DpValueDeclareTag))
                 {
-                    IDpSourceConfiguration sourceConfig = new DpSourceXmlConfiguration() { Configuration = new XDocument(configuredDpAction.Element(Xml_DpSourceConfigurationTag)) };
+                    IDpSourceConfiguration sourceConfiguration = Activator.CreateInstance(sourceConfigurationType) as IDpSourceConfiguration;                    
+                        
+                    IDpConfiguration dpConfig = Activator.CreateInstance(genericDpConfigType) as IDpConfiguration;
 
-                    string propertyName = configuredDpAction.Attribute(Xml_DpValuePropNameAttribute).Value;
-                    string connectionId = configuredDpAction.Element(Xml_DpSourceConfigurationTag).Attribute(Xml_ConnectionIdAttribute).Value;
+                    dpConfig.PropertyName = configuredDp.Attribute(Xml_DpValuePropNameAttribute).Value;
+                    sourceConfiguration.FromXml(new XDocument(configuredDp.Element(Xml_DpSourceConfigurationTag)));
+                    dpConfig.SourceConfiguration = sourceConfiguration;
 
-                    DpConfiguration dpValueConfig = new DpConfiguration() { PropertyName = propertyName, ConnectionId = connectionId, SourceConfiguration = sourceConfig };
-
-                    workerDpConfig.Add(dpValueConfig);
+                    addMethod.Invoke(listOfConfigs, new[] { dpConfig });
 
                 }
 
-                dpBinder.Bind(worker, workerDpConfig);
+
+                MethodInfo bindMethodInfo = typeof(IDpBinder).GetMethod(nameof(IDpBinder.Bind));
+                MethodInfo bindMethod = bindMethodInfo.MakeGenericMethod(sourceConfigurationType);
+                    
+                bindMethod.Invoke(dpBinder, new object[] { worker, connection, listOfConfigs });
+                
+
+
+                //foreach(XElement configuredDpAction in configuredWorker.Elements(Xml_DpActionDeclareTag))
+                //{
+                //    IDpSourceConfiguration sourceConfig = null;//new DpSourceXmlConfiguration() { Configuration = new XDocument(configuredDpAction.Element(Xml_DpSourceConfigurationTag)) };
+
+                //    string propertyName = configuredDpAction.Attribute(Xml_DpValuePropNameAttribute).Value;                    
+
+                //    DpConfiguration dpValueConfig = new DpConfiguration() { PropertyName = propertyName, ConnectionId = connectionId, SourceConfiguration = sourceConfig };
+
+                //    workerDpConfig.Add(dpValueConfig);
+                //}
+
             }
             logger.Info("Воркеры созданы.");
-        }
-
-        public IDpWorker BuildWorker<T>(IEnumerable<DpConfiguration> propertyConfiguration) where T : IDpWorker
-        {
-            IDpWorker worker = workerManager.CreateWorker<T>();
-            dpBinder.Bind(worker, propertyConfiguration);
-
-            return worker;
         }
     }
 }

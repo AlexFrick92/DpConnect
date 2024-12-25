@@ -41,6 +41,13 @@ namespace DpConnect.Example.PrimitiveValues
 
             //var con = man.CreateConnection<IOpcUaConnection, OpcUaConnectionConfiguration>(new OpcUaConnectionConfiguration());
 
+            //var binder = container.Resolve<IDpBinder>();
+
+            //IOpcUaConnection connection = container.Resolve<IOpcUaConnection>();
+
+            //binder.Bind(null, connection, null);
+
+
             IDpBuilder builder = container.Resolve<IDpBuilder>();
             builder.Build();
 

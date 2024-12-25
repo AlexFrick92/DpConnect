@@ -13,7 +13,7 @@ namespace DpConnect
         IDpConnectionManager ConnectionManager { get; }
         IDpWorkerManager WorkerManager { get; }
 
-        IDpWorker BuildWorker<T>(IEnumerable<DpConfiguration> propertyConfiguration) where T : IDpWorker;
+       // IDpWorker BuildWorker<T>(IEnumerable<DpConfiguration> propertyConfiguration) where T : IDpWorker;
 
     }
 }

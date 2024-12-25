@@ -12,22 +12,21 @@ namespace DpConnect.Building
     public class DpBinder : IDpBinder
     {
 
-        readonly IDpConnectionManager connectionManager;
         readonly ILogger logger;
 
 
-        public DpBinder(IDpConnectionManager connectionManager, ILogger logger)
+        public DpBinder(ILogger logger)
         {
-            this.connectionManager = connectionManager;
             this.logger = logger;
         }
 
 
         //Создать точку такого типа, который имеет свойство воркера
-        public void Bind(IDpWorker worker, IEnumerable<DpConfiguration> configs)
+        public void Bind<TSourceConfig>(IDpWorker worker, IDpBindableConnection<TSourceConfig> connectionToBind, IEnumerable<DpConfiguration<TSourceConfig>> configs)
+            where TSourceConfig : IDpSourceConfiguration
         {
             logger.Info($"Связываем {worker.GetType()}...");
-            foreach (DpConfiguration config in configs)
+            foreach (var config in configs)
             {
                 PropertyInfo prop = null;
                 try
@@ -37,14 +36,12 @@ namespace DpConnect.Building
                 catch (InvalidOperationException ex)
                 {
                     throw new DpConfigurationException($"В типе {worker.GetType()} не найдено публичное свойство {config.PropertyName}");
-                }                
-
-                var connection = connectionManager.GetConnection(config.ConnectionId);
+                }                               
 
                 if (prop.PropertyType.GetGenericTypeDefinition() == typeof(IDpValue<>))
                 {
                     object dp = CreateDpValue(prop);                    
-                    connection.ConnectDpValue(dp as dynamic, config.SourceConfiguration);
+                   // connection.ConnectDpValue(dp as dynamic, config.SourceConfiguration);
                     prop.SetValue(worker, dp);
                     logger.Info($"Свойство {config.PropertyName} типа {dp.GetType()} для {config.ConnectionId}");
 

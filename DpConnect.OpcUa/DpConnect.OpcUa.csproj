@@ -89,7 +89,6 @@
     <Compile Include="OpcUaConnection.cs" />
     <Compile Include="OpcUaConnectionConfiguration.cs" />
     <Compile Include="OpcUaDpValueSourceConfiguration.cs" />
-    <Compile Include="OpcUaDpValueSourceXmlConfiguration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
