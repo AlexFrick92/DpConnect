@@ -22,7 +22,7 @@ namespace DpConnect.Building
 
 
         //Создать точку такого типа, который имеет свойство воркера
-        public void Bind<TSourceConfig>(IDpWorker worker, IDpBindableConnection<TSourceConfig> connectionToBind, IEnumerable<DpConfiguration<TSourceConfig>> configs)
+        public void Bind<TSourceConfig>(IDpWorker worker, IDpBindableConnection<TSourceConfig> connection, IEnumerable<DpConfiguration<TSourceConfig>> configs)
             where TSourceConfig : IDpSourceConfiguration
         {
             logger.Info($"Связываем {worker.GetType()}...");
@@ -41,17 +41,17 @@ namespace DpConnect.Building
                 if (prop.PropertyType.GetGenericTypeDefinition() == typeof(IDpValue<>))
                 {
                     object dp = CreateDpValue(prop);
-                    connectionToBind.ConnectDpValue(dp as dynamic, config.SourceConfiguration);
+                    connection.ConnectDpValue(dp as dynamic, config.SourceConfiguration);
                     prop.SetValue(worker, dp);
                     logger.Info($"Свойство {config.PropertyName} типа {dp.GetType()} для {config.ConnectionId}");
 
                 }
                 else if (prop.PropertyType.GetGenericTypeDefinition() == typeof(IDpAction<>))
                 {
-                    //object dp = CreatDpFunc(prop);
-                    //connection.ConnectDpMethod(dp as dynamic, config.SourceConfiguration);
-                    //prop.SetValue(worker, dp);
-                    //logger.Info($"Метод {config.PropertyName} типа {dp.GetType()} для {config.ConnectionId}");
+                    object dp = CreatDpFunc(prop);
+                    connection.ConnectDpMethod(dp as dynamic, config.SourceConfiguration);
+                    prop.SetValue(worker, dp);
+                    logger.Info($"Метод {config.PropertyName} типа {dp.GetType()} для {config.ConnectionId}");
                 }
                 else
                 {
