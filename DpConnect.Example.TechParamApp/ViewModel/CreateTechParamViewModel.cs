@@ -28,7 +28,7 @@ namespace DpConnect.Example.TechParamApp.ViewModel
 
                 //dpConfig = new DpConfiguration()
                 //{
-                //    ConnectionId = SelectedConnection.ConnectionName,
+                //    ConnectionId = SelectedConnection.ConnectionTypeName,
                 //    PropertyName = "TechParam",
                 //    SourceConfiguration = dpSourceConfiguration
                 //};

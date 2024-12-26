@@ -8,5 +8,8 @@ namespace DpConnect.Example.TechParamApp.ViewModel
 {
     public interface ITechParameterConfigurationViewModel
     {
+        string ParameterTypeName { get; }
+
+
     }
 }

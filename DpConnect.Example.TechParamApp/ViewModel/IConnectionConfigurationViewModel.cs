@@ -8,9 +8,9 @@ namespace DpConnect.Example.TechParamApp.ViewModel
 {
     public interface IConnectionConfigurationViewModel
     {
-        IEnumerable<NamedConfigParamViewModel> Parameters { get; }
+        IEnumerable<NamedConfigSettingViewModel> Settings { get; }
 
-        string ConnectionName { get; }        
+        string ConnectionTypeName { get; }        
 
         void CreateConnection(IDpConnectionManager connectionManager);
     }

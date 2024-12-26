@@ -61,7 +61,7 @@
     <Compile Include="ViewModel\IConnectionConfigurationViewModel.cs" />
     <Compile Include="ViewModel\ITechParameterConfigurationViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
-    <Compile Include="ViewModel\NamedConfigParamViewModel.cs" />
+    <Compile Include="ViewModel\NamedConfigSettingViewModel.cs" />
     <Compile Include="ViewModel\OpcUaConfigSourceViewModel.cs" />
     <Compile Include="ViewModel\OpcUaConnectionConfigurationViewModel.cs" />
     <Compile Include="ViewModel\RelayCommand.cs" />

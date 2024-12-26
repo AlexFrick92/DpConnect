@@ -37,7 +37,7 @@ namespace DpConnect.Example.TechParamApp.ViewModel
         public event EventHandler<IDpConnection> ConnectionCreated;
         public event EventHandler<IDpConnectionConfiguration> CreatingCanceled;                       
 
-        public IEnumerable<NamedConfigParamViewModel> ConfigParameters { get; set; }
+        public IEnumerable<NamedConfigSettingViewModel> ConfigSettings { get; set; }
         public IEnumerable<IConnectionConfigurationViewModel> ConnectionsTypes { get; private set; }
 
         IConnectionConfigurationViewModel selectedConnectionType;
@@ -47,8 +47,8 @@ namespace DpConnect.Example.TechParamApp.ViewModel
             set
             {
                 selectedConnectionType = value;      
-                ConfigParameters = value.Parameters;
-                OnPropertyChanged(nameof(ConfigParameters));
+                ConfigSettings = value.Settings;
+                OnPropertyChanged(nameof(ConfigSettings));
                 OnPropertyChanged(nameof(SelectedConnectionType));
             }
         }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DpConnect.Example.TechParamApp.ViewModel
 {
-    public class NamedConfigParamViewModel : BaseViewModel
+    public class NamedConfigSettingViewModel : BaseViewModel
     {
         public string Name { get; set; }
 

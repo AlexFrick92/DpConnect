@@ -11,8 +11,8 @@ namespace DpConnect.Example.TechParamApp.ViewModel
     {        
         public OpcUaConnectionConfigurationViewModel()
         {
-            List<NamedConfigParamViewModel> pars = new List<NamedConfigParamViewModel>();
-            var paramId = new NamedConfigParamViewModel();
+            List<NamedConfigSettingViewModel> pars = new List<NamedConfigSettingViewModel>();
+            var paramId = new NamedConfigSettingViewModel();
             paramId.Name = "Имя соединения";
             paramId.PropertyChanged += (s, v) =>
             {
@@ -20,7 +20,7 @@ namespace DpConnect.Example.TechParamApp.ViewModel
             };
 
             pars.Add(paramId);
-            Parameters = pars;
+            Settings = pars;
         }        
 
 
@@ -33,9 +33,9 @@ namespace DpConnect.Example.TechParamApp.ViewModel
 
         public string ConnectTimeout { get; set; }
 
-        public IEnumerable<NamedConfigParamViewModel> Parameters { get; }   
+        public IEnumerable<NamedConfigSettingViewModel> Settings { get; }   
 
-        public string ConnectionName => "OpcUa";
+        public string ConnectionTypeName => "OpcUa";
 
         public void CreateConnection(IDpConnectionManager manager)
         {
