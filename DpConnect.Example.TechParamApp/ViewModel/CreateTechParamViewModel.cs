@@ -1,17 +1,7 @@
 ﻿using DpConnect.Building;
-using DpConnect.Configuration;
-using DpConnect.Connection;
-using DpConnect.Example.TechParamApp.View;
-using DpConnect.ExampleWorker;
-using DpConnect.ExampleWorker.Console;
-using DpConnect.OpcUa;
+
 using System;
-using System.CodeDom;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
 using System.Windows.Input;
 
 namespace DpConnect.Example.TechParamApp.ViewModel
@@ -23,11 +13,8 @@ namespace DpConnect.Example.TechParamApp.ViewModel
             AvaibleConnections = configuredConnections;
 
             CreateWorkerCmd = new RelayCommand((arg) =>
-            {
-                IDpWorker techParamWorker = workerManager.CreateWorker<TechParamReader>();
-
+            {                                
                 ITechParamViewModel techParam = SelectedTechParamConfigurator.CreateTechParameter(binder, workerManager, selectedConnection.DpConnection);
-
 
                 WorkerCreated?.Invoke(this, techParam);
             });

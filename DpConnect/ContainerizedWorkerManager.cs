@@ -25,7 +25,7 @@ namespace DpConnect
         public IDpWorker CreateWorker<T>() where T : IDpWorker
         {
             IDpWorker worker = container.Resolve<T>();
-            workers.Add(worker);
+            workers.Add(worker);            
 
             WorkerCreated?.Invoke(this, worker);
 
