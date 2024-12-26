@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace DpConnect.Example.TechParamApp.ViewModel
 {
-    public class OpcUaConnectionConfigurationViewModel : BaseViewModel, IConnectionConfigurationViewModel
+    public class OpcUaConnectionConfigurationViewModel : BaseViewModel, IConnectionConfiguratorViewModel
     {        
         public OpcUaConnectionConfigurationViewModel()
         {
@@ -20,6 +20,15 @@ namespace DpConnect.Example.TechParamApp.ViewModel
             };
 
             pars.Add(paramId);
+
+            var paramEndpoint = new NamedConfigSettingViewModel();
+            paramEndpoint.Name = "Адрес";
+            paramEndpoint.PropertyChanged += (s, v) =>
+            {
+                Endpoint = paramEndpoint.Value.ToString();
+            };
+            pars.Add(paramEndpoint);
+
             Settings = pars;
         }        
 

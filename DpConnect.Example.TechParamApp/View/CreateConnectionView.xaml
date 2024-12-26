@@ -62,7 +62,7 @@
                 Grid.Row="1"
                 Grid.Column="1"
                 ItemsSource="{Binding ConnectionsTypes}"        
-                DisplayMemberPath="ConnectionName"
+                DisplayMemberPath="ConnectionTypeName"
                 SelectedItem="{Binding SelectedConnectionType, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"                
                 >
 
@@ -70,7 +70,7 @@
             </ComboBox>
 
             <ItemsControl Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2"
-                     ItemsSource="{Binding ConfigParameters}"
+                     ItemsSource="{Binding SelectedConnectionType.Settings}"
                      BorderThickness="0"
                      >
                 <ItemsControl.ItemTemplate>

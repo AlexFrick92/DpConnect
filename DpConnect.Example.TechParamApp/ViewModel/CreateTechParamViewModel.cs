@@ -54,30 +54,20 @@ namespace DpConnect.Example.TechParamApp.ViewModel
         public ICommand CreateWorkerCmd { get; set; }
         public ICommand CancelCmd { get; set; }
 
-        public List<string> AvaibleWorkers { get; set; } = new List<string> { "Простой тех. параметр", "Непростой тех. параметр"};
+        public List<ITechParameterConfiguratorViewModel> AvaibleTechParamConfigurators { get; set; } = new List<ITechParameterConfiguratorViewModel>() { new TechParamReaderConfigViewModel() };
 
-        string selectedWorkerType;
-        public string SelectedWorkerType
+        ITechParameterConfiguratorViewModel selectedConfigurator;
+        public ITechParameterConfiguratorViewModel SelectedTechParamConfigurator
         {
-            get => selectedWorkerType;
+            get => selectedConfigurator;
             set
             {
-                selectedWorkerType = value;
-                switch
-                    (selectedWorkerType)
-                {
-                    case "Простой тех. параметр":
-
-
-                       
-
-                        break;
-
-                    default:
-                        break;
-                }
+                selectedConfigurator = value;
+                OnPropertyChanged(nameof(SelectedTechParamConfigurator));
             }
         }
+
+
 
         ConnectionViewModel selectedConnection;
         public ConnectionViewModel SelectedConnection 
@@ -88,20 +78,14 @@ namespace DpConnect.Example.TechParamApp.ViewModel
                 selectedConnection = value;
 
                 var opcUaConfigSourceVm = new OpcUaConfigSourceViewModel();
-                dpSourceConfiguration = opcUaConfigSourceVm.sourceConfiguration;
+                //dpSourceConfiguration = opcUaConfigSourceVm.sourceConfiguration;
 
                 SelectedConnectionSourceConfig = new OpcUaConfigSourceView(opcUaConfigSourceVm);
                 OnPropertyChanged(nameof(SelectedConnectionSourceConfig));
             }
         }
 
-
-
-        //Конфигурация
-        //DpConfiguration dpConfig;
-
         public UIElement SelectedConnectionSourceConfig { get; set; }
-        IDpSourceConfiguration dpSourceConfiguration;
         public IEnumerable<ConnectionViewModel> AvaibleConnections { get; private set; }
         
 

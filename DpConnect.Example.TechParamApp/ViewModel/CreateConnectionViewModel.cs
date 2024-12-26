@@ -22,7 +22,7 @@ namespace DpConnect.Example.TechParamApp.ViewModel
 
             //ConnectionsTypes = avaibleConnectionsTypes;   
 
-            ConnectionsTypes = new List<IConnectionConfigurationViewModel>() { new OpcUaConnectionConfigurationViewModel()};
+            ConnectionsTypes = new List<IConnectionConfiguratorViewModel>() { new OpcUaConnectionConfigurationViewModel()};
 
             CreateConnectionCmd = new RelayCommand((arg) => 
             {
@@ -36,19 +36,16 @@ namespace DpConnect.Example.TechParamApp.ViewModel
 
         public event EventHandler<IDpConnection> ConnectionCreated;
         public event EventHandler<IDpConnectionConfiguration> CreatingCanceled;                       
+        
+        public IEnumerable<IConnectionConfiguratorViewModel> ConnectionsTypes { get; private set; }
 
-        public IEnumerable<NamedConfigSettingViewModel> ConfigSettings { get; set; }
-        public IEnumerable<IConnectionConfigurationViewModel> ConnectionsTypes { get; private set; }
-
-        IConnectionConfigurationViewModel selectedConnectionType;
-        public IConnectionConfigurationViewModel SelectedConnectionType
+        IConnectionConfiguratorViewModel selectedConnectionType;
+        public IConnectionConfiguratorViewModel SelectedConnectionType
         {
             get => selectedConnectionType;
             set
             {
-                selectedConnectionType = value;      
-                ConfigSettings = value.Settings;
-                OnPropertyChanged(nameof(ConfigSettings));
+                selectedConnectionType = value;                      
                 OnPropertyChanged(nameof(SelectedConnectionType));
             }
         }

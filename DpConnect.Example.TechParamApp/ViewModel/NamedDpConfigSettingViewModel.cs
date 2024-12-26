@@ -6,10 +6,9 @@ using System.Threading.Tasks;
 
 namespace DpConnect.Example.TechParamApp.ViewModel
 {
-    public interface ITechParameterConfigurationViewModel
+    public class NamedDpConfigSettingViewModel
     {
-        string ParameterTypeName { get; }
-
-
+        public string DpName { get; set; }    
+        public IEnumerable<NamedConfigSettingViewModel> SourceSettings { get; set; }
     }
 }
