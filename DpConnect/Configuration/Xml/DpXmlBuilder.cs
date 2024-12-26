@@ -119,9 +119,14 @@ namespace DpConnect.Configuration.Xml
 
             try
             {
-                IEnumerable<XElement> workers = WorkerConfiguration.Root.Elements(Xml_WorkerDeclareTag);
-                if (workers == null || workers.Count() == 0)
-                    throw new ArgumentNullException();
+                if(WorkerConfiguration.Root != null)
+                {
+                    IEnumerable<XElement> workers = WorkerConfiguration.Root.Elements(Xml_WorkerDeclareTag);
+                    if (workers == null || workers.Count() == 0)
+                        throw new DpConfigurationException("Нет воркеров в конфигурации");
+                }
+                else
+                    throw new DpConfigurationException("Нет воркеров в конфигурации");
             }
             catch 
             {
