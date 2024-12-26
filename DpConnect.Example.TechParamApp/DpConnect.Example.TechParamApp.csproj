@@ -68,8 +68,9 @@
     <Compile Include="ViewModel\OpcUaSourceConfiguratorViewModel.cs" />
     <Compile Include="ViewModel\OpcUaConnectionConfiguratorViewModel.cs" />
     <Compile Include="ViewModel\RelayCommand.cs" />
-    <Compile Include="ViewModel\TechParamReaderConfigViewModel.cs" />
-    <Compile Include="ViewModel\TechParamWorkerViewModel.cs" />
+    <Compile Include="ViewModel\TechParamReaderConfiguratorViewModel.cs" />
+    <Compile Include="ViewModel\TechParamReaderViewModel.cs" />
+    <Compile Include="ViewModel\ITechParamViewModel.cs" />
     <Compile Include="ViewModel\WorkerViewModel.cs" />
     <Compile Include="View\CreateConnectionView.xaml.cs">
       <DependentUpon>CreateConnectionView.xaml</DependentUpon>

@@ -30,7 +30,10 @@ namespace DpConnect.Example.TechParamApp.ViewModel
             this.binder = binder;
 
 
-            workerManager.WorkerCreated += (s, w) => ConfiguredWorkers.Add(new WorkerViewModel(w));
+            workerManager.WorkerCreated += (s, w) =>
+            {                
+                ConfiguredWorkers.Add(new WorkerViewModel(w));
+            };
             connectionManager.NewConnectionCreated += (s, c) => ConfiguredConnections.Add(new OpcUaConnectionViewModel(c));
 
 
@@ -68,7 +71,7 @@ namespace DpConnect.Example.TechParamApp.ViewModel
                 createWorkerViewModel.CreatingCanceled += (s, v) => createWorkerView.Close();
                 createWorkerViewModel.WorkerCreated += (s, v) =>
                 {
-                    TechParamWorkers.Add(new TechParamWorkerViewModel(v));
+                    TechParamWorkers.Add(v);
                     createWorkerView.Close();
                 };
 
@@ -90,7 +93,7 @@ namespace DpConnect.Example.TechParamApp.ViewModel
         
 
         public ObservableCollection<WorkerViewModel> ConfiguredWorkers { get; private set; } = new ObservableCollection<WorkerViewModel>();
-        public ObservableCollection<TechParamWorkerViewModel> TechParamWorkers { get; private set; } = new ObservableCollection<TechParamWorkerViewModel>();
+        public ObservableCollection<ITechParamViewModel> TechParamWorkers { get; private set; } = new ObservableCollection<ITechParamViewModel>();
         public ObservableCollection<IConnectionViewModel> ConfiguredConnections { get; private set; } = new ObservableCollection<IConnectionViewModel>();
 
     }

@@ -26,17 +26,10 @@ namespace DpConnect.Example.TechParamApp.ViewModel
             {
                 IDpWorker techParamWorker = workerManager.CreateWorker<TechParamReader>();
 
-                //dpConfig = new DpConfiguration()
-                //{
-                //    ConnectionId = SelectedConnection.ConnectionTypeName,
-                //    PropertyName = "TechParam",
-                //    SourceConfigurator = dpSourceConfiguration
-                //};
-
-                //binder.Bind(techParamWorker, new DpConfiguration[] { dpConfig });
+                ITechParamViewModel techParam = SelectedTechParamConfigurator.CreateTechParameter(binder, workerManager, selectedConnection.DpConnection);
 
 
-                WorkerCreated?.Invoke(this, techParamWorker as ITechParamWorker);
+                WorkerCreated?.Invoke(this, techParam);
             });
             CancelCmd = new RelayCommand((arg) => CreatingCanceled?.Invoke(this, null));
 
@@ -48,13 +41,13 @@ namespace DpConnect.Example.TechParamApp.ViewModel
         IDpWorkerManager workerManager;
         IDpBinder binder;
 
-        public event EventHandler<ITechParamWorker> WorkerCreated;
+        public event EventHandler<ITechParamViewModel> WorkerCreated;
         public event EventHandler<IDpConnectionConfiguration> CreatingCanceled;
 
         public ICommand CreateWorkerCmd { get; set; }
         public ICommand CancelCmd { get; set; }
 
-        public List<ITechParameterConfiguratorViewModel> AvaibleTechParamConfigurators { get; set; } = new List<ITechParameterConfiguratorViewModel>() { new TechParamReaderConfigViewModel() };
+        public List<ITechParameterConfiguratorViewModel> AvaibleTechParamConfigurators { get; set; } = new List<ITechParameterConfiguratorViewModel>() { new TechParamReaderConfiguratorViewModel() };
 
         ITechParameterConfiguratorViewModel selectedConfigurator;
         public ITechParameterConfiguratorViewModel SelectedTechParamConfigurator

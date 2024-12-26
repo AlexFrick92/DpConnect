@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DpConnect.Connection;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,5 +14,7 @@ namespace DpConnect.Example.TechParamApp.ViewModel
         string ConnectionType { get; }
 
         void CreateSourceConfigurators(ITechParameterConfiguratorViewModel techParamConfigurator);
+
+        IDpConnection DpConnection { get; }
     }
 }

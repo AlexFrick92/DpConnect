@@ -12,14 +12,14 @@ namespace DpConnect.Example.TechParamApp.ViewModel
         
         public OpcUaConnectionViewModel(IDpConnection connection)
         {
-            dpConnection = connection;
+            DpConnection = connection;
         }
 
-        public string ConnectionName { get => dpConnection.Id; }
+        public string ConnectionName { get => DpConnection.Id; }
 
-        public string ConnectionType { get => dpConnection.GetType().ToString(); }        
+        public string ConnectionType { get => DpConnection.GetType().ToString(); }        
 
-        IDpConnection dpConnection;
+        public IDpConnection DpConnection { get; private set; }
 
         public void CreateSourceConfigurators(ITechParameterConfiguratorViewModel techParamConfigurator)
         {

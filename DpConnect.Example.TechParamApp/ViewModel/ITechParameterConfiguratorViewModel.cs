@@ -1,4 +1,6 @@
-﻿using System;
+﻿using DpConnect.Building;
+using DpConnect.Connection;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,6 +14,6 @@ namespace DpConnect.Example.TechParamApp.ViewModel
 
         IEnumerable<NamedDpConfigSettingViewModel> Settings { get; }        
 
-        void CreateTechParameter();
+        ITechParamViewModel CreateTechParameter(IDpBinder binder, IDpWorkerManager workerManager, IDpConnection connection);
     }
 }
