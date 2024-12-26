@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace DpConnect.Example.TechParamApp.ViewModel
 {
-    public class OpcUaConnectionConfigurationViewModel : BaseViewModel, IConnectionConfiguratorViewModel
+    public class OpcUaConnectionConfiguratorViewModel : BaseViewModel, IConnectionConfiguratorViewModel
     {        
-        public OpcUaConnectionConfigurationViewModel()
+        public OpcUaConnectionConfiguratorViewModel()
         {
             List<NamedConfigSettingViewModel> pars = new List<NamedConfigSettingViewModel>();
             var paramId = new NamedConfigSettingViewModel();

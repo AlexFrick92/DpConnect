@@ -22,7 +22,7 @@ namespace DpConnect.Example.TechParamApp.ViewModel
 
             //ConnectionsTypes = avaibleConnectionsTypes;   
 
-            ConnectionsTypes = new List<IConnectionConfiguratorViewModel>() { new OpcUaConnectionConfigurationViewModel()};
+            ConnectionsTypes = new List<IConnectionConfiguratorViewModel>() { new OpcUaConnectionConfiguratorViewModel()};
 
             CreateConnectionCmd = new RelayCommand((arg) => 
             {

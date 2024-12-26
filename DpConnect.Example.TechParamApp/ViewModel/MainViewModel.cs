@@ -31,12 +31,12 @@ namespace DpConnect.Example.TechParamApp.ViewModel
 
 
             workerManager.WorkerCreated += (s, w) => ConfiguredWorkers.Add(new WorkerViewModel(w));
-            connectionManager.NewConnectionCreated += (s, c) => ConfiguredConnections.Add(new ConnectionViewModel(c));
+            connectionManager.NewConnectionCreated += (s, c) => ConfiguredConnections.Add(new OpcUaConnectionViewModel(c));
 
 
             foreach(var con in connectionManager.ConfiguredConnections)
             {
-                ConfiguredConnections.Add(new ConnectionViewModel(con));
+                ConfiguredConnections.Add(new OpcUaConnectionViewModel(con));
             }
 
             AddConnectionCmd = new RelayCommand((arg) =>
@@ -91,7 +91,7 @@ namespace DpConnect.Example.TechParamApp.ViewModel
 
         public ObservableCollection<WorkerViewModel> ConfiguredWorkers { get; private set; } = new ObservableCollection<WorkerViewModel>();
         public ObservableCollection<TechParamWorkerViewModel> TechParamWorkers { get; private set; } = new ObservableCollection<TechParamWorkerViewModel>();
-        public ObservableCollection<ConnectionViewModel> ConfiguredConnections { get; private set; } = new ObservableCollection<ConnectionViewModel>();
+        public ObservableCollection<IConnectionViewModel> ConfiguredConnections { get; private set; } = new ObservableCollection<IConnectionViewModel>();
 
     }
 }

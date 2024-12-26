@@ -7,19 +7,17 @@ using System.Threading.Tasks;
 
 namespace DpConnect.Example.TechParamApp.ViewModel
 {
-    public class ConnectionViewModel : BaseViewModel
+    public class OpcUaConnectionViewModel : BaseViewModel, IConnectionViewModel
     {
         
-        public ConnectionViewModel(IDpConnection connection)
+        public OpcUaConnectionViewModel(IDpConnection connection)
         {
             dpConnection = connection;
         }
 
         public string ConnectionName { get => dpConnection.Id; }
 
-        public string ConnectionType { get => dpConnection.GetType().ToString(); }
-
-        public Type ConnectionTypeType { get => dpConnection.GetType(); }
+        public string ConnectionType { get => dpConnection.GetType().ToString(); }        
 
         IDpConnection dpConnection;
     }

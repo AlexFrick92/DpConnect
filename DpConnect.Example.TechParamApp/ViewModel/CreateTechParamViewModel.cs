@@ -18,7 +18,7 @@ namespace DpConnect.Example.TechParamApp.ViewModel
 {
     public class CreateTechParamViewModel : BaseViewModel
     {
-        public CreateTechParamViewModel(IEnumerable<ConnectionViewModel> configuredConnections, IDpWorkerManager workerManager, IDpBinder binder)
+        public CreateTechParamViewModel(IEnumerable<IConnectionViewModel> configuredConnections, IDpWorkerManager workerManager, IDpBinder binder)
         {
             AvaibleConnections = configuredConnections;
 
@@ -69,24 +69,16 @@ namespace DpConnect.Example.TechParamApp.ViewModel
 
 
 
-        ConnectionViewModel selectedConnection;
-        public ConnectionViewModel SelectedConnection 
+        IConnectionViewModel selectedConnection;
+        public IConnectionViewModel SelectedConnection 
         {
             get => selectedConnection;            
             set
             {
                 selectedConnection = value;
-
-                var opcUaConfigSourceVm = new OpcUaConfigSourceViewModel();
-                //dpSourceConfiguration = opcUaConfigSourceVm.sourceConfiguration;
-
-                SelectedConnectionSourceConfig = new OpcUaConfigSourceView(opcUaConfigSourceVm);
-                OnPropertyChanged(nameof(SelectedConnectionSourceConfig));
             }
-        }
-
-        public UIElement SelectedConnectionSourceConfig { get; set; }
-        public IEnumerable<ConnectionViewModel> AvaibleConnections { get; private set; }
+        }        
+        public IEnumerable<IConnectionViewModel> AvaibleConnections { get; private set; }
         
 
     }

@@ -21,7 +21,7 @@ namespace DpConnect.Example.TechParamApp.View
     /// </summary>
     public partial class OpcUaConfigSourceView : UserControl
     {
-        public OpcUaConfigSourceView(OpcUaConfigSourceViewModel vm)
+        public OpcUaConfigSourceView(OpcUaSourceConfiguratorViewModel vm)
         {
             InitializeComponent();
             DataContext = vm;
