@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace DpConnect.Example.TechParamApp.ViewModel
 {
-    public class TechParamReaderConfiguratorViewModel : BaseViewModel, ITechParameterConfiguratorViewModel
+    public class TechParamReaderConfiguratorViewModel : BaseViewModel, ITechParamConfiguratorViewModel
     {        
         public TechParamReaderConfiguratorViewModel()
         {

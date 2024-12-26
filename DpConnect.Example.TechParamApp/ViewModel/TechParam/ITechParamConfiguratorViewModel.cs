@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace DpConnect.Example.TechParamApp.ViewModel
 {
-    public interface ITechParameterConfiguratorViewModel
+    public interface ITechParamConfiguratorViewModel
     {
         string ConfiguratorName { get; }
 

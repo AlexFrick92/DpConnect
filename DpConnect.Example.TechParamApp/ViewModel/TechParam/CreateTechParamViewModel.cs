@@ -34,10 +34,10 @@ namespace DpConnect.Example.TechParamApp.ViewModel
         public ICommand CreateWorkerCmd { get; set; }
         public ICommand CancelCmd { get; set; }
 
-        public List<ITechParameterConfiguratorViewModel> AvaibleTechParamConfigurators { get; set; } = new List<ITechParameterConfiguratorViewModel>() { new TechParamReaderConfiguratorViewModel() };
+        public List<ITechParamConfiguratorViewModel> AvaibleTechParamConfigurators { get; set; } = new List<ITechParamConfiguratorViewModel>() { new TechParamReaderConfiguratorViewModel() };
 
-        ITechParameterConfiguratorViewModel selectedConfigurator;
-        public ITechParameterConfiguratorViewModel SelectedTechParamConfigurator
+        ITechParamConfiguratorViewModel selectedConfigurator;
+        public ITechParamConfiguratorViewModel SelectedTechParamConfigurator
         {
             get => selectedConfigurator;
             set

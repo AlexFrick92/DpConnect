@@ -21,7 +21,7 @@ namespace DpConnect.Example.TechParamApp.ViewModel
 
         public IDpConnection DpConnection { get; private set; }
 
-        public void CreateSourceConfigurators(ITechParameterConfiguratorViewModel techParamConfigurator)
+        public void CreateSourceConfigurators(ITechParamConfiguratorViewModel techParamConfigurator)
         {
             foreach(var setting in techParamConfigurator.Settings)
             {
