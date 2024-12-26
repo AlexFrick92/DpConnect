@@ -14,7 +14,7 @@ namespace DpConnect.Example.TechParamApp.ViewModel
 
             CreateWorkerCmd = new RelayCommand((arg) =>
             {                                
-                ITechParamViewModel techParam = SelectedTechParamConfigurator.CreateTechParameter(binder, workerManager, selectedConnection.DpConnection);
+                ITechParamViewModel techParam = SelectedTechParamConfigurator.CreateTechParameter(workerManager);
 
                 WorkerCreated?.Invoke(this, techParam);
             });
@@ -56,7 +56,7 @@ namespace DpConnect.Example.TechParamApp.ViewModel
             set
             {
                 selectedConnection = value;
-                selectedConnection.CreateSourceConfigurators(SelectedTechParamConfigurator);
+                SelectedTechParamConfigurator.SetConnection(value);
             }
         }        
         public IEnumerable<IConnectionViewModel> AvaibleConnections { get; private set; }

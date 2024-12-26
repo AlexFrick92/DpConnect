@@ -14,6 +14,8 @@ namespace DpConnect.Example.TechParamApp.ViewModel
 
         IEnumerable<NamedDpConfigSettingViewModel> Settings { get; }        
 
-        ITechParamViewModel CreateTechParameter(IDpBinder binder, IDpWorkerManager workerManager, IDpConnection connection);
+        ITechParamViewModel CreateTechParameter(IDpWorkerManager workerManager);
+
+        void SetConnection(IConnectionViewModel connection);
     }
 }

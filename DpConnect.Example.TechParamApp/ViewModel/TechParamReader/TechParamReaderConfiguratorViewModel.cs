@@ -3,11 +3,9 @@ using DpConnect.Configuration;
 using DpConnect.Connection;
 using DpConnect.ExampleWorker;
 using DpConnect.ExampleWorker.Console;
-using System;
+
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DpConnect.Example.TechParamApp.ViewModel
 {
@@ -28,7 +26,7 @@ namespace DpConnect.Example.TechParamApp.ViewModel
 
         public IEnumerable<NamedDpConfigSettingViewModel> Settings { get; private set; }
 
-        public ITechParamViewModel CreateTechParameter(IDpBinder binder, IDpWorkerManager workerManager, IDpConnection connection)
+        public ITechParamViewModel CreateTechParameter(IDpWorkerManager workerManager)
         {
             List<IDpConfiguration> configs = new List<IDpConfiguration>();
 
@@ -37,13 +35,25 @@ namespace DpConnect.Example.TechParamApp.ViewModel
                 configs.Add(setting.SourceConfigurator.CreateConfiguration(setting.DpName));                
             }
 
-            var worker = workerManager.CreateWorker<TechParamReader>();            
+            var worker = workerManager.CreateWorker<TechParamReader>();
 
-            Settings.First().SourceConfigurator.BindProperties(worker, configs, binder, connection);
+            connection.BindProperties(worker, configs);
             
             TechParamReaderViewModel viewModel = new TechParamReaderViewModel(worker as TechParamReader);
             
             return viewModel;
-        }        
+        }
+
+        IConnectionViewModel connection;
+
+        public void SetConnection(IConnectionViewModel connection)
+        {
+            this.connection = connection;
+
+            foreach (var setting in Settings)
+            {
+                setting.SourceConfigurator = connection.SourceConfigurator;
+            }
+        }
     }
 }
