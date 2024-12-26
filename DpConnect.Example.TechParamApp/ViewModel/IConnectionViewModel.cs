@@ -11,5 +11,7 @@ namespace DpConnect.Example.TechParamApp.ViewModel
         string ConnectionName { get; }
 
         string ConnectionType { get; }
+
+        void CreateSourceConfigurators(ITechParameterConfiguratorViewModel techParamConfigurator);
     }
 }

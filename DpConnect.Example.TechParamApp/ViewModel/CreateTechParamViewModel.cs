@@ -30,7 +30,7 @@ namespace DpConnect.Example.TechParamApp.ViewModel
                 //{
                 //    ConnectionId = SelectedConnection.ConnectionTypeName,
                 //    PropertyName = "TechParam",
-                //    SourceConfiguration = dpSourceConfiguration
+                //    SourceConfigurator = dpSourceConfiguration
                 //};
 
                 //binder.Bind(techParamWorker, new DpConfiguration[] { dpConfig });
@@ -76,6 +76,7 @@ namespace DpConnect.Example.TechParamApp.ViewModel
             set
             {
                 selectedConnection = value;
+                selectedConnection.CreateSourceConfigurators(SelectedTechParamConfigurator);
             }
         }        
         public IEnumerable<IConnectionViewModel> AvaibleConnections { get; private set; }

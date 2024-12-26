@@ -90,7 +90,7 @@
                                      Text="{Binding DpName}"
                                      />
                             <ItemsControl Grid.Column="1"
-                                          ItemsSource="{Binding SourceSettings}"
+                                          ItemsSource="{Binding SourceConfigurator.Settings}"
                                           >
                                 <ItemsControl.ItemTemplate>
                                     <DataTemplate>

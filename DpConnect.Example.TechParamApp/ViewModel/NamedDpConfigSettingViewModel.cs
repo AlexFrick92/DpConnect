@@ -6,9 +6,19 @@ using System.Threading.Tasks;
 
 namespace DpConnect.Example.TechParamApp.ViewModel
 {
-    public class NamedDpConfigSettingViewModel
+    public class NamedDpConfigSettingViewModel : BaseViewModel
     {
-        public string DpName { get; set; }    
-        public IEnumerable<NamedConfigSettingViewModel> SourceSettings { get; set; }
+        public string DpName { get; set; }
+
+        ISourceConfiguratorViewModel sourceConfigurator;
+        public ISourceConfiguratorViewModel SourceConfigurator
+        {
+            get => sourceConfigurator;
+            set
+            {
+                sourceConfigurator = value;
+                OnPropertyChanged(nameof(SourceConfigurator));
+            }
+        }
     }
 }

@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace DpConnect.Example.TechParamApp.ViewModel
 {
-    public class OpcUaSourceConfiguratorViewModel : BaseViewModel, ISourceConfigurationViewModel
+    public class OpcUaSourceConfiguratorViewModel : BaseViewModel, ISourceConfiguratorViewModel
     {
 
 

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DpConnect.Example.TechParamApp.ViewModel
 {
-    public interface ISourceConfigurationViewModel
+    public interface ISourceConfiguratorViewModel
     {
         IEnumerable<NamedConfigSettingViewModel> Settings { get; }
 

@@ -20,5 +20,13 @@ namespace DpConnect.Example.TechParamApp.ViewModel
         public string ConnectionType { get => dpConnection.GetType().ToString(); }        
 
         IDpConnection dpConnection;
+
+        public void CreateSourceConfigurators(ITechParameterConfiguratorViewModel techParamConfigurator)
+        {
+            foreach(var setting in techParamConfigurator.Settings)
+            {
+                setting.SourceConfigurator = new OpcUaSourceConfiguratorViewModel();
+            }
+        }
     }
 }
