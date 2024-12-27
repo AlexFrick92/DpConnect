@@ -24,6 +24,8 @@ namespace DpConnect
         /// <returns></returns>
         IDpConnection GetConnection(string Id);
 
+        IEnumerable<T> ResolveConnections<T>() where T : IDpConnection;
+
         IEnumerable<IDpConnection> ConfiguredConnections { get; }
 
         /// <summary>

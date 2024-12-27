@@ -89,6 +89,14 @@ namespace DpConnect
             logger.Info("Соединения закрыты.");
         }
 
+        public IEnumerable<T> ResolveConnections<T>() where T : IDpConnection
+        {
+            IEnumerable<T> resolved = connections.Where(w => typeof(T).IsAssignableFrom(w.GetType())).Select(p => (T)p);
 
+            if (resolved.Count() == 0)
+                throw new InvalidOperationException($"В коллекции соединений не найден воркер с интерфейсом {typeof(T)}");
+            else
+                return resolved;
+        }
     }
 }
