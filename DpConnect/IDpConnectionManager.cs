@@ -13,7 +13,7 @@ namespace DpConnect
         /// </summary>
         /// <param name="configuration"></param>
         /// <returns></returns>        
-        IDpConnection CreateConnection<TConfigurableConnection, TConnectionConfig>(TConnectionConfig configuration)
+        TConfigurableConnection CreateConnection<TConfigurableConnection, TConnectionConfig>(TConnectionConfig configuration)
             where TConfigurableConnection : IDpConfigurableConnection<TConnectionConfig>
             where TConnectionConfig : IDpConnectionConfiguration;
 

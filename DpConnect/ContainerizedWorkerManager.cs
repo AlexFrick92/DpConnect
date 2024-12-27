@@ -22,9 +22,9 @@ namespace DpConnect
 
         public event EventHandler<IDpWorker> WorkerCreated;
 
-        public IDpWorker CreateWorker<T>() where T : IDpWorker
+        public T CreateWorker<T>() where T : IDpWorker
         {
-            IDpWorker worker = container.Resolve<T>();
+            T worker = container.Resolve<T>();
             workers.Add(worker);            
 
             WorkerCreated?.Invoke(this, worker);

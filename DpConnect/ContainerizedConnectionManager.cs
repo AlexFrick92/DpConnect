@@ -50,22 +50,22 @@ namespace DpConnect
         //        throw new InvalidOperationException("Не найден обобщенный метод создания соединения");
         
 
-        public IDpConnection CreateConnection<T, TConnectionConfig>(TConnectionConfig configuration) 
+        public T CreateConnection<T, TConnectionConfig>(TConnectionConfig configuration) 
             where TConnectionConfig : IDpConnectionConfiguration
             where T : IDpConfigurableConnection<TConnectionConfig>
             
         {
-            IDpConfigurableConnection<TConnectionConfig> con = container.Resolve<T>();
+            T con = container.Resolve<T>();
 
             logger.Info($"Менеджер соединений: Создано новое подключение: {configuration.ConnectionId} с типом {con.GetType()}");
             con.Configure(configuration);
 
 
-            connections.Add(con as IDpConnection);
+            connections.Add(con);
 
-            NewConnectionCreated?.Invoke(this, con as IDpConnection);
+            NewConnectionCreated?.Invoke(this, con);
 
-            return con as IDpConnection;            
+            return con;            
          
         }
 

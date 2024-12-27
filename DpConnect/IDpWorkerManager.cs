@@ -11,7 +11,7 @@ namespace DpConnect
 
     public interface IDpWorkerManager
     {
-        IDpWorker CreateWorker<T>() where T : IDpWorker;
+        T CreateWorker<T>() where T : IDpWorker;
         
 
         /// <summary>
