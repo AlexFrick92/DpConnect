@@ -1,4 +1,5 @@
-﻿using DpConnect.OpcUa;
+﻿using DpConnect.Example.TechParamApp.ViewModel.Connection;
+using DpConnect.OpcUa;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,8 +8,8 @@ using System.Threading.Tasks;
 
 namespace DpConnect.Example.TechParamApp.ViewModel
 {
-    public class OpcUaConnectionConfiguratorViewModel : BaseViewModel, IConnectionConfiguratorViewModel
-    {        
+    public class OpcUaConnectionConfiguratorViewModel : BaseViewModel, IConnectionConfiguratorViewModel, IConnectionConfigurator<IOpcUaConnection, OpcUaConnectionConfiguration>
+    {         
         public OpcUaConnectionConfiguratorViewModel()
         {
             List<NamedConfigSettingViewModel> pars = new List<NamedConfigSettingViewModel>();
@@ -49,6 +50,11 @@ namespace DpConnect.Example.TechParamApp.ViewModel
         public void CreateConnection(IDpConnectionManager manager)
         {
             manager.CreateConnection<IOpcUaConnection, OpcUaConnectionConfiguration>(Config);
+        }
+
+        public OpcUaConnectionConfiguration CreateConfiguration()
+        {
+            throw new NotImplementedException();
         }
     }
 }

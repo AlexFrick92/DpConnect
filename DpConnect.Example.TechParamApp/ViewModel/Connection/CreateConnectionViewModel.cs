@@ -1,5 +1,5 @@
 ﻿using DpConnect.Connection;
-
+using DpConnect.OpcUa;
 using System;
 using System.Collections.Generic;
 
@@ -11,18 +11,16 @@ namespace DpConnect.Example.TechParamApp.ViewModel
     public class CreateConnectionViewModel : BaseViewModel
     {
         IDpConnectionManager dpConnectionManager;
-        public CreateConnectionViewModel(IDpConnectionManager connectionManager)
+        public CreateConnectionViewModel(IDpConnectionManager connectionManager, IEnumerable<Type> configurators)
         {
             dpConnectionManager = connectionManager;
 
-            //ConnectionsTypes = avaibleConnectionsTypes;   
+            ConnectionsTypes = configurators;   
 
-            ConnectionsTypes = new List<IConnectionConfiguratorViewModel>() { new OpcUaConnectionConfiguratorViewModel()};
 
             CreateConnectionCmd = new RelayCommand((arg) => 
             {
-
-                SelectedConnectionType.CreateConnection(connectionManager);
+                ConnectionConfigurator.CreateConnection(dpConnectionManager);
 
                 ConnectionCreated?.Invoke(this, null);
             });
@@ -32,18 +30,22 @@ namespace DpConnect.Example.TechParamApp.ViewModel
         public event EventHandler<IDpConnection> ConnectionCreated;
         public event EventHandler<IDpConnectionConfiguration> CreatingCanceled;                       
         
-        public IEnumerable<IConnectionConfiguratorViewModel> ConnectionsTypes { get; private set; }
+        public IEnumerable<Type> ConnectionsTypes { get; private set; }
 
-        IConnectionConfiguratorViewModel selectedConnectionType;
-        public IConnectionConfiguratorViewModel SelectedConnectionType
+        Type selectedConnectionType;
+        public Type SelectedConnectionType
         {
             get => selectedConnectionType;
             set
             {
-                selectedConnectionType = value;                      
+                selectedConnectionType = value;
+                ConnectionConfigurator = (IConnectionConfiguratorViewModel)Activator.CreateInstance(value);
+                OnPropertyChanged(nameof(ConnectionConfigurator));
                 OnPropertyChanged(nameof(SelectedConnectionType));
             }
         }
+
+        public IConnectionConfiguratorViewModel ConnectionConfigurator { get; private set; }
 
         public ICommand CreateConnectionCmd { get; set; }
         public ICommand CancelCmd { get; set; }

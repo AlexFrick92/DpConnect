@@ -21,6 +21,13 @@ namespace DpConnect.Example.TechParamApp.ViewModel
         IDpBinder binder;
         IDpBuilder dpBuilder;
 
+        List<Type> ConnectionTypes = new List<Type> { typeof(IOpcUaConnection) }; //Допустим, это мы загрузили сборки сюда
+        //Теперь с каждым соединением нужно ассоциировать конфигуратор
+        //Для этого, при создании конфигуратора, мы укажем через обобщение, что он реализует интерфейс IConfigurator<>
+        List<Type> ConnectionConfiguratorsType = new List<Type>() { typeof(OpcUaConnectionConfiguratorViewModel) };
+        //Если мы хотим динамически менять конфигуратор и соединения, то создаваться они тоже будут динамически. 
+        //Либо через активатор, либо через контейнер
+        //если бы мы загружали их вручную, то можно было бы явно указать и создать нужные конфигураторы
 
         public MainViewModel(IDpConnectionManager conManager, IDpWorkerManager workerManager, IDpBuilder builder, IDpBinder binder)
         {
@@ -44,11 +51,10 @@ namespace DpConnect.Example.TechParamApp.ViewModel
 
             AddConnectionCmd = new RelayCommand((arg) =>
             {
-                Console.WriteLine("Добавить соединение");                
+                Console.WriteLine("Добавить соединение");
 
-                CreateConnectionViewModel createConnectionViewModel = 
-                new CreateConnectionViewModel(connectionManager              
-                );
+                CreateConnectionViewModel createConnectionViewModel = new CreateConnectionViewModel(conManager, ConnectionConfiguratorsType);
+                
 
 
                 CreateConnectionView createConnectionView = new CreateConnectionView(createConnectionViewModel);
