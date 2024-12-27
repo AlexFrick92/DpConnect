@@ -13,9 +13,13 @@ namespace DpConnect
         /// </summary>
         /// <param name="configuration"></param>
         /// <returns></returns>        
-        TConfigurableConnection CreateConnection<TConfigurableConnection, TConnectionConfig>(TConnectionConfig configuration)
-            where TConfigurableConnection : IDpConfigurableConnection<TConnectionConfig>
-            where TConnectionConfig : IDpConnectionConfiguration;
+        //TConfigurableConnection CreateConnection<TConfigurableConnection, TConnectionConfig>(TConnectionConfig configuration)
+        //    where TConfigurableConnection : IDpConfigurableConnection<TConnectionConfig>
+        //    where TConnectionConfig : IDpConnectionConfiguration;
+
+
+        IDpConfigurableConnection<TConfig> CreateConnection<TConfig>(TConfig config)
+            where TConfig : IDpConnectionConfiguration;
 
         /// <summary>
         /// Получить соединение из коллекции соединений

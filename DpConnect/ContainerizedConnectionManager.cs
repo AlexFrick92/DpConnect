@@ -28,7 +28,7 @@ namespace DpConnect
             this.container = container;
         }
 
-        
+
         //public IDpConnection CreateConnection(IDpConnectionConfiguration configuration)
         //{            
         //    var method = typeof(IDpConnectionManager).GetMethods()
@@ -48,27 +48,40 @@ namespace DpConnect
         //    }
         //    else
         //        throw new InvalidOperationException("Не найден обобщенный метод создания соединения");
-        
 
-        public T CreateConnection<T, TConnectionConfig>(TConnectionConfig configuration) 
-            where TConnectionConfig : IDpConnectionConfiguration
-            where T : IDpConfigurableConnection<TConnectionConfig>
-            
+
+        //public T CreateConnection<T, TConnectionConfig>(TConnectionConfig configuration) 
+        //    where TConnectionConfig : IDpConnectionConfiguration
+        //    where T : IDpConfigurableConnection<TConnectionConfig>
+
+        //{
+        //    T con = container.Resolve<T>();
+
+        //    logger.Info($"Менеджер соединений: Создано новое подключение: {configuration.ConnectionId} с типом {con.GetType()}");
+        //    con.Configure(configuration);
+
+
+        //    connections.Add(con);
+
+        //    NewConnectionCreated?.Invoke(this, con);
+
+        //    return con;            
+
+        //}
+        public IDpConfigurableConnection<TConfig> CreateConnection<TConfig>(TConfig configuration) where TConfig : IDpConnectionConfiguration
         {
-            T con = container.Resolve<T>();
+                IDpConfigurableConnection<TConfig> con = container.Resolve<IDpConfigurableConnection<TConfig>>();
 
-            logger.Info($"Менеджер соединений: Создано новое подключение: {configuration.ConnectionId} с типом {con.GetType()}");
-            con.Configure(configuration);
+                logger.Info($"Менеджер соединений: Создано новое подключение: {configuration.ConnectionId} с типом {con.GetType()}");
+                con.Configure(configuration);
 
 
-            connections.Add(con);
+                connections.Add(con);
 
-            NewConnectionCreated?.Invoke(this, con);
+                NewConnectionCreated?.Invoke(this, con);
 
-            return con;            
-         
+                return con;
         }
-
 
         public IDpConnection GetConnection(string Id)
         {
@@ -98,5 +111,7 @@ namespace DpConnect
             else
                 return resolved;
         }
+
+
     }
 }

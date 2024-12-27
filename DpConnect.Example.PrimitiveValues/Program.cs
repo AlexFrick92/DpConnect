@@ -1,5 +1,6 @@
 ﻿using DpConnect.Building;
 using DpConnect.Configuration.Xml;
+using DpConnect.Connection;
 using DpConnect.OpcUa;
 
 using Promatis.Core;
@@ -25,7 +26,7 @@ namespace DpConnect.Example.PrimitiveValues
 
             container.RegisterInstance(new ConsoleLogger() as ILogger);
 
-            container.Register<IOpcUaConnection, OpcUaConnection>();
+            container.Register<IDpConfigurableConnection<OpcUaConnectionConfiguration>, OpcUaConnection>();
             container.RegisterSingleton<IDpConnectionManager, ContainerizedConnectionManager>();
 
 

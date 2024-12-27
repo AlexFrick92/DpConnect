@@ -84,16 +84,16 @@ namespace DpConnect.Configuration.Xml
                 Type connectionType = Type.GetType(typeName);
 
                 //Соединение создается с аргументом - его конфигурация. Этот тип мы должны выяснить, чтобы создать эту конфигурацию.
-                Type connectionTypeGenericArg = GetConnectionTypeGenericArg(connectionType, typeof(IDpConfigurableConnection<>));                
+                Type connectionConfigType = GetConnectionTypeGenericArg(connectionType, typeof(IDpConfigurableConnection<>));                
                 
                 //Здесь мы создаем этот тип, но нам нужен только его интерфейс, чтобы загрузкить xml конфиг
-                IDpConnectionConfiguration connectionConfig = Activator.CreateInstance(connectionTypeGenericArg) as IDpConnectionConfiguration;
+                IDpConnectionConfiguration connectionConfig = Activator.CreateInstance(connectionConfigType) as IDpConnectionConfiguration;
                 connectionConfig.FromXml(new XDocument(configuredConnection));
 
                 //Теперь вызываем метод у менеджера, который создаст соединение нужного типа и с нужной конфигурацией.
                 //Этот метод обобщенный - он принимает тип соединения и тип конфигурации, чтобы законфигурировать соединение
                 MethodInfo createConnectionMethodInfo = typeof(IDpConnectionManager).GetMethod(nameof(IDpConnectionManager.CreateConnection));
-                MethodInfo createConnectionMethod = createConnectionMethodInfo.MakeGenericMethod(connectionType, connectionTypeGenericArg);
+                MethodInfo createConnectionMethod = createConnectionMethodInfo.MakeGenericMethod(connectionConfigType);
                 createConnectionMethod.Invoke(connectionManager, new object[] { connectionConfig });                
             }
 
