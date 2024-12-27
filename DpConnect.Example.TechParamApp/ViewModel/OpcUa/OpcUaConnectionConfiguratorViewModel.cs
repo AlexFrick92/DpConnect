@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace DpConnect.Example.TechParamApp.ViewModel
 {
-    public class OpcUaConnectionConfiguratorViewModel : BaseViewModel, IConnectionConfiguratorViewModel, IConnectionConfigurator<IOpcUaConnection, OpcUaConnectionConfiguration>
+    public class OpcUaConnectionConfiguratorViewModel : BaseViewModel, IConnectionConfiguratorViewModel, IConnectionConfigurator<OpcUaConnectionConfiguration>
     {         
         public OpcUaConnectionConfiguratorViewModel()
         {
@@ -43,18 +43,16 @@ namespace DpConnect.Example.TechParamApp.ViewModel
 
         public string ConnectTimeout { get; set; }
 
-        public IEnumerable<NamedConfigSettingViewModel> Settings { get; }   
-
-        public string ConnectionTypeName => "OpcUa";
+        public IEnumerable<NamedConfigSettingViewModel> Settings { get; }           
 
         public void CreateConnection(IDpConnectionManager manager)
         {
-            manager.CreateConnection<IOpcUaConnection, OpcUaConnectionConfiguration>(Config);
+            //manager.CreateConnection<IOpcUaConnection, OpcUaConnectionConfiguration>(Config);
         }
 
-        public OpcUaConnectionConfiguration CreateConfiguration()
+        public IDpConnectionConfiguration CreateConfiguration()
         {
-            throw new NotImplementedException();
+            return Config;
         }
     }
 }

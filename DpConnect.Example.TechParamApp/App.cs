@@ -10,6 +10,7 @@ using DpConnect.Configuration.Xml;
 using DpConnect.OpcUa;
 using DpConnect.ExampleWorker.Console;
 using DpConnect.Building;
+using DpConnect.Connection;
 
 namespace DpConnect.Example.TechParamApp
 {
@@ -24,7 +25,7 @@ namespace DpConnect.Example.TechParamApp
 
             container.RegisterInstance(new ConsoleLogger() as ILogger);
 
-            container.Register<IOpcUaConnection, OpcUaConnection>();
+            container.Register<IDpConfigurableConnection<OpcUaConnectionConfiguration>, OpcUaConnection>();
             container.RegisterSingleton(typeof(IDpConnectionManager), typeof(ContainerizedConnectionManager));
 
 

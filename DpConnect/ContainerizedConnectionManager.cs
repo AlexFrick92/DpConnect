@@ -70,17 +70,18 @@ namespace DpConnect
         //}
         public IDpConfigurableConnection<TConfig> CreateConnection<TConfig>(TConfig configuration) where TConfig : IDpConnectionConfiguration
         {
-                IDpConfigurableConnection<TConfig> con = container.Resolve<IDpConfigurableConnection<TConfig>>();
 
-                logger.Info($"Менеджер соединений: Создано новое подключение: {configuration.ConnectionId} с типом {con.GetType()}");
-                con.Configure(configuration);
+            IDpConfigurableConnection<TConfig> con = container.Resolve<IDpConfigurableConnection<TConfig>>(configuration.GetType());
+
+            logger.Info($"Менеджер соединений: Создано новое подключение: {configuration.ConnectionId} с типом {con.GetType()}");
+            con.Configure(configuration);
 
 
-                connections.Add(con);
+            connections.Add(con);
 
-                NewConnectionCreated?.Invoke(this, con);
+            NewConnectionCreated?.Invoke(this, con);
 
-                return con;
+            return con;
         }
 
         public IDpConnection GetConnection(string Id)

@@ -20,7 +20,9 @@ namespace DpConnect.Example.TechParamApp.ViewModel
 
             CreateConnectionCmd = new RelayCommand((arg) => 
             {
-                ConnectionConfigurator.CreateConnection(dpConnectionManager);
+                IDpConnectionConfiguration conConfig = ConnectionConfigurator.CreateConfiguration();
+
+                connectionManager.CreateConnection(conConfig as dynamic);
 
                 ConnectionCreated?.Invoke(this, null);
             });

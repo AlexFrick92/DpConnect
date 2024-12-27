@@ -7,10 +7,8 @@ using System.Threading.Tasks;
 
 namespace DpConnect.Example.TechParamApp.ViewModel.Connection
 {
-    internal interface IConnectionConfigurator<TConnection, TConfig>
+    internal interface IConnectionConfigurator<TConfig>
         where TConfig : IDpConnectionConfiguration
-        where TConnection : IDpConfigurableConnection<TConfig>
-    {
-
+    {        
     }
 }
