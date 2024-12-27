@@ -1,4 +1,5 @@
 ﻿using DpConnect.Building;
+using DpConnect.Example.TechParamApp.ViewModel.TechParam;
 using DpConnect.ExampleWorker.Console;
 using DpConnect.OpcUa;
 using System;
@@ -15,9 +16,7 @@ namespace DpConnect.Example.TechParamApp.ViewModel
 
             CreateWorkerCmd = new RelayCommand((arg) =>
             {                                
-                SourceConfigurator.Bind(binder, workerManager);
-
-                WorkerCreated?.Invoke(this, null);
+                SourceConfigurator.Bind(binder, workerManager);                
             });
             CancelCmd = new RelayCommand((arg) => CreatingCanceled?.Invoke(this, null));
 
@@ -29,7 +28,7 @@ namespace DpConnect.Example.TechParamApp.ViewModel
         IDpWorkerManager workerManager;
         IDpBinder binder;
 
-        public event EventHandler<ITechParamViewModel> WorkerCreated;
+        public event EventHandler<ITechParamViewModel> TechParamCreated;
         public event EventHandler<IDpConnectionConfiguration> CreatingCanceled;
 
         public ICommand CreateWorkerCmd { get; set; }
@@ -60,7 +59,20 @@ namespace DpConnect.Example.TechParamApp.ViewModel
                 switch(selectedConfigurator)
                 {
                     case "FloatTechParam":
-                        SourceConfigurator = new OpcUaSourceConfiguratorViewModel<TechParamReader>(value as OpcUaConnection);
+                        SourceConfigurator = new OpcUaSourceConfiguratorViewModel<TechParamReader>(value.DpConnection as OpcUaConnection);
+
+                        //Здесь нужно создать ViewModel для ридера
+                        //так как воркер не может реализовать интерфейс ITechParamViewModel, мы должен создать для него свой Vm.
+
+                        (SourceConfigurator as ISourceConfiguratorBinder<TechParamReader>).WorkerBinded += (s, w) =>
+                        {
+                            TechParamCreated?.Invoke(this, new TechParamReaderViewModel(w));
+                        };
+                        
+
+                        //Здесь мы создаем OpcUaSourceConfig с параметром TechParamReader. Здесь же мы и должны создать к нему TechParamReaderViewModel
+                        //
+
                         OnPropertyChanged(nameof(SourceConfigurator));
                         Console.WriteLine("Выбрали");
                         break;
@@ -68,8 +80,6 @@ namespace DpConnect.Example.TechParamApp.ViewModel
             }
         }    
         
-        public ISourceConfiguratorViewModel SourceConfigurator { get; set; }    
-        
-
+        public ISourceConfiguratorViewModel SourceConfigurator { get; set; }            
     }
 }

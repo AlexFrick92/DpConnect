@@ -1,6 +1,7 @@
 ﻿using DpConnect.Building;
 using DpConnect.Configuration;
 using DpConnect.Connection;
+using DpConnect.Example.TechParamApp.ViewModel.TechParam;
 using DpConnect.OpcUa;
 using System;
 using System.Collections.Generic;
@@ -9,7 +10,7 @@ using System.Linq;
 
 namespace DpConnect.Example.TechParamApp.ViewModel
 {
-    public class OpcUaSourceConfiguratorViewModel<TWorker> : BaseViewModel, ISourceConfiguratorViewModel
+    public class OpcUaSourceConfiguratorViewModel<TWorker> : BaseViewModel, ISourceConfiguratorViewModel, ISourceConfiguratorBinder<TWorker>
         where TWorker : IDpWorker
     {
         OpcUaConnection connection;
@@ -42,7 +43,9 @@ namespace DpConnect.Example.TechParamApp.ViewModel
 
         public IEnumerable<NamedDpConfigSettingViewModel> DpPropSettings { get; private set; }
 
-        public void Bind(IDpBinder binder, IDpWorkerManager workerManager)
+        public event EventHandler<TWorker> WorkerBinded;
+
+        public IDpWorker Bind(IDpBinder binder, IDpWorkerManager workerManager)
         {
             var dpConfigList = new List<DpConfiguration<OpcUaDpValueSourceConfiguration>>();
 
@@ -51,8 +54,13 @@ namespace DpConnect.Example.TechParamApp.ViewModel
                 var dpConfig = new DpConfiguration<OpcUaDpValueSourceConfiguration>();
                 dpConfig.PropertyName = dp.DpName;
 
+
                 //Это NodeId. Необходимо придумать, как обратно конвертировать. Может нужно использовать dictionary<string, object>
-                dpConfig.SourceConfiguration.NodeId = dp.SourceSettings.First().Value.ToString();
+                var SourceConfiguration = new OpcUaDpValueSourceConfiguration();
+
+                SourceConfiguration.NodeId = dp.SourceSettings.First().Value.ToString();
+
+                dpConfig.SourceConfiguration = SourceConfiguration;
 
                 dpConfigList.Add(dpConfig);
             }
@@ -60,6 +68,10 @@ namespace DpConnect.Example.TechParamApp.ViewModel
             IDpWorker worker = workerManager.CreateWorker<TWorker>();
 
             binder.Bind(worker, connection, dpConfigList);
+
+            WorkerBinded?.Invoke(this, (TWorker) worker);
+
+            return worker;
 
         }
     }

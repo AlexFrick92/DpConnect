@@ -67,6 +67,7 @@
     <Compile Include="ViewModel\OpcUa\OpcUaSourceConfiguratorViewModel.cs" />
     <Compile Include="ViewModel\OpcUa\OpcUaConnectionConfiguratorViewModel.cs" />
     <Compile Include="ViewModel\RelayCommand.cs" />
+    <Compile Include="ViewModel\TechParam\ISourceConfiguratorBinder.cs" />
     <Compile Include="ViewModel\WorkerViewModel.cs" />
     <Compile Include="ViewModel\TechParamReader\TechParamReaderViewModel.cs" />
     <Compile Include="ViewModel\TechParam\ITechParamViewModel.cs" />

@@ -69,7 +69,7 @@ namespace DpConnect.Example.TechParamApp.ViewModel
                 CreateTechParamView createWorkerView = new CreateTechParamView(createWorkerViewModel);
 
                 createWorkerViewModel.CreatingCanceled += (s, v) => createWorkerView.Close();
-                createWorkerViewModel.WorkerCreated += (s, v) =>
+                createWorkerViewModel.TechParamCreated += (s, v) =>
                 {
                     TechParamWorkers.Add(v);
                     createWorkerView.Close();
