@@ -34,12 +34,12 @@ namespace DpConnect.Example.TechParamApp.ViewModel
             {                
                 ConfiguredWorkers.Add(new WorkerViewModel(w));
             };
-            connectionManager.NewConnectionCreated += (s, c) => ConfiguredConnections.Add(new OpcUaConnectionViewModel(c as OpcUaConnection, binder));
+            connectionManager.NewConnectionCreated += (s, c) => ConfiguredConnections.Add(new OpcUaConnectionViewModel(c as OpcUaConnection));
 
 
             foreach(var con in connectionManager.ConfiguredConnections)
             {
-                ConfiguredConnections.Add(new OpcUaConnectionViewModel(con as OpcUaConnection, binder));
+                ConfiguredConnections.Add(new OpcUaConnectionViewModel(con as OpcUaConnection));
             }
 
             AddConnectionCmd = new RelayCommand((arg) =>

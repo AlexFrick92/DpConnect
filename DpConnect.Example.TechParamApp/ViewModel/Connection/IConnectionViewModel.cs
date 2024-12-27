@@ -15,9 +15,5 @@ namespace DpConnect.Example.TechParamApp.ViewModel
         string ConnectionType { get; }        
 
         IDpConnection DpConnection { get; }
-
-        ISourceConfiguratorViewModel SourceConfigurator { get; }
-
-        void BindProperties(IDpWorker worker, IEnumerable<IDpConfiguration> configs);
     }
 }

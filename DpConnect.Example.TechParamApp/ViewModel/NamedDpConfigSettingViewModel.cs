@@ -8,17 +8,15 @@ namespace DpConnect.Example.TechParamApp.ViewModel
 {
     public class NamedDpConfigSettingViewModel : BaseViewModel
     {
+
+        public NamedDpConfigSettingViewModel(string DpName, IEnumerable<NamedConfigSettingViewModel> sourceSettings)
+        {
+            this.DpName = DpName;
+            SourceSettings = sourceSettings;
+
+        }
         public string DpName { get; set; }
 
-        ISourceConfiguratorViewModel sourceConfigurator;
-        public ISourceConfiguratorViewModel SourceConfigurator
-        {
-            get => sourceConfigurator;
-            set
-            {
-                sourceConfigurator = value;
-                OnPropertyChanged(nameof(SourceConfigurator));
-            }
-        }
+        public IEnumerable<NamedConfigSettingViewModel> SourceSettings { get; private set; }
     }
 }

@@ -11,11 +11,9 @@ namespace DpConnect.Example.TechParamApp.ViewModel
 {
     public interface ISourceConfiguratorViewModel
     {
-        IEnumerable<NamedConfigSettingViewModel> Settings { get; }
+        IEnumerable<NamedDpConfigSettingViewModel> DpPropSettings { get; }
 
-        IDpConfiguration CreateConfiguration(string dpName);
-
-        void BindProperties(IDpWorker worker, IEnumerable<IDpConfiguration> configs, IDpBinder binder, IDpConnection connection);
+        void Bind(IDpBinder binder, IDpWorkerManager workerManager);
 
     }
 }

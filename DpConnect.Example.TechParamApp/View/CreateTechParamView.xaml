@@ -56,8 +56,7 @@
             <ComboBox
                 Grid.Row="1"
                 Grid.Column="1"
-                ItemsSource="{Binding AvaibleTechParamConfigurators}"
-                DisplayMemberPath="ConfiguratorName"
+                ItemsSource="{Binding AvaibleTechParamConfigurators}"                
                 SelectedItem="{Binding SelectedTechParamConfigurator}"
                 />
 
@@ -75,7 +74,7 @@
                 />
 
             <ItemsControl Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2"
-                          ItemsSource="{Binding SelectedTechParamConfigurator.Settings}"                          
+                          ItemsSource="{Binding SourceConfigurator.DpPropSettings}"                          
                           >
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
@@ -90,7 +89,7 @@
                                      Text="{Binding DpName}"
                                      />
                             <ItemsControl Grid.Column="1"
-                                          ItemsSource="{Binding SourceConfigurator.Settings}"
+                                          ItemsSource="{Binding SourceSettings}"
                                           >
                                 <ItemsControl.ItemTemplate>
                                     <DataTemplate>

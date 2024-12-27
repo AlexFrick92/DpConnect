@@ -1,5 +1,6 @@
 ﻿using DpConnect.Building;
-
+using DpConnect.ExampleWorker.Console;
+using DpConnect.OpcUa;
 using System;
 using System.Collections.Generic;
 using System.Windows.Input;
@@ -14,9 +15,9 @@ namespace DpConnect.Example.TechParamApp.ViewModel
 
             CreateWorkerCmd = new RelayCommand((arg) =>
             {                                
-                ITechParamViewModel techParam = SelectedTechParamConfigurator.CreateTechParameter(workerManager);
+                SourceConfigurator.Bind(binder, workerManager);
 
-                WorkerCreated?.Invoke(this, techParam);
+                WorkerCreated?.Invoke(this, null);
             });
             CancelCmd = new RelayCommand((arg) => CreatingCanceled?.Invoke(this, null));
 
@@ -34,10 +35,10 @@ namespace DpConnect.Example.TechParamApp.ViewModel
         public ICommand CreateWorkerCmd { get; set; }
         public ICommand CancelCmd { get; set; }
 
-        public List<ITechParamConfiguratorViewModel> AvaibleTechParamConfigurators { get; set; } = new List<ITechParamConfiguratorViewModel>() { new TechParamReaderConfiguratorViewModel() };
+        public List<string> AvaibleTechParamConfigurators { get; set; } = new List<string>() { "FloatTechParam" };
 
-        ITechParamConfiguratorViewModel selectedConfigurator;
-        public ITechParamConfiguratorViewModel SelectedTechParamConfigurator
+        string selectedConfigurator;
+        public string SelectedTechParamConfigurator
         {
             get => selectedConfigurator;
             set
@@ -46,8 +47,7 @@ namespace DpConnect.Example.TechParamApp.ViewModel
                 OnPropertyChanged(nameof(SelectedTechParamConfigurator));
             }
         }
-
-
+        public IEnumerable<IConnectionViewModel> AvaibleConnections { get; private set; }
 
         IConnectionViewModel selectedConnection;
         public IConnectionViewModel SelectedConnection 
@@ -56,10 +56,19 @@ namespace DpConnect.Example.TechParamApp.ViewModel
             set
             {
                 selectedConnection = value;
-                SelectedTechParamConfigurator.SetConnection(value);
+
+                switch(selectedConfigurator)
+                {
+                    case "FloatTechParam":
+                        SourceConfigurator = new OpcUaSourceConfiguratorViewModel<TechParamReader>(value as OpcUaConnection);
+                        OnPropertyChanged(nameof(SourceConfigurator));
+                        Console.WriteLine("Выбрали");
+                        break;
+                }
             }
-        }        
-        public IEnumerable<IConnectionViewModel> AvaibleConnections { get; private set; }
+        }    
+        
+        public ISourceConfiguratorViewModel SourceConfigurator { get; set; }    
         
 
     }

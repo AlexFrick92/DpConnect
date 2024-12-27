@@ -62,14 +62,12 @@
     <Compile Include="ViewModel\Connection\CreateConnectionViewModel.cs" />
     <Compile Include="ViewModel\TechParam\CreateTechParamViewModel.cs" />
     <Compile Include="ViewModel\Connection\IConnectionConfiguratorViewModel.cs" />
-    <Compile Include="ViewModel\TechParam\ITechParamConfiguratorViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\NamedConfigSettingViewModel.cs" />
     <Compile Include="ViewModel\OpcUa\OpcUaSourceConfiguratorViewModel.cs" />
     <Compile Include="ViewModel\OpcUa\OpcUaConnectionConfiguratorViewModel.cs" />
     <Compile Include="ViewModel\RelayCommand.cs" />
     <Compile Include="ViewModel\WorkerViewModel.cs" />
-    <Compile Include="ViewModel\TechParamReader\TechParamReaderConfiguratorViewModel.cs" />
     <Compile Include="ViewModel\TechParamReader\TechParamReaderViewModel.cs" />
     <Compile Include="ViewModel\TechParam\ITechParamViewModel.cs" />
     <Compile Include="View\CreateConnectionView.xaml.cs">
@@ -83,9 +81,6 @@
     </Compile>
     <Compile Include="View\MainView.xaml.cs">
       <DependentUpon>MainView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\OpcUaConfigSourceView.xaml.cs">
-      <DependentUpon>OpcUaConfigSourceView.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -106,10 +101,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\MainView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\OpcUaConfigSourceView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -9,55 +9,58 @@ using System.Linq;
 
 namespace DpConnect.Example.TechParamApp.ViewModel
 {
-    public class OpcUaSourceConfiguratorViewModel : BaseViewModel, ISourceConfiguratorViewModel
+    public class OpcUaSourceConfiguratorViewModel<TWorker> : BaseViewModel, ISourceConfiguratorViewModel
+        where TWorker : IDpWorker
     {
+        OpcUaConnection connection;
 
-
-        public OpcUaSourceConfiguratorViewModel()
+        public OpcUaSourceConfiguratorViewModel(OpcUaConnection connection)
         {
+            this.connection = connection;
+
             var pars = new List<NamedConfigSettingViewModel>();
             var nodeId = new NamedConfigSettingViewModel();
             nodeId.Name = "NodeId";
-            nodeId.PropertyChanged += (s, v) =>
-            {
-                NodeId = nodeId.Value.ToString();
-            };
 
             pars.Add(nodeId);
 
+            //Найдем все свойства воркера
+            var settings = new List<NamedDpConfigSettingViewModel>();
 
-            Settings = pars;
+            foreach (var prop in typeof(TWorker).GetProperties().Where(p => p.PropertyType.IsGenericType).Where(p =>
+                p.PropertyType.GetGenericTypeDefinition() == typeof(IDpAction<>)
+                || p.PropertyType.GetGenericTypeDefinition() == typeof(IDpValue<>)))
+            {
+                var config = new NamedDpConfigSettingViewModel(prop.Name, pars);
+                settings.Add(config);
+            }
 
+            DpPropSettings = settings;
 
+            Console.WriteLine(settings.Count);
+        }        
 
-        }
+        public IEnumerable<NamedDpConfigSettingViewModel> DpPropSettings { get; private set; }
 
-        public OpcUaDpValueSourceConfiguration sourceConfiguration = new OpcUaDpValueSourceConfiguration();
-
-        public string NodeId
+        public void Bind(IDpBinder binder, IDpWorkerManager workerManager)
         {
-            get => sourceConfiguration.NodeId;
-            set => sourceConfiguration.NodeId = value;
-        }
+            var dpConfigList = new List<DpConfiguration<OpcUaDpValueSourceConfiguration>>();
 
-        public IEnumerable<NamedConfigSettingViewModel> Settings { get; private set; }
+            foreach (var dp in DpPropSettings)
+            {
+                var dpConfig = new DpConfiguration<OpcUaDpValueSourceConfiguration>();
+                dpConfig.PropertyName = dp.DpName;
 
-        public IDpConfiguration CreateConfiguration(string dpName)
-        {
-            DpConfiguration<OpcUaDpValueSourceConfiguration> config = new DpConfiguration<OpcUaDpValueSourceConfiguration>();
-            config.PropertyName = dpName;
-            config.SourceConfiguration = sourceConfiguration;
+                //Это NodeId. Необходимо придумать, как обратно конвертировать. Может нужно использовать dictionary<string, object>
+                dpConfig.SourceConfiguration.NodeId = dp.SourceSettings.First().Value.ToString();
 
-            return config;
-        }
+                dpConfigList.Add(dpConfig);
+            }
 
-        public void BindProperties(IDpWorker worker, IEnumerable<IDpConfiguration> configs, IDpBinder binder, IDpConnection connection)
-        {
-            Console.WriteLine("Тип :" + configs.First().GetType());
+            IDpWorker worker = workerManager.CreateWorker<TWorker>();
 
-            binder.Bind(worker, 
-                connection as IDpBindableConnection<OpcUaDpValueSourceConfiguration>, 
-                configs.OfType<DpConfiguration<OpcUaDpValueSourceConfiguration>>());
+            binder.Bind(worker, connection, dpConfigList);
+
         }
     }
 }

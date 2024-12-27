@@ -12,27 +12,19 @@ namespace DpConnect.Example.TechParamApp.ViewModel
 {
     public class OpcUaConnectionViewModel : BaseViewModel, IConnectionViewModel
     {
-        IDpBinder dpBinder;
 
         OpcUaConnection OpcUaConnection;
-        public OpcUaConnectionViewModel(OpcUaConnection connection, IDpBinder binder)
+        public OpcUaConnectionViewModel(OpcUaConnection connection)
         {
             DpConnection = connection;
             OpcUaConnection = connection;
-            this.dpBinder = binder;
         }
 
         public string ConnectionName { get => DpConnection.Id; }
 
         public string ConnectionType { get => DpConnection.GetType().ToString(); }        
 
-        public IDpConnection DpConnection { get; private set; }
+        public IDpConnection DpConnection { get; private set; }        
 
-        public ISourceConfiguratorViewModel SourceConfigurator => new OpcUaSourceConfiguratorViewModel();
-
-        public void BindProperties(IDpWorker worker, IEnumerable<IDpConfiguration> configs)
-        {
-            dpBinder.Bind(worker, OpcUaConnection, configs.OfType<DpConfiguration<OpcUaDpValueSourceConfiguration>>());
-        }
     }
 }
