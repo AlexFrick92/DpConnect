@@ -15,12 +15,12 @@ namespace DpConnect.Example.TechParamApp.ViewModel
         {
             get => val;
             set 
-            {
-                Console.WriteLine("Задано значение" + value);
+            {                
                 val = value;
-                OnPropertyChanged(nameof(Value));
+                ValueChanged?.Invoke(this, val);    
             }
         }
+        public event EventHandler<object> ValueChanged;
 
 
 

@@ -11,11 +11,11 @@ namespace DpConnect.Example.TechParamApp.ViewModel
     public class CreateConnectionViewModel : BaseViewModel
     {
         IDpConnectionManager dpConnectionManager;
-        public CreateConnectionViewModel(IDpConnectionManager connectionManager, IEnumerable<Type> configurators)
+        public CreateConnectionViewModel(IDpConnectionManager connectionManager, IEnumerable<Type> configTypes)
         {
             dpConnectionManager = connectionManager;
 
-            ConnectionsTypes = configurators;   
+            ConnectionsTypes = configTypes;   
 
 
             CreateConnectionCmd = new RelayCommand((arg) => 
@@ -41,13 +41,13 @@ namespace DpConnect.Example.TechParamApp.ViewModel
             set
             {
                 selectedConnectionType = value;
-                ConnectionConfigurator = (IConnectionConfiguratorViewModel)Activator.CreateInstance(value);
+                ConnectionConfigurator = new ConnectionConfiguratorViewModel(value);
                 OnPropertyChanged(nameof(ConnectionConfigurator));
                 OnPropertyChanged(nameof(SelectedConnectionType));
             }
         }
 
-        public IConnectionConfiguratorViewModel ConnectionConfigurator { get; private set; }
+        public ConnectionConfiguratorViewModel ConnectionConfigurator { get; private set; }
 
         public ICommand CreateConnectionCmd { get; set; }
         public ICommand CancelCmd { get; set; }

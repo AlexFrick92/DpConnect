@@ -44,6 +44,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Configuration\DpConfigPropertyAttribute.cs" />
     <Compile Include="Configuration\DpConfigurationException.cs" />
     <Compile Include="Configuration\DpConfiguration.cs" />
     <Compile Include="Configuration\IDpConfiguration.cs" />

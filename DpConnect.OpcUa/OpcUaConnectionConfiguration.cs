@@ -7,10 +7,13 @@ namespace DpConnect.OpcUa
 {
     public class OpcUaConnectionConfiguration : IDpConnectionConfiguration
     {
+        [DpConfigProperty("ConnectionId")]
         public string ConnectionId { get; set; }
 
+        [DpConfigProperty("Endpoint")]
         public string Endpoint { get; set; }
 
+        [DpConfigProperty("Active")]
         public bool Active { get; set; } = true;
 
         public Type ConnectionType { get; private set; } = typeof(IOpcUaConnection);
