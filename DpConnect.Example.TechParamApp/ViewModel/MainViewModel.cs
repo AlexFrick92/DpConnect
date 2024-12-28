@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 using DpConnect.Building;
+using DpConnect.Connection;
 using DpConnect.Example.TechParamApp.View;
 using DpConnect.ExampleWorker;
 using DpConnect.OpcUa;
@@ -21,7 +22,7 @@ namespace DpConnect.Example.TechParamApp.ViewModel
         IDpBinder binder;
         IDpBuilder dpBuilder;
 
-        List<Type> ConnectionTypes = new List<Type> { typeof(IOpcUaConnection) }; //Допустим, это мы загрузили сборки сюда
+        List<Type> ConnectionTypes = new List<Type> { typeof(IDpConfigurableConnection<OpcUaConnectionConfiguration>) }; //Допустим, это мы загрузили сборки сюда
         //Теперь с каждым соединением нужно ассоциировать конфигуратор
         //Для этого, при создании конфигуратора, мы укажем через обобщение, что он реализует интерфейс IConfigurator<>
         List<Type> ConnectionConfiguratorsType = new List<Type>() { typeof(OpcUaConnectionConfiguratorViewModel) };
@@ -41,12 +42,12 @@ namespace DpConnect.Example.TechParamApp.ViewModel
             {                
                 ConfiguredWorkers.Add(new WorkerViewModel(w));
             };
-            connectionManager.NewConnectionCreated += (s, c) => ConfiguredConnections.Add(new OpcUaConnectionViewModel(c as OpcUaConnection));
+            connectionManager.NewConnectionCreated += (s, c) => ConfiguredConnections.Add(new ConnectionViewModel(c as OpcUaConnection));
 
 
             foreach(var con in connectionManager.ConfiguredConnections)
             {
-                ConfiguredConnections.Add(new OpcUaConnectionViewModel(con as OpcUaConnection));
+                ConfiguredConnections.Add(new ConnectionViewModel(con as OpcUaConnection));
             }
 
             AddConnectionCmd = new RelayCommand((arg) =>
@@ -71,7 +72,7 @@ namespace DpConnect.Example.TechParamApp.ViewModel
             {
                 Console.WriteLine("Добавить тех. параметр");
 
-                CreateTechParamViewModel createWorkerViewModel = new CreateTechParamViewModel(ConfiguredConnections, workerManager, binder);
+                CreateWorkerViewModel createWorkerViewModel = new CreateWorkerViewModel(ConfiguredConnections, workerManager, binder);
                 CreateTechParamView createWorkerView = new CreateTechParamView(createWorkerViewModel);
 
                 createWorkerViewModel.CreatingCanceled += (s, v) => createWorkerView.Close();

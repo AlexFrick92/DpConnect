@@ -20,7 +20,7 @@ namespace DpConnect.Example.TechParamApp.View
     /// </summary>
     public partial class CreateTechParamView : Window
     {
-        public CreateTechParamView(CreateTechParamViewModel vm)
+        public CreateTechParamView(CreateWorkerViewModel vm)
         {
             InitializeComponent();
             DataContext = vm;

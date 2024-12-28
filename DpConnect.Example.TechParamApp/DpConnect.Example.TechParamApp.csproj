@@ -56,23 +56,25 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModel\BaseViewModel.cs" />
     <Compile Include="ViewModel\BinderViewModel.cs" />
-    <Compile Include="ViewModel\Connection\IConnectionConfigurator.cs" />
+    <Compile Include="ViewModel\Connection\ConnectionConfigurator\IConnectionConfigurator.cs" />
     <Compile Include="ViewModel\Connection\IConnectionViewModel.cs" />
-    <Compile Include="ViewModel\Connection\ISourceConfiguratorViewModel.cs" />
+    <Compile Include="ViewModel\Connection\SourceConfigurator\ISourceConfiguratorViewModel.cs" />
     <Compile Include="ViewModel\NamedDpConfigSettingViewModel.cs" />
-    <Compile Include="ViewModel\OpcUa\OpcUaConnectionViewModel.cs" />
+    <Compile Include="ViewModel\Connection\ConnectionViewModel.cs" />
     <Compile Include="ViewModel\Connection\CreateConnectionViewModel.cs" />
-    <Compile Include="ViewModel\TechParam\CreateTechParamViewModel.cs" />
-    <Compile Include="ViewModel\Connection\IConnectionConfiguratorViewModel.cs" />
+    <Compile Include="ViewModel\Worker\CreateWorkerViewModel.cs" />
+    <Compile Include="ViewModel\Connection\ConnectionConfigurator\IConnectionConfiguratorViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\NamedConfigSettingViewModel.cs" />
-    <Compile Include="ViewModel\OpcUa\OpcUaSourceConfiguratorViewModel.cs" />
-    <Compile Include="ViewModel\OpcUa\OpcUaConnectionConfiguratorViewModel.cs" />
+    <Compile Include="ViewModel\Connection\SourceConfigurator\OpcUaAssembly\OpcUaSourceConfiguratorViewModel.cs" />
+    <Compile Include="ViewModel\Connection\ConnectionConfigurator\OpcUaAssembly\OpcUaConnectionConfiguratorViewModel.cs" />
     <Compile Include="ViewModel\RelayCommand.cs" />
     <Compile Include="ViewModel\TechParam\ISourceConfiguratorBinder.cs" />
     <Compile Include="ViewModel\WorkerViewModel.cs" />
     <Compile Include="ViewModel\TechParamReader\TechParamReaderViewModel.cs" />
     <Compile Include="ViewModel\TechParam\ITechParamViewModel.cs" />
+    <Compile Include="ViewModel\Worker\IWorkerConfiguratorViewModel.cs" />
+    <Compile Include="ViewModel\Worker\TechParamReaderAssembly\TechParamReaderConfigurator.cs" />
     <Compile Include="View\CreateConnectionView.xaml.cs">
       <DependentUpon>CreateConnectionView.xaml</DependentUpon>
     </Compile>

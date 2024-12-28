@@ -10,11 +10,11 @@ using System.Threading.Tasks;
 
 namespace DpConnect.Example.TechParamApp.ViewModel
 {
-    public class OpcUaConnectionViewModel : BaseViewModel, IConnectionViewModel
+    public class ConnectionViewModel : BaseViewModel, IConnectionViewModel
     {
 
         OpcUaConnection OpcUaConnection;
-        public OpcUaConnectionViewModel(OpcUaConnection connection)
+        public ConnectionViewModel(OpcUaConnection connection)
         {
             DpConnection = connection;
             OpcUaConnection = connection;
