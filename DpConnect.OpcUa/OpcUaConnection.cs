@@ -130,6 +130,8 @@ namespace DpConnect.OpcUa
                 client.ModifyNodeComplexValue(node);                
             };
             dpValuesStatus.Add(dpValue);
+
+            dpValue.UpdateValueFromSource((T)Activator.CreateInstance(typeof(T))) ;
             return node;
         }
 
