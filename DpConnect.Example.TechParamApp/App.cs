@@ -14,13 +14,21 @@ using DpConnect.Connection;
 
 namespace DpConnect.Example.TechParamApp
 {
+    /// <summary>
+    /// 
+    /// </summary>
     internal class App : System.Windows.Application
     {
         IIoCContainer container;
         public App()
         {
+
+            //Регистрируем сервисы в контейнере.
+            //
+
             container = new DryIocContainer();
 
+            //Регистрируем сам контейнер. Его используют ConnectionManager и WorkerManager
             container.RegisterInstance(container);
 
             container.RegisterInstance(new ConsoleLogger() as ILogger);
@@ -45,6 +53,7 @@ namespace DpConnect.Example.TechParamApp
         }
         public new void Run()
         {
+            //Достаем окно приветствия и запускаем UI.
 
             container.Resolve<MainView>().Show();
 
