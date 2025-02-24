@@ -2,6 +2,7 @@
 
 using DpConnect;
 using DpConnect.Connection;
+using DpConnect.Exceptions;
 
 
 namespace DpConnect.Building
@@ -17,7 +18,14 @@ namespace DpConnect.Building
             }
             set
             {
-                ValueWritten(this, value);
+                try
+                {
+                    ValueWritten(this, value);
+                }
+                catch
+                {
+                    throw;
+                }
             }
         }
 

@@ -8,6 +8,7 @@ using Promatis.Core.Logging;
 using DpConnect.Connection;
 
 using DpConnect.Configuration.Xml;
+using DpConnect.Exceptions;
 
 namespace DpConnect.OpcUa
 {
@@ -108,7 +109,14 @@ namespace DpConnect.OpcUa
                 node.Value = v;
                 if (client != null)
                 {
-                    client.ModifyNodeValue(node);                    
+                    try
+                    {
+                        client.ModifyNodeValue(node);                    
+                    }
+                    catch(Exception ex)
+                    {                     
+                        throw new TransportLevelDpException($"Не удалось записать ноду {config.NodeId}", ex);
+                    }
                 }
                 else
                 {

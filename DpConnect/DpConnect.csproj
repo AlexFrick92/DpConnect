@@ -56,6 +56,7 @@
     <Compile Include="Building\DpBinder.cs" />
     <Compile Include="ContainerizedConnectionManager.cs" />
     <Compile Include="Building\DpValue.cs" />
+    <Compile Include="Exceptions\TransportLevelDpException.cs" />
     <Compile Include="IDpStatus.cs" />
     <Compile Include="IDpAction.cs" />
     <Compile Include="Connection\IDpActionSource.cs" />
